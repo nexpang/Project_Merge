@@ -70,6 +70,7 @@ public class MouseElement : MonoBehaviour
 
     void Hide()
     {
+        if(GetComponent<MouseElement>().mouseID != 40)
         Destroy(gameObject);
     }
 
@@ -82,7 +83,7 @@ public class MouseElement : MonoBehaviour
             if(gameObject.GetComponent<MouseElement>().mouseID == MSM.TileSprites[i].GetComponent<MouseElement>().mouseID)
                 Instantiate(MSM.TileSprites[i+1], triggered.transform.localPosition, triggered.transform.localRotation);
         }
-        if (gameObject.GetComponent<MouseElement>().mouseID != 39)
+        if (gameObject.GetComponent<MouseElement>().mouseID != 40)
             Destroy(gameObject);
     }
 }
