@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEditor.VersionControl;
 using Microsoft.Win32.SafeHandles;
+using DG.Tweening;
+
 
 public class UIManager : MonoBehaviour
 {
@@ -26,8 +28,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Transform pposition = null;
 
-    MouseSpriteManager MSM;
-    GameObject triggered;
+    public GameObject Gmarket = null;
+    public GameObject background = null;
 
     // Start is called before the first frame update
     void Start()
@@ -57,5 +59,26 @@ public class UIManager : MonoBehaviour
     {
         Money.text = Mmoney.ToString();
         Cheese.text = MCheese.ToString();
+    }
+    public void GmarketOpen()
+    {
+        if (Gmarket.activeSelf)
+        {
+            //Time.timeScale = 1; //시간 정상
+            Gmarket.SetActive(false);
+        }
+        else
+        {
+            Gmarket.SetActive(true);
+            //Time.timeScale = 0; //시간 멈춤
+        }
+    } //쥐마켓페이지올리기
+    public void GmarketClose()
+    {
+        Gmarket.SetActive(false);
+    }
+    public void CameraMove()
+    {
+        background.transform.DOMoveX(-5, 1);
     }
 }
