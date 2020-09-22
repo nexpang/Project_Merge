@@ -267,8 +267,10 @@ MonoBehaviour:
   mouseID: 0
   mouse: {fileID: 6276589606407741934, guid: a53f1d4a40b21714e8b7a3eb7f94ce99, type: 3}
   pposition: {fileID: 1582528260}
+  isBGon: 0
   Gmarket: {fileID: 1247504786}
-  background: {fileID: 1603739500}
+  Catbackground: {fileID: 566213184}
+  Gbackground: {fileID: 778706571}
 --- !u!4 &154088884
 Transform:
   m_ObjectHideFlags: 0
@@ -328,7 +330,7 @@ PrefabInstance:
     - target: {fileID: 3339184946743921633, guid: e4000a969c6bdf44bb15d1d93b41911d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3339184946743921633, guid: e4000a969c6bdf44bb15d1d93b41911d,
         type: 3}
@@ -635,11 +637,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 566213184}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: 1.6402686, z: 108.25391}
+  m_LocalPosition: {x: -5.149871, y: 0, z: 100}
   m_LocalScale: {x: 0.34, y: 0.34, z: 1}
   m_Children: []
-  m_Father: {fileID: 778706572}
-  m_RootOrder: 8
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &567771092
 GameObject:
@@ -794,10 +796,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706459879}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.14987099, y: 1.6402686, z: 108.25391}
+  m_LocalPosition: {x: 0, y: 0, z: 100}
   m_LocalScale: {x: 0.34, y: 0.34, z: 1}
   m_Children: []
-  m_Father: {fileID: 778706572}
+  m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &733465990
@@ -962,10 +964,8 @@ Transform:
   - {fileID: 1264569375}
   - {fileID: 1677143865}
   - {fileID: 2140137027}
-  - {fileID: 706459881}
   - {fileID: 1435501629}
   - {fileID: 1582528260}
-  - {fileID: 566213186}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1980,7 +1980,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 778706572}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1603739500
 GameObject:

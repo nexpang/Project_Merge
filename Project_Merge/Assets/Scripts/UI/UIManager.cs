@@ -28,8 +28,11 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Transform pposition = null;
 
+    public bool isBGon = false;
+
     public GameObject Gmarket = null;
-    public GameObject background = null;
+    public GameObject Catbackground = null;
+    public GameObject Gbackground = null;
 
     // Start is called before the first frame update
     void Start()
@@ -79,6 +82,21 @@ public class UIManager : MonoBehaviour
     }
     public void CameraMove()
     {
-        background.transform.DOMoveX(-5, 1);
+        if (Catbackground.activeSelf)
+        {
+            isBGon = false;
+            //Time.timeScale = 1; //시간 정상
+            Catbackground.transform.DOMoveX(-5, 0.1f);
+            Gbackground.SetActive(true);
+            Catbackground.SetActive(false);
+        }
+        else
+        {
+            isBGon = true;
+            Catbackground.transform.DOMoveX(0, 1);
+            Gbackground.SetActive(false);
+            Catbackground.SetActive(true);
+            //Time.timeScale = 0; //시간 멈춤
+        }
     }
 }
