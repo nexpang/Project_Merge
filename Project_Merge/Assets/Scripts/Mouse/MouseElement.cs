@@ -7,14 +7,16 @@ public class MouseElement : MonoBehaviour
     [SerializeField]
     private int mouseID = 0;
 
+
     bool MoveWithComputerMouse = false;
     bool CollidedWithOther = false;
 
     MouseSpriteManager MSM;
     GameObject triggered;
-
+    UIManager uiManager;
     void Awake()
     {
+        uiManager = FindObjectOfType<UIManager>();
         MSM = FindObjectOfType<MouseSpriteManager>();
     }
 
@@ -81,7 +83,11 @@ public class MouseElement : MonoBehaviour
             if (i == 39)
                 break;
             if(gameObject.GetComponent<MouseElement>().mouseID == MSM.TileSprites[i].GetComponent<MouseElement>().mouseID)
-                Instantiate(MSM.TileSprites[i+1], triggered.transform.localPosition, triggered.transform.localRotation);
+            {
+                GameObject mergedmouse = Instantiate(MSM.TileSprites[i + 1], triggered.transform.localPosition + new Vector3(0,-1.7f,0), triggered.transform.localRotation);
+                mergedmouse.transform.SetParent(uiManager.pposition.transform);
+            }
+
         }
         if (gameObject.GetComponent<MouseElement>().mouseID != 40)
             Destroy(gameObject);

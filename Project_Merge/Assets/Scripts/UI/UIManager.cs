@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject mouse = null;
     [SerializeField]
-    private Transform pposition = null;
+    public Transform pposition = null;
 
     public bool isBGon = false;
 
@@ -47,7 +47,7 @@ public class UIManager : MonoBehaviour
     }
     public void SpreadCheese()
     {
-        if(MCheese > NeedCheese)
+        if(isBGon ? false : MCheese > NeedCheese)
         {
             MCheese -= NeedCheese;
             GameObject newmouse = Instantiate(mouse,pposition.position ,Quaternion.identity);
@@ -70,19 +70,22 @@ public class UIManager : MonoBehaviour
         if (Gmarket.activeSelf)
         {
             //Time.timeScale = 1; //시간 정상
+            isBGon = true;
             Gmarket.SetActive(false);
         }
         else
         {
+            isBGon = true;
             Gmarket.SetActive(true);
             //Time.timeScale = 0; //시간 멈춤
         }
     } //쥐마켓페이지올리기
     public void GmarketClose()
     {
+        isBGon = false;
         Gmarket.SetActive(false);
     }
-    public void CameraMove()
+    public void BGMove()
     {
         if (Catbackground.activeSelf)
         {
@@ -100,5 +103,10 @@ public class UIManager : MonoBehaviour
             Catbackground.SetActive(true);
             //Time.timeScale = 0; //시간 멈춤
         }
+    }
+    public void CheeseCat()
+    {
+        MCheese++;
+        UpdateMoneyCheese();
     }
 }
