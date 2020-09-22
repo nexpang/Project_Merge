@@ -50,12 +50,14 @@ public class UIManager : MonoBehaviour
         if(MCheese > NeedCheese)
         {
             MCheese -= NeedCheese;
-            Instantiate(mouse,pposition.position, Quaternion.identity);
-            UpdateMoneyCheese();
+            GameObject newmouse = Instantiate(mouse,pposition.position ,Quaternion.identity);
+            newmouse.transform.SetParent(pposition.transform);
+
+            UpdateMoneyCheese();    
         }
         else
         {
-            
+
         }
     }
     private void UpdateMoneyCheese()
