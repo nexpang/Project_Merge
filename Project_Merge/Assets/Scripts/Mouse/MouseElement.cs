@@ -14,15 +14,17 @@ public class MouseElement : MonoBehaviour
     MouseSpriteManager MSM;
     GameObject triggered;
     UIManager uiManager;
+    SpriteRenderer spriteRenderer;
     void Awake()
     {
         uiManager = FindObjectOfType<UIManager>();
         MSM = FindObjectOfType<MouseSpriteManager>();
+        spriteRenderer = FindObjectOfType<SpriteRenderer>();
     }
 
     void Update()
     {
-        if (MoveWithComputerMouse && GetComponent<SpriteRenderer>().enabled)
+        if (MoveWithComputerMouse && spriteRenderer.enabled)
         {
             transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
         }

@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
     public Transform pposition = null;
 
     public bool isBGon = false;
+    public bool isBGoff = false;
 
     public GameObject Gmarket = null;
     public GameObject Catbackground = null;
@@ -70,38 +71,55 @@ public class UIManager : MonoBehaviour
         if (Gmarket.activeSelf)
         {
             //Time.timeScale = 1; //시간 정상
-            isBGon = true;
             Gmarket.SetActive(false);
         }
         else
         {
-            isBGon = true;
             Gmarket.SetActive(true);
             //Time.timeScale = 0; //시간 멈춤
         }
     } //쥐마켓페이지올리기
     public void GmarketClose()
     {
-        isBGon = false;
         Gmarket.SetActive(false);
     }
     public void BGMove()
     {
         if (Catbackground.activeSelf)
         {
-            isBGon = false;
             //Time.timeScale = 1; //시간 정상
-            Catbackground.transform.DOMoveX(-5, 0.1f);
-            Gbackground.SetActive(true);
-            Catbackground.SetActive(false);
+            StartCoroutine(BGoff());
         }
         else
         {
-            isBGon = true;
-            Catbackground.transform.DOMoveX(0, 1);
-            Gbackground.SetActive(false);
-            Catbackground.SetActive(true);
+            StartCoroutine(BGon());
+
             //Time.timeScale = 0; //시간 멈춤
+        }
+    }
+    private IEnumerator BGon()
+    {
+        if(isBGon == false)
+        {
+            Catbackground.transform.DOMoveX(0, 1);
+            isBGon = true;
+            Catbackground.SetActive(true);
+            Gbackground.SetActive(false);
+            yield return new WaitForSeconds(1f);
+            isBGon = false;
+        }
+    }
+    private IEnumerator BGoff()
+    {
+        if(isBGoff == false)
+        {
+            Catbackground.transform.DOMoveX(-5, 1f);
+            isBGoff = true;
+            Gbackground.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            Catbackground.SetActive(false);
+            yield return new WaitForSeconds(1f);
+            isBGoff = false;
         }
     }
     public void CheeseCat()
