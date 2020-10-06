@@ -86,7 +86,7 @@ public class MouseElement : MonoBehaviour
                 break;
             if(gameObject.GetComponent<MouseElement>().mouseID == MSM.TileSprites[i].GetComponent<MouseElement>().mouseID)
             {
-                GameObject mergedmouse = Instantiate(MSM.TileSprites[i + 1], triggered.transform.localPosition + new Vector3(0,-1.7f,0), triggered.transform.localRotation);
+                GameObject mergedmouse = Instantiate(MSM.TileSprites[i + 1], triggered.transform.localPosition + new Vector3(0,0,0), triggered.transform.localRotation);
                 mergedmouse.transform.SetParent(uiManager.pposition.transform);
             }
 
