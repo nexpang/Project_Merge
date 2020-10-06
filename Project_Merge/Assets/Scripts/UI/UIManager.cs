@@ -28,27 +28,28 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     public Transform pposition = null;
 
-    public bool isBGon = false;
-    public bool isBGoff = false;
+    public bool isCatScene = false;
+
 
     public GameObject Gmarket = null;
-    public GameObject Catbackground = null;
+    public GameObject MainCamera = null;
     public GameObject Gbackground = null;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
+
     public void SpreadCheese()
     {
-        if(isBGon ? false : MCheese > NeedCheese)
+        if(isCatScene ? false : MCheese > NeedCheese)
         {
             MCheese -= NeedCheese;
             GameObject newmouse = Instantiate(mouse,pposition.position ,Quaternion.identity);
@@ -85,41 +86,32 @@ public class UIManager : MonoBehaviour
     }
     public void BGMove()
     {
-        if (Catbackground.activeSelf)
+        if (isCatScene)
         {
             //Time.timeScale = 1; //시간 정상
-            StartCoroutine(BGoff());
+            Catoff();
         }
         else
         {
-            StartCoroutine(BGon());
+            Caton();
 
             //Time.timeScale = 0; //시간 멈춤
         }
     }
-    private IEnumerator BGon()
+    private void Caton()
     {
-        if(isBGon == false)
+        if(isCatScene == false)
         {
-            Catbackground.transform.DOMoveX(0, 1);
-            isBGon = true;
-            Catbackground.SetActive(true);
-            Gbackground.SetActive(false);
-            yield return new WaitForSeconds(1f);
-            isBGon = false;
+            MainCamera.transform.DOMoveX(-5, 1f);
+            isCatScene = true;
         }
     }
-    private IEnumerator BGoff()
+    private void Catoff()
     {
-        if(isBGoff == false)
+        if(isCatScene == true)
         {
-            Catbackground.transform.DOMoveX(-5, 1f);
-            isBGoff = true;
-            Gbackground.SetActive(true);
-            yield return new WaitForSeconds(1f);
-            Catbackground.SetActive(false);
-            yield return new WaitForSeconds(1f);
-            isBGoff = false;
+            MainCamera.transform.DOMoveX(0, 1);
+            isCatScene = false;
         }
     }
     public void CheeseCat()
