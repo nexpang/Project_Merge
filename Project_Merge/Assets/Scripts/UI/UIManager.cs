@@ -25,10 +25,17 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     private GameObject mouse = null;
     [SerializeField]
+    private int MCheeseUpgrade = 1;
+    //[SerializeField]
+    //private int MMoneyUpgrade = 1;
+    [SerializeField]
     public Transform pposition = null;
 
-    public bool isCatScene = false;
 
+    private int MCheeseUpgradeAdd = 1;
+    //private int MMoneyUpgradeAdd = 0;
+
+    public bool isCatScene = false;
 
     public GameObject Gmarket = null;
     public GameObject MainCamera = null;
@@ -115,13 +122,24 @@ public class UIManager : Singleton<UIManager>
     }
     public void CheeseCat()
     {
-        MCheese++;
+        MCheese += MCheeseUpgradeAdd;
         UpdateMoneyCheese();
     }
+    public void CheeseUpgrade()
+    {
+        MCheeseUpgrade++;
+        MCheeseUpgradeAdd = GameStat.Instance.CheeseDataTable[MCheeseUpgrade];
+    }
+    /*public void MoneyUpgrade()
+    {
+        MMoneyUpgrade++;
+        MMoneyUpgradeAdd = GameStat.Instance.MoneyDataTable[MMoneyUpgrade];
+    }*/
 
     public void AddMoney(int money)
     {
         Mmoney += money;
         UpdateMoneyCheese();
     }
+
 }
