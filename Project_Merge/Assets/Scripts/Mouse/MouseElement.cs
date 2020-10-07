@@ -12,7 +12,7 @@ public class MouseElement : MonoBehaviour
     bool CollidedWithOther = false;
 
     MouseSpriteManager MSM;
-    GameObject triggered;
+    GameObject triggered = null;
     UIManager uiManager;
     SpriteRenderer spriteRenderer;
     void Awake()
@@ -40,6 +40,10 @@ public class MouseElement : MonoBehaviour
         {
             OntoOtherOne();
         }
+        if(triggered != null&&triggered.GetComponent<MouseElement>().CollidedWithOther)
+        {
+            triggered.GetComponent<MouseElement>().OntoOtherOne();
+        }
     }
 
     void OnTriggerStay2D(Collider2D col)
@@ -55,6 +59,7 @@ public class MouseElement : MonoBehaviour
         if (col.gameObject.GetComponent<MouseElement>())
         {
             CollidedWithOther = false;
+            triggered = null;
         }
     }
 
@@ -86,7 +91,7 @@ public class MouseElement : MonoBehaviour
                 break;
             if(gameObject.GetComponent<MouseElement>().mouseID == MSM.TileSprites[i].GetComponent<MouseElement>().mouseID)
             {
-                GameObject mergedmouse = Instantiate(MSM.TileSprites[i + 1], triggered.transform.localPosition + new Vector3(0,0,0), triggered.transform.localRotation);
+                GameObject mergedmouse = Instantiate(MSM.TileSprites[i + 1], triggered.transform.localPosition + new Vector3(0,0,0.1f), triggered.transform.localRotation);
                 mergedmouse.transform.SetParent(uiManager.pposition.transform);
             }
 

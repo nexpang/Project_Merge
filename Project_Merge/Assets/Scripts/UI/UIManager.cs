@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
         if(isCatScene ? false : MCheese > NeedCheese)
         {
             MCheese -= NeedCheese;
-            GameObject newmouse = Instantiate(mouse,pposition.position ,Quaternion.identity);
+            GameObject newmouse = Instantiate(mouse,new Vector3 (0,0,0.1f) ,Quaternion.identity);
             newmouse.transform.SetParent(pposition.transform);
 
             UpdateMoneyCheese();    
