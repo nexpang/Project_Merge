@@ -12,9 +12,15 @@ public class MouseElement : MonoBehaviour
     bool CollidedWithOther = false;
 
     MouseSpriteManager MSM;
-    GameObject triggered;
+    GameObject triggered = null;
     UIManager uiManager;
     SpriteRenderer spriteRenderer;
+
+    private void OnEnable()
+    {
+        StartCoroutine(GetMoney());
+    }
+
     void Awake()
     {
         uiManager = FindObjectOfType<UIManager>();
@@ -40,6 +46,10 @@ public class MouseElement : MonoBehaviour
         {
             OntoOtherOne();
         }
+        if(triggered != null&&triggered.GetComponent<MouseElement>().CollidedWithOther)
+        {
+            triggered.GetComponent<MouseElement>().OntoOtherOne();
+        }
     }
 
     void OnTriggerStay2D(Collider2D col)
@@ -55,6 +65,7 @@ public class MouseElement : MonoBehaviour
         if (col.gameObject.GetComponent<MouseElement>())
         {
             CollidedWithOther = false;
+            triggered = null;
         }
     }
 
@@ -86,12 +97,22 @@ public class MouseElement : MonoBehaviour
                 break;
             if(gameObject.GetComponent<MouseElement>().mouseID == MSM.TileSprites[i].GetComponent<MouseElement>().mouseID)
             {
-                GameObject mergedmouse = Instantiate(MSM.TileSprites[i + 1], triggered.transform.localPosition + new Vector3(0,-1.7f,0), triggered.transform.localRotation);
+                GameObject mergedmouse = Instantiate(MSM.TileSprites[i + 1], triggered.transform.localPosition + new Vector3(0,0,0.1f), triggered.transform.localRotation);
                 mergedmouse.transform.SetParent(uiManager.pposition.transform);
             }
 
         }
         if (gameObject.GetComponent<MouseElement>().mouseID != 40)
             Destroy(gameObject);
+    }
+
+
+    private IEnumerator GetMoney()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(GameStat.Instance.Upgrade_MoneyElapsedTime);
+            UIManager.Instance.AddMoney(GameStat.Instance.MoneyDataTable[mouseID]);
+        }
     }
 }

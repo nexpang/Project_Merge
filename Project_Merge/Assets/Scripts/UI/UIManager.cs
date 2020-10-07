@@ -4,12 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-using UnityEditor.VersionControl;
 using Microsoft.Win32.SafeHandles;
 using DG.Tweening;
 
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
     [SerializeField]
     private Text Cheese = null;
@@ -52,7 +51,7 @@ public class UIManager : MonoBehaviour
         if(isCatScene ? false : MCheese > NeedCheese)
         {
             MCheese -= NeedCheese;
-            GameObject newmouse = Instantiate(mouse,pposition.position ,Quaternion.identity);
+            GameObject newmouse = Instantiate(mouse,new Vector3 (0,0,0.1f) ,Quaternion.identity);
             newmouse.transform.SetParent(pposition.transform);
 
             UpdateMoneyCheese();    
@@ -117,6 +116,12 @@ public class UIManager : MonoBehaviour
     public void CheeseCat()
     {
         MCheese++;
+        UpdateMoneyCheese();
+    }
+
+    public void AddMoney(int money)
+    {
+        Mmoney += money;
         UpdateMoneyCheese();
     }
 }
