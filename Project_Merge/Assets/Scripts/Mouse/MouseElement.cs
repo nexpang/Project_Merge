@@ -15,6 +15,12 @@ public class MouseElement : MonoBehaviour
     GameObject triggered = null;
     UIManager uiManager;
     SpriteRenderer spriteRenderer;
+
+    private void OnEnable()
+    {
+        StartCoroutine(GetMoney());
+    }
+
     void Awake()
     {
         uiManager = FindObjectOfType<UIManager>();
@@ -98,5 +104,15 @@ public class MouseElement : MonoBehaviour
         }
         if (gameObject.GetComponent<MouseElement>().mouseID != 40)
             Destroy(gameObject);
+    }
+
+
+    private IEnumerator GetMoney()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(GameStat.Instance.Upgrade_MoneyElapsedTime);
+            UIManager.Instance.AddMoney(GameStat.Instance.MoneyDataTable[mouseID]);
+        }
     }
 }

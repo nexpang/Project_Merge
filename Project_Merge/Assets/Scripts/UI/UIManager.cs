@@ -9,7 +9,7 @@ using Microsoft.Win32.SafeHandles;
 using DG.Tweening;
 
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
     [SerializeField]
     private Text Cheese = null;
@@ -117,6 +117,12 @@ public class UIManager : MonoBehaviour
     public void CheeseCat()
     {
         MCheese++;
+        UpdateMoneyCheese();
+    }
+
+    public void AddMoney(int money)
+    {
+        Mmoney += money;
         UpdateMoneyCheese();
     }
 }
