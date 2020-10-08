@@ -13,14 +13,13 @@ public class MouseElement : MonoBehaviour
 
     MouseSpriteManager MSM;
     GameObject triggered = null;
-    public GameObject EffectCheese = null;
     UIManager uiManager;
     SpriteRenderer spriteRenderer;
 
     private void OnEnable()
     {
         StartCoroutine(GetMoney());
-        Instantiate(EffectCheese, new Vector3(transform.localPosition.x,transform.localPosition.y,-0.2f),transform.rotation);
+        Instantiate(GameObjectBox.Instance.CheeseAnimation, new Vector3(transform.localPosition.x,transform.localPosition.y,-0.2f),transform.rotation);
     }
 
     void Awake()
@@ -117,6 +116,8 @@ public class MouseElement : MonoBehaviour
         {
             yield return new WaitForSeconds(GameStat.Instance.Upgrade_MoneyElapsedTime);
             UIManager.Instance.AddMoney(GameStat.Instance.MoneyDataTable[mouseID]);
+            GameObject coinAnimation = Instantiate(GameObjectBox.Instance.CoinAnimation, new Vector3(transform.localPosition.x, transform.localPosition.y + 2, -0.15f), transform.rotation);
+            coinAnimation.transform.SetParent(gameObject.transform);
         }
     }
 }
