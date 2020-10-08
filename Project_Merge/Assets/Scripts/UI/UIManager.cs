@@ -65,10 +65,14 @@ public class UIManager : Singleton<UIManager>
 
     public void SpreadCheese()
     {
-        if(isCatScene ? false : MCheese > NeedCheese)
+        if(isCatScene ? false : MCheese >= NeedCheese)
         {
             MCheese -= NeedCheese;
-            GameObject newmouse = Instantiate(mouse,new Vector3 (0,0,0.1f) ,Quaternion.identity);
+            float randomMouseX = Random.Range(-1.8f, 1.8f);
+            float randomMouseY = Random.Range(-2.2f, 3f);
+
+            Vector3 randomSpawn = new Vector3(randomMouseX, randomMouseY, 0.1f);
+            GameObject newmouse = Instantiate(mouse,randomSpawn,Quaternion.identity);
             newmouse.transform.SetParent(pposition.transform);
 
             UpdateMoneyCheese();    

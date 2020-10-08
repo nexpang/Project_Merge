@@ -13,12 +13,14 @@ public class MouseElement : MonoBehaviour
 
     MouseSpriteManager MSM;
     GameObject triggered = null;
+    public GameObject EffectCheese = null;
     UIManager uiManager;
     SpriteRenderer spriteRenderer;
 
     private void OnEnable()
     {
         StartCoroutine(GetMoney());
+        Instantiate(EffectCheese, new Vector3(transform.localPosition.x,transform.localPosition.y,-0.2f),transform.rotation);
     }
 
     void Awake()
@@ -32,7 +34,9 @@ public class MouseElement : MonoBehaviour
     {
         if (MoveWithComputerMouse && spriteRenderer.enabled)
         {
-            transform.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
+            float targetPositionX = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, -2f, 2f);
+            float targetPositionY = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -2.5f, 3.5f);
+            transform.position = new Vector3(targetPositionX, targetPositionY, 0);
         }
     }
     void OnMouseDown()

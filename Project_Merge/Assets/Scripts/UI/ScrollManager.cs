@@ -10,6 +10,7 @@ public class ScrollManager : MonoBehaviour
     bool isDrag = false;
     public GameObject MainCamera = null;
     public GameObject ChangeScroll = null;
+    public GameObject BlurBlack = null;
     void Start()
     {
         
@@ -27,6 +28,7 @@ public class ScrollManager : MonoBehaviour
                 ChangeScroll.GetComponent<Scrollbar>().value = Mathf.Lerp(ScrollStat, 0, Time.deltaTime * 5);
         }
 
+        BlurBlack.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, ChangeScroll.GetComponent<Scrollbar>().value);
         MainCamera.transform.position = new Vector3(ChangeScroll.GetComponent<Scrollbar>().value * -5, MainCamera.transform.position.y, -10);
     }
 
