@@ -9,6 +9,7 @@ public class ScrollManager : MonoBehaviour
     float ScrollStat;
     bool isDrag = false;
     public GameObject MainCamera = null;
+    public GameObject ChangeScroll = null;
     void Start()
     {
         
@@ -16,17 +17,17 @@ public class ScrollManager : MonoBehaviour
 
     void Update()
     {
-         ScrollStat = GameObject.Find("체인쥐Scroll").GetComponent<Scrollbar>().value;
+         ScrollStat = ChangeScroll.GetComponent<Scrollbar>().value;
 
         if (isDrag == false)
         {
-            if (GameObject.Find("체인쥐Scroll").GetComponent<Scrollbar>().value >= 0.5)
-                GameObject.Find("체인쥐Scroll").GetComponent<Scrollbar>().value = Mathf.Lerp(ScrollStat, 1, Time.deltaTime * 5);
+            if (ChangeScroll.GetComponent<Scrollbar>().value >= 0.5)
+                ChangeScroll.GetComponent<Scrollbar>().value = Mathf.Lerp(ScrollStat, 1, Time.deltaTime * 5);
             else
-                GameObject.Find("체인쥐Scroll").GetComponent<Scrollbar>().value = Mathf.Lerp(ScrollStat, 0, Time.deltaTime * 5);
+                ChangeScroll.GetComponent<Scrollbar>().value = Mathf.Lerp(ScrollStat, 0, Time.deltaTime * 5);
         }
 
-        MainCamera.transform.position = new Vector3(GameObject.Find("체인쥐Scroll").GetComponent<Scrollbar>().value * -5, MainCamera.transform.position.y, -10);
+        MainCamera.transform.position = new Vector3(ChangeScroll.GetComponent<Scrollbar>().value * -5, MainCamera.transform.position.y, -10);
     }
 
     private void OnMouseDrag()

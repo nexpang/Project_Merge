@@ -2621,6 +2621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 1603739500}
+  ChangeScroll: {fileID: 1777347964}
 --- !u!61 &1777347970
 BoxCollider2D:
   m_ObjectHideFlags: 0
