@@ -15,6 +15,8 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     private Text Money = null;
     [SerializeField]
+    private Text CheeseUpgradeCostText = null;
+    [SerializeField]
     private int NeedCheese = 0;
     [SerializeField]
     private int MCheese = 0;
@@ -30,6 +32,8 @@ public class UIManager : Singleton<UIManager>
     //private int MMoneyUpgrade = 1;
     [SerializeField]
     public Transform pposition = null;
+    [SerializeField]
+    private int MCheeseUpgradeCost = 0;
 
 
     private int MCheeseUpgradeAdd = 1;
@@ -40,6 +44,7 @@ public class UIManager : Singleton<UIManager>
     public GameObject Gmarket = null;
     public GameObject MainCamera = null;
     public GameObject Gbackground = null;
+    public GameObject MenuSet = null;
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +55,12 @@ public class UIManager : Singleton<UIManager>
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (MenuSet.activeSelf)
+                MenuSet.SetActive(false);
+            else MenuSet.SetActive(true);
+        }
     }
 
     public void SpreadCheese()
@@ -70,8 +80,9 @@ public class UIManager : Singleton<UIManager>
     }
     private void UpdateMoneyCheese()
     {
-        Money.text = Mmoney.ToString();
-        Cheese.text = MCheese.ToString();
+        Money.text = string.Format("화폐 / {0:D} 원", Mmoney);
+        Cheese.text = string.Format("치즈 / {0:D}", MCheese);
+        CheeseUpgradeCostText.text = string.Format("{0:D} 원", MCheeseUpgradeCost);
     }
     public void GmarketOpen()
     {
@@ -127,8 +138,18 @@ public class UIManager : Singleton<UIManager>
     }
     public void CheeseUpgrade()
     {
-        MCheeseUpgrade++;
-        MCheeseUpgradeAdd = GameStat.Instance.CheeseDataTable[MCheeseUpgrade];
+        if(Mmoney >= MCheeseUpgradeCost)
+        {
+            Mmoney -= MCheeseUpgradeCost;
+            MCheeseUpgradeCost += GameStat.Instance.CheeseDataTable[MCheeseUpgrade];
+            MCheeseUpgrade++;
+            MCheeseUpgradeAdd = GameStat.Instance.CheeseDataTable[MCheeseUpgrade];
+            UpdateMoneyCheese();
+        }
+        else
+        {
+            Debug.Log("Not enough Money");
+        }
     }
     /*public void MoneyUpgrade()
     {
@@ -136,6 +157,16 @@ public class UIManager : Singleton<UIManager>
         MMoneyUpgradeAdd = GameStat.Instance.MoneyDataTable[MMoneyUpgrade];
     }*/
 
+    public void MenuSetOn()
+    {
+        if (MenuSet.activeSelf)
+            MenuSet.SetActive(false);
+        else MenuSet.SetActive(true);
+    }
+    public void Exit()
+    {
+        Application.Quit();
+    }
     public void AddMoney(int money)
     {
         Mmoney += money;
