@@ -138,8 +138,22 @@ public class UIManager : Singleton<UIManager>
     public void CheeseCat()
     {
         MCheese += MCheeseUpgradeAdd;
+        float hitPx = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, -2f, 2f);
+        float hitPy = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -2.5f, 3.5f);
+        MouseClickAnimation(hitPx , hitPy);
         UpdateMoneyCheese();
+
     }
+    private void MouseClickAnimation(float x , float y)
+    {
+        Instantiate(GameObjectBox.Instance.CatClickAnimation, new Vector3(x, y, -2f), transform.rotation);
+
+        if (Instantiate(GameObjectBox.Instance.CatClickAnimation, new Vector3(x, y, -2f), transform.rotation))
+        {
+            Debug.Log("Click");
+        }
+    }
+
     public void CheeseUpgrade()
     {
         if(Mmoney >= MCheeseUpgradeCost)

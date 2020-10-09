@@ -6,4 +6,5 @@ public class GameObjectBox : Singleton<GameObjectBox>
 {
     public GameObject CheeseAnimation = null;
     public GameObject CoinAnimation = null;
+    public GameObject CatClickAnimation = null;
 }

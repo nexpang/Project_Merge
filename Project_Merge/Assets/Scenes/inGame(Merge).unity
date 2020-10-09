@@ -2982,6 +2982,8 @@ MonoBehaviour:
     type: 3}
   CoinAnimation: {fileID: 3169014595350719080, guid: 3221d89acf4a6114786f9c8769a0ad24,
     type: 3}
+  CatClickAnimation: {fileID: 7814668115494246554, guid: 28252b1d6cde1e84f99c2d757bde8b81,
+    type: 3}
 --- !u!1 &1837339329
 GameObject:
   m_ObjectHideFlags: 0
