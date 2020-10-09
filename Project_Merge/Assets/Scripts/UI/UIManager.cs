@@ -42,6 +42,11 @@ public class UIManager : Singleton<UIManager>
     public bool isCatScene = false;
 
     public GameObject Gmarket = null;
+
+    public GameObject MouseShop = null;
+    public GameObject MoneyShop = null;
+    public GameObject CheeseShop = null;
+
     public GameObject MainCamera = null;
     public GameObject Gbackground = null;
     public GameObject MenuSet = null;
@@ -88,52 +93,34 @@ public class UIManager : Singleton<UIManager>
         Cheese.text = string.Format("치즈 / {0:D}", MCheese);
         CheeseUpgradeCostText.text = string.Format("{0:D} 원", MCheeseUpgradeCost);
     }
-    public void GmarketOpen()
+    public void GmarketOpen()//쥐마켓페이지On,Off
     {
         if (Gmarket.activeSelf)
         {
-            //Time.timeScale = 1; //시간 정상
             Gmarket.SetActive(false);
         }
         else
         {
             Gmarket.SetActive(true);
-            //Time.timeScale = 0; //시간 멈춤
         }
-    } //쥐마켓페이지올리기
-    public void GmarketClose()
+    } 
+    public void Cheese_Shop()
     {
-        Gmarket.SetActive(false);
+        MouseShop.SetActive(false);
+        MoneyShop.SetActive(false);
+        CheeseShop.SetActive(true);
     }
-    public void BGMove()
+    public void Money_Shop()
     {
-        if (isCatScene)
-        {
-            //Time.timeScale = 1; //시간 정상
-            Catoff();
-        }
-        else
-        {
-            Caton();
-
-            //Time.timeScale = 0; //시간 멈춤
-        }
+        MouseShop.SetActive(false);
+        MoneyShop.SetActive(true);
+        CheeseShop.SetActive(false);
     }
-    private void Caton()
+    public void Mouse_Shop()
     {
-        if(isCatScene == false)
-        {
-            MainCamera.transform.DOMoveX(-5, 1f);
-            isCatScene = true;
-        }
-    }
-    private void Catoff()
-    {
-        if(isCatScene == true)
-        {
-            MainCamera.transform.DOMoveX(0, 1);
-            isCatScene = false;
-        }
+        MouseShop.SetActive(true);
+        MoneyShop.SetActive(false);
+        CheeseShop.SetActive(false);
     }
     public void CheeseCat()
     {
