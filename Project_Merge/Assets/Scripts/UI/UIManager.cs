@@ -146,12 +146,7 @@ public class UIManager : Singleton<UIManager>
     }
     private void MouseClickAnimation(float x , float y)
     {
-        Instantiate(GameObjectBox.Instance.CatClickAnimation, new Vector3(x, y, -2f), transform.rotation);
-
-        if (Instantiate(GameObjectBox.Instance.CatClickAnimation, new Vector3(x, y, -2f), transform.rotation))
-        {
-            Debug.Log("Click");
-        }
+        Instantiate(GameObjectBox.Instance.CatClickAnimation, new Vector3(x-5, y, -2f), transform.rotation);
     }
 
     public void CheeseUpgrade()
