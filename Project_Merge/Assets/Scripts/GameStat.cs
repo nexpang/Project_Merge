@@ -14,10 +14,10 @@ public class GameStat : Singleton<GameStat>
         MoneyDataTableCalculate();
         CheeseDataTableCalculate();
     }
-    /*void Awake()
+    void Awake()
     {
-        Screen.SetResolution(1440, 2960, true);
-    }*/
+        Screen.SetResolution(1440, 2960, false);
+    }
     public void FUpgrade_MoneyElapsedTime(int upgradeStack)
     {
         Upgrade_MoneyElapsedTime = 4 - (upgradeStack * 0.1f);
