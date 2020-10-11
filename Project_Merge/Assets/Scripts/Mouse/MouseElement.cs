@@ -15,6 +15,10 @@ public class MouseElement : MonoBehaviour
     GameObject triggered = null;
     UIManager uiManager;
     SpriteRenderer spriteRenderer;
+    private MouseElement[] mice;
+    private float distance = 0f;
+    [SerializeField]
+    private float collideDistance = 0f;
 
     private void OnEnable()
     {
@@ -45,62 +49,71 @@ public class MouseElement : MonoBehaviour
     void OnMouseUp()
     {
         MoveWithComputerMouse = false;
-        if (CollidedWithOther)
-        {
             OntoOtherOne();
-        }
-        if(triggered != null&&triggered.GetComponent<MouseElement>().CollidedWithOther)
-        {
-            triggered.GetComponent<MouseElement>().OntoOtherOne();
-        }
     }
 
-    void OnTriggerStay2D(Collider2D col)
-    {
-        if (col.gameObject.GetComponent<MouseElement>())
-        {
-            triggered = col.gameObject;
-            CollidedWithOther = true;
-        }
-    }
+    //void OnTriggerStay2D(Collider2D col)
+    //{
+    //    if (col.gameObject.GetComponent<MouseElement>())
+    //    {
+    //        triggered = col.gameObject;
+    //        CollidedWithOther = true;
+    //    }
+    //}
     void OnTriggerExit2D(Collider2D col)
     {
         if (col.gameObject.GetComponent<MouseElement>())
         {
             CollidedWithOther = false;
-            triggered = null;
         }
     }
 
     void OntoOtherOne()
     {
-        if (triggered.GetComponent<MouseElement>().mouseID == gameObject.GetComponent<MouseElement>().mouseID)
+        Debug.Log("OntoOtherOne");
+        mice = FindObjectsOfType<MouseElement>();
+        foreach (MouseElement mouse in mice)
         {
-            Merge();
+            if (gameObject != mouse.gameObject)
+            {
+                distance = Vector2.Distance(transform.position, mouse.transform.position);
+                if (distance <= collideDistance)
+                {
+                    triggered = mouse.gameObject;
+                    CollidedWithOther = true;
+                    if (triggered.GetComponent<MouseElement>().mouseID == gameObject.GetComponent<MouseElement>().mouseID)
+                    {
+                        Merge();
+                        break;
+                    }
+                }
+            }
         }
     }
 
     void Merge()
     {
-        triggered.GetComponent<MouseElement>().UpdateMouseElementSprite();
+        Debug.Log("Merge 시도");
+        GetComponent<MouseElement>().UpdateMouseElementSprite();
         Hide();
     }
 
     void Hide()
     {
         if(GetComponent<MouseElement>().mouseID != 40)
-        Destroy(gameObject);
+        Destroy(triggered.gameObject);
     }
 
     void UpdateMouseElementSprite()
     {
+        Debug.Log("UpdateMouseElementSprite");
         for (int i = 0; i < 40; i++)
         {
             if (i == 39)
                 break;
             if(gameObject.GetComponent<MouseElement>().mouseID == MSM.TileSprites[i].GetComponent<MouseElement>().mouseID)
             {
-                GameObject mergedmouse = Instantiate(MSM.TileSprites[i + 1], triggered.transform.localPosition + new Vector3(0,0,0.1f), triggered.transform.localRotation);
+                GameObject mergedmouse = Instantiate(MSM.TileSprites[i + 1], transform.localPosition + new Vector3(0,0,0.1f), transform.localRotation);
                 mergedmouse.transform.SetParent(uiManager.pposition.transform);
             }
 

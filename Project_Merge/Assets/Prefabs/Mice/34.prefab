@@ -144,5 +144,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseID: 34
-  EffectCheese: {fileID: 7814668115494246554, guid: dc08e41d5526d85498eb2ef746f09702,
-    type: 3}
+  collideDistance: 0.5
