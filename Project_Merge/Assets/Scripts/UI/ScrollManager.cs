@@ -30,6 +30,8 @@ public class ScrollManager : MonoBehaviour
 
         BlurBlack.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, ChangeScroll.GetComponent<Scrollbar>().value);
         MainCamera.transform.position = new Vector3(ChangeScroll.GetComponent<Scrollbar>().value * -5, MainCamera.transform.position.y, -10);
+
+        AudioManager.Instance.ASCatSleep.volume = ChangeScroll.GetComponent<Scrollbar>().value;
     }
 
     private void OnMouseDrag()

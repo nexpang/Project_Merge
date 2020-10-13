@@ -24,6 +24,7 @@ public class MouseElement : MonoBehaviour
     {
         StartCoroutine(GetMoney());
         Instantiate(GameObjectBox.Instance.CheeseAnimation, new Vector3(transform.localPosition.x,transform.localPosition.y,-0.2f),transform.rotation);
+        GameObject.Find("AudioResources").GetComponent<AudioManager>().FMouseSqueaky();
     }
 
     void Awake()
