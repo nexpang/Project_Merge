@@ -90,6 +90,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void UpdateMoneyCheese()
     {
+        MCheeseUpgradeAdd = GameStat.Instance.CheeseDataTable[MCheeseUpgrade];
         MCheeseUpgradeCost = GameStat.Instance.CheeseDataTable[MCheeseUpgrade];
 
         Money.text = string.Format("화폐 / {0:D} 원", Mmoney);
@@ -146,6 +147,7 @@ public class UIManager : Singleton<UIManager>
         {
             Mmoney -= MCheeseUpgradeCost;
             MCheeseUpgrade++;
+            MCheeseUpgradeAdd = GameStat.Instance.CheeseDataTable[MCheeseUpgrade];
             MCheeseUpgradeCost = GameStat.Instance.CheeseDataTable[MCheeseUpgrade];
             UpdateMoneyCheese();
         }
