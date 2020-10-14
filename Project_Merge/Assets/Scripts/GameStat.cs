@@ -14,9 +14,15 @@ public class GameStat : Singleton<GameStat>
         MoneyDataTableCalculate();
         CheeseDataTableCalculate();
     }
+    private void Update()
+    {
+        FUpgrade_MoneyElapsedTime(SaveMouse.Instance.gameData.Upgrade_MoneyElapsedTimeStack);
+        FUpgrade_MoneyElapsedTime(SaveMouse.Instance.gameData.Upgrade_MoneyElapsedTimeStack);
+    }
     void Awake()
     {
         Screen.SetResolution(1440, 2960, false);
+        SaveMouse.Instance.LoadGameData();
     }
     public void FUpgrade_MoneyElapsedTime(int upgradeStack)
     {

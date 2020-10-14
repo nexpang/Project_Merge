@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class IntroAnimation : MonoBehaviour
@@ -11,11 +12,12 @@ public class IntroAnimation : MonoBehaviour
     GameObject IntroBackground = null;
     [SerializeField]
     GameObject IntroTitle = null;
+    [SerializeField]
+    GameObject IntroTitleText = null;
 
     void Start()
     {
         Invoke("GoToTitle", 3);
-        InvokeRepeating("CheckClick", 4.5f, 0.166f);
     }
 
     private void GoToTitle()
@@ -25,9 +27,9 @@ public class IntroAnimation : MonoBehaviour
         IntroTitle.GetComponent<Animator>().Play("Intro_Title_Appear");
     }
 
-    private void CheckClick()
+    private void Update()
     {
-        if(Input.GetMouseButton(0))
+        if(Input.GetMouseButton(0)&&IntroTitleText.GetComponent<Text>().color == new Color(0,0,0,1))
         {
             SceneManager.LoadScene("inGame(Merge)");
         }

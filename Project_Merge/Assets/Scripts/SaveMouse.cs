@@ -1,143 +1,129 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using LitJson;
 using System.IO;
+using System;
 
-public class Mice
-{
-    public int ID;
-
-    public Mice(int id)
-    {
-        ID = id;
-    }
-}
-
-public class Wealth
-{
-    public int CHEESE;
-    public int MONEY;
-
-    public Wealth(int cheese, int money)
-    {
-        CHEESE = cheese;
-        MONEY = money;
-    }
-}
-
-public class Upgrade
-{
-    public int CHEESE;
-    public Upgrade(int cheese)
-    {
-        CHEESE = cheese;
-    }
-}
 public class SaveMouse : MonoBehaviour
 {
-    public List<Mice> MiceList = new List<Mice>();
-    [SerializeField]
-    private GameObject pposition = null;
-
-    public List<Wealth> WealthList = new List<Wealth>();
-
-    public List<Upgrade> UpgradeList = new List<Upgrade>();
-
-    private void Awake()
+    //싱글톤====================
+    static GameObject _container;
+    static GameObject Container
     {
+        get
+        {
+            return _container;
+        }
+    }
+    static SaveMouse _instance;
+    public static SaveMouse Instance
+    {
+        get
+        {
+            if(!_instance)
+            {
+                _container = new GameObject();
+                _container.name = "SaveMouse";
+                _instance = _container.AddComponent(typeof(SaveMouse)) as SaveMouse;
+                DontDestroyOnLoad(_container);
+            }
+            return _instance;
+        }
+    }
+    // =================================================
+
+    public string GameDataFileName = ".json";
+
+    public GameData _gameData;
+    public GameData gameData
+    {
+        get
+        {
+            if(_gameData == null)
+            {
+                LoadGameData();
+                SaveGameData();
+            }
+            return _gameData;
+        }
+    }
+
+    public void LoadGameData()
+    {
+        string filePath = Application.persistentDataPath + GameDataFileName;
+        if(File.Exists(filePath))
+        {
+            Debug.Log("불러오기");
+            string FromJsonData = File.ReadAllText(filePath);
+            _gameData = JsonUtility.FromJson<GameData>(FromJsonData);
+        }
+        else
+        {
+            Debug.Log("새로운 파일 생성");
+            _gameData = new GameData();
+        }
         MiceLoad();
-        WealthLoad();
-        UpgradeLoad();
         UIManager.Instance.UpdateMoneyCheese();
     }
-    void Update()
+
+    public void SaveGameData()
     {
-        MiceSave();// 최적화 없는 업데이트문에 세이브 이거 합치거나 저장할때 되게 하셈 난 귀찮음 ^^
-        WealthSave();
-        UpgradeSave();
-        //if (Input.GetKeyDown(KeyCode.S))
-        //{
-        //    MiceSave();
-        //}
+        string ToJsonData = JsonUtility.ToJson(gameData);
+        string filePath = Application.persistentDataPath + GameDataFileName;
+        File.WriteAllText(filePath, ToJsonData);
+        MiceSave();
+        Debug.Log("저장");
     }
-    void MiceLoad()
+
+    private void OnApplicationQuit()
     {
-        string Jsonstring = File.ReadAllText(Application.dataPath + "/SaveData/MiceData.json");
+        SaveGameData();
+    }
 
-        JsonData MiceData = JsonMapper.ToObject(Jsonstring);
-
-        for (int i =0; i < MiceData.Count; i++)
+    public void MiceLoad()
+    {
+        for (int i = 0; i < gameData.MiceList.Count; i++)
         {
-            float randomMouseX = Random.Range(-1.8f, 1.8f);
-            float randomMouseY = Random.Range(-2.2f, 3f);
-
-            Vector3 randomSpawn = new Vector3(randomMouseX, randomMouseY, 0.1f);
-
-            GameObject mouse = MouseSpriteManager.Instance.TileSprites[(int)MiceData[i]["ID"]];
-            GameObject newmouse = Instantiate(mouse, randomSpawn, Quaternion.identity);
+            GameObject newmouse = Instantiate(MouseSpriteManager.Instance.TileSprites[gameData.MiceList[i]-1], gameData.MiceXY[i], Quaternion.identity);
+            GameObject pposition = GameObject.Find("pposition");
             newmouse.transform.SetParent(pposition.transform);
         }
-
-        for (int i = 0; i < MiceList.Count; i++)
-        {
-            Debug.Log(i + ". : " + MiceList[i].ID + "레벨");
-        }
-
     }
-    void MiceSave()
+    public void MiceSave()
     {
-        MiceList.Clear();
+        Debug.Log("save mouse");
+        gameData.MiceList.Clear();
+        gameData.MiceXY.Clear();
+        GameObject pposition = GameObject.Find("pposition");
+
         for (int i = 0; i < pposition.transform.childCount; i++)
         {
-            int id = pposition.transform.GetChild(i).GetComponent<MouseElement>().mouseID-1;
-            MiceList.Add(new Mice(id));
+            gameData.MiceList.Add(pposition.transform.GetChild(i).gameObject.GetComponent<MouseElement>().mouseID);
+            gameData.MiceXY.Add(pposition.transform.GetChild(i).gameObject.transform.localPosition);
         }
-
-        JsonData MiceJson = JsonMapper.ToJson(MiceList);
-
-        File.WriteAllText(Application.dataPath + "/SaveData/MiceData.json", MiceJson.ToString());
     }
-    void WealthSave()
+
+    public void MiceXYSave()
     {
-        WealthList.Clear();
+        Debug.Log("save mouseXY");
+        gameData.MiceXY.Clear();
+        GameObject pposition = GameObject.Find("pposition");
 
-        int myCheese = UIManager.Instance.MCheese;
-        int myMoney = UIManager.Instance.Mmoney;
-
-        WealthList.Add(new Wealth(myCheese,myMoney));
-
-        JsonData WealthJson = JsonMapper.ToJson(WealthList);
-
-        File.WriteAllText(Application.dataPath + "/SaveData/WealthData.json", WealthJson.ToString());
+        for (int i = 0; i < pposition.transform.childCount; i++)
+        {
+            gameData.MiceXY.Add(pposition.transform.GetChild(i).gameObject.transform.localPosition);
+        }
     }
-    void WealthLoad()
+
+    private void Update()
     {
-        string Jsonstring = File.ReadAllText(Application.dataPath + "/SaveData/WealthData.json");
-
-        JsonData WealthData = JsonMapper.ToObject(Jsonstring);
-
-        UIManager.Instance.MCheese = (int)WealthData[0]["CHEESE"];
-        UIManager.Instance.Mmoney = (int)WealthData[0]["MONEY"];
-    }
-    void UpgradeSave()
-    {
-        UpgradeList.Clear();
-
-        int upgradeCheese = UIManager.Instance.MCheeseUpgrade;
-
-        UpgradeList.Add(new Upgrade(upgradeCheese));
-
-        JsonData UpgradeJson = JsonMapper.ToJson(UpgradeList);
-
-        File.WriteAllText(Application.dataPath + "/SaveData/UpgradeData.json", UpgradeJson.ToString());
-    }
-    void UpgradeLoad()
-    {
-        string Jsonstring = File.ReadAllText(Application.dataPath + "/SaveData/UpgradeData.json");
-
-        JsonData UpgradeData = JsonMapper.ToObject(Jsonstring);
-
-        UIManager.Instance.MCheeseUpgrade = (int)UpgradeData[0]["CHEESE"];
+        if(Input.GetKey(KeyCode.S))
+        {
+            MiceSave();
+        }
+        if (Input.GetKey(KeyCode.L))
+        {
+            MiceLoad();
+        }
     }
 }

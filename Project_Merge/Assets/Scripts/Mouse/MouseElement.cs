@@ -47,7 +47,8 @@ public class MouseElement : MonoBehaviour
     void OnMouseUp()
     {
         MoveWithComputerMouse = false;
-            OntoOtherOne();
+        OntoOtherOne();
+        SaveMouse.Instance.MiceXYSave();
     }
 
     //void OnTriggerStay2D(Collider2D col)
@@ -113,7 +114,7 @@ public class MouseElement : MonoBehaviour
             {
                 GameObject mergedmouse = Instantiate(MSM.TileSprites[i + 1], transform.localPosition + new Vector3(0,0,0.1f), transform.localRotation);
                 mergedmouse.transform.SetParent(uiManager.pposition.transform);
-                mergedmouse.GetComponent<MouseElement>().MergeOrCreate();
+                mergedmouse.GetComponent<MouseElement>().Invoke("MergeOrCreate", 0.05f);
             }
         }
         if (gameObject.GetComponent<MouseElement>().mouseID != 40)
@@ -136,5 +137,6 @@ public class MouseElement : MonoBehaviour
     {
         Instantiate(GameObjectBox.Instance.CheeseAnimation, new Vector3(transform.localPosition.x, transform.localPosition.y, -0.2f), transform.rotation);
         GameObject.Find("AudioResources").GetComponent<AudioManager>().FMouseSqueaky();
+        SaveMouse.Instance.MiceSave();
     }
 }
