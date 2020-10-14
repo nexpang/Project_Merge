@@ -18,16 +18,17 @@ public class UIManager : Singleton<UIManager>
     private Text CheeseUpgradeCostText = null;
     [SerializeField]
     private int NeedCheese = 0;
-    [SerializeField]
-    private int MCheese = 0;
-    [SerializeField]
-    private int Mmoney = 0;
+
+    public int MCheese = 0;
+    public int Mmoney = 0;
+
     [SerializeField]
     private int mouseID = 0;
     [SerializeField]
     private GameObject mouse = null;
-    [SerializeField]
-    private int MCheeseUpgrade = 1;
+
+    public int MCheeseUpgrade = 1;
+
     //[SerializeField]
     //private int MMoneyUpgrade = 1;
     [SerializeField]
@@ -87,8 +88,10 @@ public class UIManager : Singleton<UIManager>
 
         }
     }
-    private void UpdateMoneyCheese()
+    public void UpdateMoneyCheese()
     {
+        MCheeseUpgradeCost = GameStat.Instance.CheeseDataTable[MCheeseUpgrade];
+
         Money.text = string.Format("화폐 / {0:D} 원", Mmoney);
         Cheese.text = string.Format("치즈 / {0:D}", MCheese);
         CheeseUpgradeCostText.text = string.Format("{0:D} 원", MCheeseUpgradeCost);
@@ -103,7 +106,8 @@ public class UIManager : Singleton<UIManager>
         {
             Gmarket.SetActive(true);
         }
-    } 
+        UpdateMoneyCheese();
+    }
     public void Cheese_Shop()
     {
         MouseShop.SetActive(false);
@@ -141,9 +145,8 @@ public class UIManager : Singleton<UIManager>
         if(Mmoney >= MCheeseUpgradeCost)
         {
             Mmoney -= MCheeseUpgradeCost;
-            MCheeseUpgradeCost += GameStat.Instance.CheeseDataTable[MCheeseUpgrade];
             MCheeseUpgrade++;
-            MCheeseUpgradeAdd = GameStat.Instance.CheeseDataTable[MCheeseUpgrade];
+            MCheeseUpgradeCost = GameStat.Instance.CheeseDataTable[MCheeseUpgrade];
             UpdateMoneyCheese();
         }
         else

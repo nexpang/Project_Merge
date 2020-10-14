@@ -492,11 +492,11 @@ MonoBehaviour:
   Money: {fileID: 1499493687}
   CheeseUpgradeCostText: {fileID: 1763373024}
   NeedCheese: 10
-  MCheese: 1000
-  Mmoney: 1000
+  MCheese: 0
+  Mmoney: 0
   mouseID: 0
   mouse: {fileID: 6276589606407741934, guid: a53f1d4a40b21714e8b7a3eb7f94ce99, type: 3}
-  MCheeseUpgrade: 0
+  MCheeseUpgrade: 1
   pposition: {fileID: 1582528260}
   MCheeseUpgradeCost: 0
   isCatScene: 0
@@ -5426,7 +5426,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uD654\uD3D0 / 1000 \uC6D0"
+  m_Text: "\uD654\uD3D0 / 0 \uC6D0"
 --- !u!222 &1499493688
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7125,7 +7125,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uCE58\uC988 / 1000"
+  m_Text: "\uCE58\uC988 / 0"
 --- !u!222 &1908022154
 CanvasRenderer:
   m_ObjectHideFlags: 0
