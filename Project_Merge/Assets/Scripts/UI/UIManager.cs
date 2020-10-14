@@ -79,7 +79,7 @@ public class UIManager : Singleton<UIManager>
             Vector3 randomSpawn = new Vector3(randomMouseX, randomMouseY, 0.1f);
             GameObject newmouse = Instantiate(mouse,randomSpawn,Quaternion.identity);
             newmouse.transform.SetParent(pposition.transform);
-
+            newmouse.GetComponent<MouseElement>().MergeOrCreate();
             UpdateMoneyCheese();    
         }
         else

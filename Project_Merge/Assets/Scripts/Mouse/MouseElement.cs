@@ -22,8 +22,6 @@ public class MouseElement : MonoBehaviour
     private void OnEnable()
     {
         StartCoroutine(GetMoney());
-        Instantiate(GameObjectBox.Instance.CheeseAnimation, new Vector3(transform.localPosition.x,transform.localPosition.y,-0.2f),transform.rotation);
-        GameObject.Find("AudioResources").GetComponent<AudioManager>().FMouseSqueaky();
     }
 
     void Awake()
@@ -115,8 +113,8 @@ public class MouseElement : MonoBehaviour
             {
                 GameObject mergedmouse = Instantiate(MSM.TileSprites[i + 1], transform.localPosition + new Vector3(0,0,0.1f), transform.localRotation);
                 mergedmouse.transform.SetParent(uiManager.pposition.transform);
+                mergedmouse.GetComponent<MouseElement>().MergeOrCreate();
             }
-
         }
         if (gameObject.GetComponent<MouseElement>().mouseID != 40)
             Destroy(gameObject);
@@ -132,5 +130,11 @@ public class MouseElement : MonoBehaviour
             GameObject coinAnimation = Instantiate(GameObjectBox.Instance.CoinAnimation, new Vector3(transform.localPosition.x, transform.localPosition.y + 2, -0.15f), transform.rotation);
             coinAnimation.transform.SetParent(gameObject.transform);
         }
+    }
+
+    public void MergeOrCreate()
+    {
+        Instantiate(GameObjectBox.Instance.CheeseAnimation, new Vector3(transform.localPosition.x, transform.localPosition.y, -0.2f), transform.rotation);
+        GameObject.Find("AudioResources").GetComponent<AudioManager>().FMouseSqueaky();
     }
 }
