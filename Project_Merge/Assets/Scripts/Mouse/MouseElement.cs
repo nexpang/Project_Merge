@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class MouseElement : MonoBehaviour
 {
-    [SerializeField]
-    private int mouseID = 0;
+    public int mouseID = 0;
 
 
     bool MoveWithComputerMouse = false;
