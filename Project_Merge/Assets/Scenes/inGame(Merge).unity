@@ -491,10 +491,8 @@ MonoBehaviour:
   Money: {fileID: 1499493687}
   CheeseUpgradeCostText: {fileID: 1763373024}
   NeedCheese: 10
-  Mmoney: 0
   mouseID: 0
   mouse: {fileID: 6276589606407741934, guid: a53f1d4a40b21714e8b7a3eb7f94ce99, type: 3}
-  MCheeseUpgrade: 1
   pposition: {fileID: 1582528260}
   MCheeseUpgradeCost: 0
   isCatScene: 0
@@ -5376,8 +5374,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 407, y: -105}
-  m_SizeDelta: {x: 800, y: 180}
+  m_AnchoredPosition: {x: -2.7, y: -58.9}
+  m_SizeDelta: {x: 1346.4729, y: 97.147736}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1499493687
 MonoBehaviour:
@@ -5399,8 +5397,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 4fffd25132674fd498687d37679dac1e, type: 3}
-    m_FontSize: 100
+    m_Font: {fileID: 12800000, guid: a420bbb438ba24b4caefcddef6f70454, type: 3}
+    m_FontSize: 75
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -7075,8 +7073,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -302, y: -105}
-  m_SizeDelta: {x: 650, y: 180}
+  m_AnchoredPosition: {x: -2.7021, y: 39.836}
+  m_SizeDelta: {x: 1346.4772, y: 100.324036}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1908022153
 MonoBehaviour:
@@ -7098,8 +7096,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 4fffd25132674fd498687d37679dac1e, type: 3}
-    m_FontSize: 100
+    m_Font: {fileID: 12800000, guid: a420bbb438ba24b4caefcddef6f70454, type: 3}
+    m_FontSize: 75
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0

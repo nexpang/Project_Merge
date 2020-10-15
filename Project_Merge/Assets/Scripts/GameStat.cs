@@ -21,7 +21,7 @@ public class GameStat : Singleton<GameStat>
     }
     void Awake()
     {
-        Screen.SetResolution(1440, 2960, false);
+        Screen.SetResolution(1440, 2960, true);
         SaveMouse.Instance.LoadGameData();
     }
     public void FUpgrade_MoneyElapsedTime(int upgradeStack)

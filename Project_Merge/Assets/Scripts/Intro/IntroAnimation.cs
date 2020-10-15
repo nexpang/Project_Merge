@@ -29,7 +29,7 @@ public class IntroAnimation : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButton(0)&&IntroTitleText.GetComponent<Text>().color == new Color(0,0,0,1))
+        if(Input.GetMouseButton(0)&&IntroTitleText.GetComponent<Text>().color == new Color(0,0,0,1)&&IntroTitleText.activeSelf)
         {
             SceneManager.LoadScene("inGame(Merge)");
         }
