@@ -89,7 +89,7 @@ public class SaveMouse : MonoBehaviour
             newmouse.transform.SetParent(pposition.transform);
         }
     }
-    public void MiceSave()
+    public void MiceSave()  // 게임 저장시, 합쳐질 때 저장 됨
     {
         Debug.Log("save mouse");
         gameData.MiceList.Clear();
@@ -103,7 +103,7 @@ public class SaveMouse : MonoBehaviour
         }
     }
 
-    public void MiceXYSave()
+    public void MiceXYSave() // 쥐를 클릭하고 마우스를 올렸을 때 저장됨
     {
         Debug.Log("save mouseXY");
         gameData.MiceXY.Clear();

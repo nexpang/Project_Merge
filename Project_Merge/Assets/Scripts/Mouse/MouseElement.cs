@@ -51,14 +51,6 @@ public class MouseElement : MonoBehaviour
         SaveMouse.Instance.MiceXYSave();
     }
 
-    //void OnTriggerStay2D(Collider2D col)
-    //{
-    //    if (col.gameObject.GetComponent<MouseElement>())
-    //    {
-    //        triggered = col.gameObject;
-    //        CollidedWithOther = true;
-    //    }
-    //}
     void OnTriggerExit2D(Collider2D col)
     {
         if (col.gameObject.GetComponent<MouseElement>())
@@ -69,7 +61,6 @@ public class MouseElement : MonoBehaviour
 
     void OntoOtherOne()
     {
-        Debug.Log("OntoOtherOne");
         mice = FindObjectsOfType<MouseElement>();
         foreach (MouseElement mouse in mice)
         {
@@ -92,7 +83,6 @@ public class MouseElement : MonoBehaviour
 
     void Merge()
     {
-        Debug.Log("Merge 시도");
         GetComponent<MouseElement>().UpdateMouseElementSprite();
         Hide();
     }
@@ -105,7 +95,6 @@ public class MouseElement : MonoBehaviour
 
     void UpdateMouseElementSprite()
     {
-        Debug.Log("UpdateMouseElementSprite");
         for (int i = 0; i < 40; i++)
         {
             if (i == 39)
@@ -137,6 +126,6 @@ public class MouseElement : MonoBehaviour
     {
         Instantiate(GameObjectBox.Instance.CheeseAnimation, new Vector3(transform.localPosition.x, transform.localPosition.y, -0.2f), transform.rotation);
         GameObject.Find("AudioResources").GetComponent<AudioManager>().FMouseSqueaky();
-        SaveMouse.Instance.MiceSave();
+        SaveMouse.Instance.SaveGameData();
     }
 }

@@ -45,6 +45,7 @@ public class UIManager : Singleton<UIManager>
     public GameObject MainCamera = null;
     public GameObject Gbackground = null;
     public GameObject MenuSet = null;
+    public GameObject CatBGCanvas = null;
 
     // Start is called before the first frame update
     void Start()
@@ -87,9 +88,28 @@ public class UIManager : Singleton<UIManager>
         MCheeseUpgradeAdd = GameStat.Instance.CheeseDataTable[SaveMouse.Instance.gameData.Upgrade_CheeseStack];
         MCheeseUpgradeCost = GameStat.Instance.CheeseDataTable[SaveMouse.Instance.gameData.Upgrade_CheeseStack];
 
-        Money.text = string.Format("화폐 / {0:D} 원", SaveMouse.Instance.gameData.Money);
-        Cheese.text = string.Format("치즈 / {0:D}", SaveMouse.Instance.gameData.Cheese);
-        CheeseUpgradeCostText.text = string.Format("{0:D} 원", MCheeseUpgradeCost);
+        long money = SaveMouse.Instance.gameData.Money;
+        string moneyText = "화폐 / ";
+
+        if (money >= 100000000)
+            moneyText += string.Format("{0}억", (money % 1000000000000) / 100000000);
+        if (money >= 10000)
+            moneyText += string.Format("{0}만", (money % 100000000) / 10000);
+        if ( money >= 0)
+            moneyText += string.Format("{0}원", money % 10000);
+        Money.text = moneyText;
+
+        long cheese = SaveMouse.Instance.gameData.Cheese;
+        string cheeseText = "치즈 / ";
+
+        if (cheese >= 10000)
+            cheeseText += string.Format("{0}만", (cheese % 100000000) / 10000);
+        if (cheese >= 0)
+            cheeseText += string.Format("{0}개", cheese % 10000);
+        Cheese.text = cheeseText;
+
+        CheeseUpgradeCostText.text = string.Format("{0:#,###} 원", MCheeseUpgradeCost);
+        SaveMouse.Instance.SaveGameData();
     }
     public void GmarketOpen()//쥐마켓페이지On,Off
     {
@@ -133,6 +153,7 @@ public class UIManager : Singleton<UIManager>
     private void MouseClickAnimation(float x , float y)
     {
         Instantiate(GameObjectBox.Instance.CatClickAnimation, new Vector3(x-5, y, -2f), transform.rotation);
+        CatBGCanvas.GetComponent<Animator>().Play("Cat_Click");
     }
 
     public void CheeseUpgrade()

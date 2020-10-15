@@ -503,6 +503,7 @@ MonoBehaviour:
   MainCamera: {fileID: 1603739500}
   Gbackground: {fileID: 778706571}
   MenuSet: {fileID: 772561122}
+  CatBGCanvas: {fileID: 1007522624}
 --- !u!4 &154088884
 Transform:
   m_ObjectHideFlags: 0
@@ -3784,6 +3785,7 @@ GameObject:
   - component: {fileID: 1007522628}
   - component: {fileID: 1007522627}
   - component: {fileID: 1007522626}
+  - component: {fileID: 1007522629}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -3871,6 +3873,25 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!95 &1007522629
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007522624}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ace820f215b2f07429ad35408a2b4ad6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1052066000
 GameObject:
   m_ObjectHideFlags: 0
@@ -5409,7 +5430,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uD654\uD3D0 / 0 \uC6D0"
+  m_Text: "\uD654\uD3D0 / 0\uC6D0"
 --- !u!222 &1499493688
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7108,7 +7129,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uCE58\uC988 / 0"
+  m_Text: "\uCE58\uC988 / 0\uAC1C"
 --- !u!222 &1908022154
 CanvasRenderer:
   m_ObjectHideFlags: 0
