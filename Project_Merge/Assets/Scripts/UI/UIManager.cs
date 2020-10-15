@@ -15,8 +15,6 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     private Text Money = null;
     [SerializeField]
-    private Text CheeseUpgradeCostText = null;
-    [SerializeField]
     private int NeedCheese = 0;
 
     [SerializeField]
@@ -46,7 +44,8 @@ public class UIManager : Singleton<UIManager>
     public GameObject Gbackground = null;
     public GameObject MenuSet = null;
     public GameObject CatBGCanvas = null;
-
+    public GameObject MarketTab = null;
+    public Sprite[] MarketTabImage = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -85,11 +84,8 @@ public class UIManager : Singleton<UIManager>
     }
     public void UpdateMoneyCheese()
     {
-        MCheeseUpgradeAdd = GameStat.Instance.CheeseDataTable[SaveMouse.Instance.gameData.Upgrade_CheeseStack];
-        MCheeseUpgradeCost = GameStat.Instance.CheeseDataTable[SaveMouse.Instance.gameData.Upgrade_CheeseStack];
-
         long money = SaveMouse.Instance.gameData.Money;
-        string moneyText = "화폐 / ";
+        string moneyText = "x ";
 
         if (money >= 100000000)
             moneyText += string.Format("{0}억", (money % 1000000000000) / 100000000);
@@ -100,7 +96,7 @@ public class UIManager : Singleton<UIManager>
         Money.text = moneyText;
 
         long cheese = SaveMouse.Instance.gameData.Cheese;
-        string cheeseText = "치즈 / ";
+        string cheeseText = "x ";
 
         if (cheese >= 10000)
             cheeseText += string.Format("{0}만", (cheese % 100000000) / 10000);
@@ -108,7 +104,6 @@ public class UIManager : Singleton<UIManager>
             cheeseText += string.Format("{0}개", cheese % 10000);
         Cheese.text = cheeseText;
 
-        CheeseUpgradeCostText.text = string.Format("{0:#,###} 원", MCheeseUpgradeCost);
         SaveMouse.Instance.SaveGameData();
     }
     public void GmarketOpen()//쥐마켓페이지On,Off
@@ -125,25 +120,34 @@ public class UIManager : Singleton<UIManager>
     }
     public void Cheese_Shop()
     {
+        MarketManager.Instance.Refresh();
         MouseShop.SetActive(false);
         MoneyShop.SetActive(false);
         CheeseShop.SetActive(true);
+
+        MarketTab.GetComponent<Image>().sprite = MarketTabImage[0];
     }
     public void Money_Shop()
     {
+        MarketManager.Instance.Refresh();
         MouseShop.SetActive(false);
         MoneyShop.SetActive(true);
         CheeseShop.SetActive(false);
+
+        MarketTab.GetComponent<Image>().sprite = MarketTabImage[2];
     }
     public void Mouse_Shop()
     {
+        MarketManager.Instance.Refresh();
         MouseShop.SetActive(true);
         MoneyShop.SetActive(false);
         CheeseShop.SetActive(false);
+ 
+        MarketTab.GetComponent<Image>().sprite = MarketTabImage[1];
     }
     public void CheeseCat()
     {
-        SaveMouse.Instance.gameData.Cheese += MCheeseUpgradeAdd;
+        SaveMouse.Instance.gameData.Cheese += MarketManager.Instance.CatList[0].AddList[SaveMouse.Instance.gameData.Upgrade_CheeseStack];
         float hitPx = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, -2f, 2f);
         float hitPy = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -2.5f, 3.5f);
         MouseClickAnimation(hitPx , hitPy);
@@ -155,27 +159,6 @@ public class UIManager : Singleton<UIManager>
         Instantiate(GameObjectBox.Instance.CatClickAnimation, new Vector3(x-5, y, -2f), transform.rotation);
         CatBGCanvas.GetComponent<Animator>().Play("Cat_Click");
     }
-
-    public void CheeseUpgrade()
-    {
-        if(SaveMouse.Instance.gameData.Money >= MCheeseUpgradeCost)
-        {
-            SaveMouse.Instance.gameData.Money -= MCheeseUpgradeCost;
-            SaveMouse.Instance.gameData.Upgrade_CheeseStack++;
-            MCheeseUpgradeAdd = GameStat.Instance.CheeseDataTable[SaveMouse.Instance.gameData.Upgrade_CheeseStack];
-            MCheeseUpgradeCost = GameStat.Instance.CheeseDataTable[SaveMouse.Instance.gameData.Upgrade_CheeseStack];
-            UpdateMoneyCheese();
-        }
-        else
-        {
-            Debug.Log("Not enough Money");
-        }
-    }
-    /*public void MoneyUpgrade()
-    {
-        MMoneyUpgrade++;
-        MMoneyUpgradeAdd = GameStat.Instance.MoneyDataTable[MMoneyUpgrade];
-    }*/
 
     public void MenuSetOn()
     {

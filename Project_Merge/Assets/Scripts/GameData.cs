@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class GameData
 {
-    public int Cheese = 0;
+    public long Cheese = 0;
     public long Money = 0;
     public int Upgrade_MoneyElapsedTimeStack = 0;
     public int Upgrade_CheeseStack = 1;

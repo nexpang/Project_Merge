@@ -33,6 +33,10 @@ public class MouseElement : MonoBehaviour
 
     void Update()
     {
+        if (UIManager.Instance.Gmarket.activeSelf)
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        else
+            gameObject.GetComponent<BoxCollider2D>().enabled = true;
         if (MoveWithComputerMouse && spriteRenderer.enabled)
         {
             float targetPositionX = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, -2f, 2f);
