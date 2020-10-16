@@ -7,7 +7,6 @@ using TMPro;
 using Microsoft.Win32.SafeHandles;
 using DG.Tweening;
 
-
 public class UIManager : Singleton<UIManager>
 {
     [SerializeField]
@@ -150,13 +149,13 @@ public class UIManager : Singleton<UIManager>
         SaveMouse.Instance.gameData.Cheese += MarketManager.Instance.CatList[0].AddList[SaveMouse.Instance.gameData.Upgrade_CheeseStack];
         float hitPx = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, -2f, 2f);
         float hitPy = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -2.5f, 3.5f);
-        MouseClickAnimation(hitPx , hitPy);
+        CatClickAnimation();
         UpdateMoneyCheese();
 
     }
-    private void MouseClickAnimation(float x , float y)
+    private void CatClickAnimation()
     {
-        Instantiate(GameObjectBox.Instance.CatClickAnimation, new Vector3(x-5, y, -2f), transform.rotation);
+        Instantiate(GameObjectBox.Instance.CatClickAnimation, Vector3.zero, Quaternion.identity);
         CatBGCanvas.GetComponent<Animator>().Play("Cat_Click");
     }
 

@@ -6,12 +6,12 @@ public class EffectDestroy : MonoBehaviour
 {
     [SerializeField]
     private float DestroyTime = 0.5f;
-    void Start()
+    public void Start()
     {
         StartCoroutine(DestroyThis());
     }
 
-    private IEnumerator DestroyThis()
+    protected IEnumerator DestroyThis()
     {
         yield return new WaitForSeconds(DestroyTime);
         Destroy(gameObject);
