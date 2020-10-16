@@ -14,6 +14,8 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     private Text Money = null;
     [SerializeField]
+    private Text marketMoney = null;
+    [SerializeField]
     private int NeedCheese = 0;
 
     [SerializeField]
@@ -93,6 +95,7 @@ public class UIManager : Singleton<UIManager>
         if ( money >= 0)
             moneyText += string.Format("{0}원", money % 10000);
         Money.text = moneyText;
+        marketMoney.text = moneyText;
 
         long cheese = SaveMouse.Instance.gameData.Cheese;
         string cheeseText = "x ";

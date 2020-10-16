@@ -21,6 +21,8 @@ public class UpgradeManager : MonoBehaviour
             SaveMouse.Instance.gameData.Upgrade_CheeseStack++;
             MarketManager.Instance.CatList[0].upgradeCount++;
             UIManager.Instance.UpdateMoneyCheese();
+
+            AudioManager.Instance.ASbuysound.Play();
         }
         else
         {
@@ -37,6 +39,8 @@ public class UpgradeManager : MonoBehaviour
             SaveMouse.Instance.gameData.Upgrade_MoneyElapsedTimeStack++;
             MarketManager.Instance.MouseList[0].upgradeCount++;
             UIManager.Instance.UpdateMoneyCheese();
+
+            AudioManager.Instance.ASbuysound.Play();
         }
         else
         {
