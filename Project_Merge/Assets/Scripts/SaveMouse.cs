@@ -20,7 +20,7 @@ public class SaveMouse : MonoBehaviour
     {
         get
         {
-            if(!_instance)
+            if (!_instance)
             {
                 _container = new GameObject();
                 _container.name = "SaveMouse";
@@ -34,12 +34,14 @@ public class SaveMouse : MonoBehaviour
 
     public string GameDataFileName = ".json";
 
+    private string filePath = "";
+
     public GameData _gameData;
     public GameData gameData
     {
         get
         {
-            if(_gameData == null)
+            if (_gameData == null)
             {
                 LoadGameData();
                 SaveGameData();
@@ -47,14 +49,20 @@ public class SaveMouse : MonoBehaviour
             return _gameData;
         }
     }
+    private void Awake()
+    {
+        filePath = string.Concat(Application.persistentDataPath, GameDataFileName);
+    }
 
     public void LoadGameData()
     {
-        string filePath = Application.persistentDataPath + GameDataFileName;
-        if(File.Exists(filePath))
+        if (File.Exists(filePath))
         {
             Debug.Log("불러오기");
-            string FromJsonData = File.ReadAllText(filePath);
+            string code = File.ReadAllText(filePath);
+
+            byte[] bytes = System.Convert.FromBase64String(code);
+            string FromJsonData = System.Text.Encoding.UTF8.GetString(bytes);
             _gameData = JsonUtility.FromJson<GameData>(FromJsonData);
         }
         else
@@ -68,9 +76,12 @@ public class SaveMouse : MonoBehaviour
 
     public void SaveGameData()
     {
-        string ToJsonData = JsonUtility.ToJson(gameData);
-        string filePath = Application.persistentDataPath + GameDataFileName;
-        File.WriteAllText(filePath, ToJsonData);
+        string ToJsonData = JsonUtility.ToJson(gameData, true);
+        byte[] bytes = System.Text.Encoding.UTF8.GetBytes(ToJsonData);
+        string code = System.Convert.ToBase64String(bytes);
+
+        File.WriteAllText(filePath, code);
+
         MiceSave();
         Debug.Log("저장");
     }
@@ -84,7 +95,7 @@ public class SaveMouse : MonoBehaviour
     {
         for (int i = 0; i < gameData.MiceList.Count; i++)
         {
-            GameObject newmouse = Instantiate(MouseSpriteManager.Instance.TileSprites[gameData.MiceList[i]-1], gameData.MiceXY[i], Quaternion.identity);
+            GameObject newmouse = Instantiate(MouseSpriteManager.Instance.TileSprites[gameData.MiceList[i] - 1], gameData.MiceXY[i], Quaternion.identity);
             GameObject pposition = GameObject.Find("pposition");
             newmouse.transform.SetParent(pposition.transform);
         }
@@ -117,7 +128,7 @@ public class SaveMouse : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
             MiceSave();
         }
