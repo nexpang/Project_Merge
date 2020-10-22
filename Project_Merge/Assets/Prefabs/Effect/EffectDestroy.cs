@@ -6,7 +6,7 @@ public class EffectDestroy : MonoBehaviour
 {
     [SerializeField]
     private float DestroyTime = 0.5f;
-    public void Start()
+    protected virtual void Start()
     {
         StartCoroutine(DestroyThis());
     }

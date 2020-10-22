@@ -29,6 +29,7 @@ public class MarketManager : Singleton<MarketManager>
             int productUpgradeCount = CatList[i].upgradeCount;
             if (productUpgradeCount >= CatList[i].priceList.Count) // 업그레이드가 최대로 찍혔는지 감지
             {
+                CatList[i].isMax = true;
                 CatList[i].Product.transform.GetChild(2).gameObject.GetComponent<Text>().text = string.Format("Max", CatList[i].price);
                 CatList[i].Product.transform.GetChild(3).gameObject.GetComponent<Text>().text = "";
                 CatList[i].Product.transform.GetChild(4).gameObject.SetActive(false);
@@ -132,6 +133,9 @@ public class MarketProduct
     public int upgradeCount = 0;
     [HideInInspector]
     public long price = 0;
+
+    [HideInInspector]
+    public bool isMax = false;
 
     public List<long> priceList = new List<long>();
     public List<long> AddList = new List<long>();

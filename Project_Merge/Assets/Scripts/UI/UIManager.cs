@@ -19,19 +19,12 @@ public class UIManager : Singleton<UIManager>
     private int NeedCheese = 0;
 
     [SerializeField]
-    private int mouseID = 0;
-    [SerializeField]
     private GameObject mouse = null;
 
     //public int MCheeseUpgrade = 1; 아마 지울꺼
 
     [SerializeField]
     public Transform pposition = null;
-    [SerializeField]
-    private int MCheeseUpgradeCost = 0;
-
-
-    private int MCheeseUpgradeAdd = 1;
 
     public bool isCatScene = false;
 
@@ -66,6 +59,7 @@ public class UIManager : Singleton<UIManager>
 
     public void SpreadCheese()
     {
+        AudioManager.Instance.ASButtonClick.Play();
         if(isCatScene ? false : SaveMouse.Instance.gameData.Cheese >= NeedCheese)
         {
             SaveMouse.Instance.gameData.Cheese -= NeedCheese;
@@ -105,11 +99,10 @@ public class UIManager : Singleton<UIManager>
         if (cheese >= 0)
             cheeseText += string.Format("{0}개", cheese % 10000);
         Cheese.text = cheeseText;
-
-        SaveMouse.Instance.SaveGameData();
     }
     public void GmarketOpen()//쥐마켓페이지On,Off
     {
+        AudioManager.Instance.ASButtonClick.Play();
         if (Gmarket.activeSelf)
         {
             Gmarket.SetActive(false);
@@ -122,6 +115,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void Cheese_Shop()
     {
+        AudioManager.Instance.ASButtonClick.Play();
         MarketManager.Instance.Refresh();
         MouseShop.SetActive(false);
         MoneyShop.SetActive(false);
@@ -131,6 +125,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void Money_Shop()
     {
+        AudioManager.Instance.ASButtonClick.Play();
         MarketManager.Instance.Refresh();
         MouseShop.SetActive(false);
         MoneyShop.SetActive(true);
@@ -140,6 +135,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void Mouse_Shop()
     {
+        AudioManager.Instance.ASButtonClick.Play();
         MarketManager.Instance.Refresh();
         MouseShop.SetActive(true);
         MoneyShop.SetActive(false);
@@ -149,6 +145,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void CheeseCat()
     {
+        AudioManager.Instance.FCatClick();
         SaveMouse.Instance.gameData.Cheese += MarketManager.Instance.CatList[0].AddList[SaveMouse.Instance.gameData.Upgrade_CheeseStack];
         float hitPx = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, -2f, 2f);
         float hitPy = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -2.5f, 3.5f);

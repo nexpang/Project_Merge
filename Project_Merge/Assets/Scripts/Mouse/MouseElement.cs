@@ -52,7 +52,6 @@ public class MouseElement : MonoBehaviour
     {
         MoveWithComputerMouse = false;
         OntoOtherOne();
-        SaveMouse.Instance.MiceXYSave();
     }
 
     void OnTriggerExit2D(Collider2D col)
@@ -130,6 +129,5 @@ public class MouseElement : MonoBehaviour
     {
         Instantiate(GameObjectBox.Instance.CheeseAnimation, new Vector3(transform.localPosition.x, transform.localPosition.y, -0.2f), transform.rotation);
         GameObject.Find("AudioResources").GetComponent<AudioManager>().FMouseSqueaky();
-        SaveMouse.Instance.SaveGameData();
     }
 }

@@ -53,13 +53,11 @@ public class SaveMouse : MonoBehaviour
         string filePath = Application.persistentDataPath + GameDataFileName;
         if(File.Exists(filePath))
         {
-            Debug.Log("불러오기");
             string FromJsonData = File.ReadAllText(filePath);
             _gameData = JsonUtility.FromJson<GameData>(FromJsonData);
         }
         else
         {
-            Debug.Log("새로운 파일 생성");
             _gameData = new GameData();
         }
         MiceLoad();
@@ -72,7 +70,7 @@ public class SaveMouse : MonoBehaviour
         string filePath = Application.persistentDataPath + GameDataFileName;
         File.WriteAllText(filePath, ToJsonData);
         MiceSave();
-        Debug.Log("저장");
+        MiceXYSave();
     }
 
     private void OnApplicationQuit()
@@ -91,7 +89,6 @@ public class SaveMouse : MonoBehaviour
     }
     public void MiceSave()  // 게임 저장시, 합쳐질 때 저장 됨
     {
-        Debug.Log("save mouse");
         gameData.MiceList.Clear();
         gameData.MiceXY.Clear();
         GameObject pposition = GameObject.Find("pposition");
@@ -105,7 +102,6 @@ public class SaveMouse : MonoBehaviour
 
     public void MiceXYSave() // 쥐를 클릭하고 마우스를 올렸을 때 저장됨
     {
-        Debug.Log("save mouseXY");
         gameData.MiceXY.Clear();
         GameObject pposition = GameObject.Find("pposition");
 
@@ -125,5 +121,17 @@ public class SaveMouse : MonoBehaviour
         {
             MiceLoad();
         }
+    }
+
+
+    private void Start()
+    {
+        InvokeRepeating("AutoSave", 0, 30);
+
+    }
+    private void AutoSave()
+    {
+        SaveGameData();
+        Debug.Log("Save Complete");
     }
 }

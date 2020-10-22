@@ -5,7 +5,7 @@ using UnityEngine;
 public class EffectCheesePop : EffectDestroy
 {
     private Rigidbody2D rigid = null;
-    private void Start()
+    protected override void Start()
     {
         float targetScale = Random.Range(0.2f, 0.3f);
 
