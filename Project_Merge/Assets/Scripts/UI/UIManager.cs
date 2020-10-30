@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using Microsoft.Win32.SafeHandles;
-using DG.Tweening;
 
 public class UIManager : Singleton<UIManager>
 {

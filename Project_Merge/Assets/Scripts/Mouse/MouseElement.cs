@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MouseElement : MonoBehaviour
+public class MouseElement : Singleton<MouseElement>
 {
     public int mouseID = 0;
 
 
-    bool MoveWithComputerMouse = false;
-    bool CollidedWithOther = false;
+    public bool MoveWithComputerMouse = false;
 
     MouseSpriteManager MSM;
     GameObject triggered = null;
@@ -44,21 +43,17 @@ public class MouseElement : MonoBehaviour
             transform.position = new Vector3(targetPositionX, targetPositionY, 0);
         }
     }
+
     void OnMouseDown()
     {
         MoveWithComputerMouse = true;
     }
     void OnMouseUp()
     {
-        MoveWithComputerMouse = false;
-        OntoOtherOne();
-    }
-
-    void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.gameObject.GetComponent<MouseElement>())
+        if (GetComponent<Rigidbody2D>().simulated == true)
         {
-            CollidedWithOther = false;
+            MoveWithComputerMouse = false;
+            OntoOtherOne();
         }
     }
 
@@ -73,7 +68,6 @@ public class MouseElement : MonoBehaviour
                 if (distance <= collideDistance)
                 {
                     triggered = mouse.gameObject;
-                    CollidedWithOther = true;
                     if (triggered.GetComponent<MouseElement>().mouseID == gameObject.GetComponent<MouseElement>().mouseID)
                     {
                         Merge();
