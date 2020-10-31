@@ -4,21 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MouseBookData : MonoBehaviour
+[Serializable]
+public class MouseBookData : Singleton<MouseBookData>
 {
     List<MouseVo> mouseBookList = new List<MouseVo>();
 
-    public MouseVo FindID(int targetId)
-    {
-        for (int i = 0; i < mouseBookList.Count; i++)
-        {
-            if (mouseBookList[i].id == targetId)
-            {
-                return mouseBookList[i];
-            }
-        }
-        return null;
-    }
     public void MouseBookDatatable()
     {
 
@@ -110,5 +100,12 @@ public class MouseBookData : MonoBehaviour
         mouseBookList.Add(mouse39);
         mouseBookList.Add(mouse40);
 
+    }
+
+
+    private void Start()
+    {
+        MouseBookDatatable();
+        Debug.Log(mouseBookList[0].name);
     }
 }

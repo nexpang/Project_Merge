@@ -15,4 +15,7 @@ public class FunctionManager : Singleton<FunctionManager>
         yield return new WaitForSeconds(time);
         Destroy(go);
     }
+
+
+
 }
