@@ -39,7 +39,7 @@ public class MouseElement : Singleton<MouseElement>
         if (MoveWithComputerMouse && spriteRenderer.enabled)
         {
             float targetPositionX = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, -2f, 2f);
-            float targetPositionY = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -2.5f, 3.5f);
+            float targetPositionY = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -2.2f, 1.8f);
             transform.position = new Vector3(targetPositionX, targetPositionY, 0);
         }
     }

@@ -65,7 +65,7 @@ public class UIManager : Singleton<UIManager>
         {
             SaveMouse.Instance.gameData.Cheese -= NeedCheese;
             float randomMouseX = Random.Range(-1.8f, 1.8f);
-            float randomMouseY = Random.Range(-2.2f, 3f);
+            float randomMouseY = Random.Range(-2.2f, 1.8f);
 
             Vector3 randomSpawn = new Vector3(randomMouseX, randomMouseY, 0.1f);
             GameObject newmouse = Instantiate(mouse,randomSpawn,Quaternion.identity);
