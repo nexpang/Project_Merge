@@ -100,7 +100,7 @@ public class UIManager : Singleton<UIManager>
         if (jewelrymoney >= 10000)
             jewelryMoneyText += string.Format("{0}만", (jewelrymoney % 100000000) / 10000);
         if (jewelrymoney >= 0)
-            jewelryMoneyText += string.Format("{0}원", jewelrymoney % 10000);
+            jewelryMoneyText += string.Format("{0}개", jewelrymoney % 10000);
 
         jewelryMoney.text = jewelryMoneyText;
 
