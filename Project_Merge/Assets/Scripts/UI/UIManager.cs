@@ -75,13 +75,13 @@ public class UIManager : Singleton<UIManager>
         }
         else
         {
-            // TO DO: 치즈가 부족하다고 출력
+            // TO DO: 치즈가 부족하다고 출력.
         }
     }
     public void UpdateMoneyCheese()
     {
         long money = SaveMouse.Instance.gameData.Money;
-        string moneyText = "x ";
+        string moneyText = "";
 
         if (money >= 100000000)
             moneyText += string.Format("{0}억", (money % 1000000000000) / 100000000);
@@ -93,7 +93,7 @@ public class UIManager : Singleton<UIManager>
         marketMoney.text = moneyText;
 
         long jewelrymoney = SaveMouse.Instance.gameData.JewelryMoney;
-        string jewelryMoneyText = "x ";
+        string jewelryMoneyText = "";
 
         if (jewelrymoney >= 100000000)
             jewelryMoneyText += string.Format("{0}억", (jewelrymoney % 1000000000000) / 100000000);
@@ -106,7 +106,7 @@ public class UIManager : Singleton<UIManager>
 
 
         long cheese = SaveMouse.Instance.gameData.Cheese;
-        string cheeseText = "x ";
+        string cheeseText = "";
 
         if (cheese >= 10000)
             cheeseText += string.Format("{0}만", (cheese % 100000000) / 10000);
