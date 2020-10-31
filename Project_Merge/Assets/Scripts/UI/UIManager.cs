@@ -13,6 +13,8 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     private Text Money = null;
     [SerializeField]
+    private Text jewelryMoney = null;
+    [SerializeField]
     private Text marketMoney = null;
     [SerializeField]
     private int NeedCheese = 0;
@@ -89,6 +91,19 @@ public class UIManager : Singleton<UIManager>
             moneyText += string.Format("{0}원", money % 10000);
         Money.text = moneyText;
         marketMoney.text = moneyText;
+
+        long jewelrymoney = SaveMouse.Instance.gameData.JewelryMoney;
+        string jewelryMoneyText = "x ";
+
+        if (jewelrymoney >= 100000000)
+            jewelryMoneyText += string.Format("{0}억", (jewelrymoney % 1000000000000) / 100000000);
+        if (jewelrymoney >= 10000)
+            jewelryMoneyText += string.Format("{0}만", (jewelrymoney % 100000000) / 10000);
+        if (jewelrymoney >= 0)
+            jewelryMoneyText += string.Format("{0}원", jewelrymoney % 10000);
+
+        jewelryMoney.text = jewelryMoneyText;
+
 
         long cheese = SaveMouse.Instance.gameData.Cheese;
         string cheeseText = "x ";
