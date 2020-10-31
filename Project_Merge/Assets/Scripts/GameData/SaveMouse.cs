@@ -136,7 +136,6 @@ public class SaveMouse : MonoBehaviour
         }
     }
 
-
     private void Start()
     {
         InvokeRepeating("AutoSave", 0, 30);
