@@ -17,7 +17,6 @@ public class AudioManager : Singleton<AudioManager>
     {
         ASCatSleep.Play();
     }
-
     public void FMouseSqueaky()
     {
         ASMouseSqueaky.PlayOneShot(ASMouseSqueaky.clip);

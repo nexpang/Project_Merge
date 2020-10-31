@@ -8,7 +8,10 @@ using UnityEngine.UI;
 public class MouseBookData : Singleton<MouseBookData>
 {
     List<MouseVo> mouseBookList = new List<MouseVo>();
-
+    [SerializeField]
+    private GameObject MouseBookPrefab = null;
+    [SerializeField]
+    private GameObject MouseTapParent = null;
     public void MouseBookDatatable()
     {
 
@@ -105,7 +108,30 @@ public class MouseBookData : Singleton<MouseBookData>
 
     private void Start()
     {
+        int j = 0;
         MouseBookDatatable();
-        Debug.Log(mouseBookList[0].name);
+        for (int i = 0; i < mouseBookList.Count; i++)
+        {
+            GameObject booktap = Instantiate(MouseBookPrefab, MouseTapParent.transform);
+            booktap.transform.SetParent(MouseTapParent.transform);
+            if (i % 3 == 0)
+            {
+                booktap.GetComponent<RectTransform>().anchoredPosition = new Vector2(-450, 3930 - j * 560);
+            }
+            else if (i % 3 == 1)
+            {
+                booktap.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 3930 - j * 560);
+            }
+            else if (i % 3 == 2)
+            {
+                booktap.GetComponent<RectTransform>().anchoredPosition = new Vector2(450, 3930 - j * 560);
+                j++;
+            }
+            booktap.transform.GetChild(0).GetComponent<Image>().sprite = mouseBookList[i].sprite;
+            booktap.transform.GetChild(1).GetComponent<Text>().text = mouseBookList[i].name;
+            booktap.GetComponent<MouseBookTap>().tapId = i + 1;
+        }
+        
+        Debug.Log(mouseBookList[0].id);
     }
 }

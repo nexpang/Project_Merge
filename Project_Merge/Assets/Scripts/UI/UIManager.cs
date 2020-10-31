@@ -22,6 +22,13 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     private GameObject mouse = null;
 
+    [SerializeField]
+    private GameObject MouseBook = null;
+    [SerializeField]
+    private GameObject MouseBookDesc = null;
+    [SerializeField]
+    private GameObject Option = null;
+
     //public int MCheeseUpgrade = 1; 아마 지울꺼
 
     [SerializeField]
@@ -41,6 +48,7 @@ public class UIManager : Singleton<UIManager>
     public GameObject CatBGCanvas = null;
     public GameObject MarketTab = null;
     public Sprite[] MarketTabImage = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -188,5 +196,22 @@ public class UIManager : Singleton<UIManager>
         SaveMouse.Instance.gameData.Money += money;
         UpdateMoneyCheese();
     }
-
+    public void MouseBookActive()
+    {
+        if (MouseBook.activeSelf)
+            MouseBook.SetActive(false);
+        else MouseBook.SetActive(true);
+    }
+    public void MouseBookDescActive()
+    {
+        if (MouseBookDesc.activeSelf)
+            MouseBookDesc.SetActive(false);
+        else MouseBookDesc.SetActive(true);
+    }
+    public void OptionActive()
+    {
+        if (Option.activeSelf)
+            Option.SetActive(false);
+        else Option.SetActive(true);
+    }
 }

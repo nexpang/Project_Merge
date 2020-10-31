@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ScrollManager : MonoBehaviour
 {
     float ScrollStat;
-    bool isDrag = false;
+    float SoundStat;
     public GameObject MainCamera = null;
     public GameObject ChangeScroll = null;
     public GameObject BlurBlack = null;
@@ -18,31 +18,30 @@ public class ScrollManager : MonoBehaviour
 
     void Update()
     {
-         ScrollStat = ChangeScroll.GetComponent<Scrollbar>().value;
+        ScrollStat = ChangeScroll.GetComponent<Scrollbar>().value;
+        SoundStat = OptionManager.Instance.V;
 
-        if (isDrag == false)
-        {
-            if (ChangeScroll.GetComponent<Scrollbar>().value >= 0.5)
-                ChangeScroll.GetComponent<Scrollbar>().value = Mathf.Lerp(ScrollStat, 1, Time.deltaTime * 5);
+            if (ScrollStat >= 0.5)
+                ScrollStat = Mathf.Lerp(ScrollStat, 1, Time.deltaTime * 5);
             else
-                ChangeScroll.GetComponent<Scrollbar>().value = Mathf.Lerp(ScrollStat, 0, Time.deltaTime * 5);
+                ScrollStat = Mathf.Lerp(ScrollStat, 0, Time.deltaTime * 5);
+
+        BlurBlack.GetComponent<Image>().color = new Color(1, 1, 1, ScrollStat);
+        MainCamera.transform.position = new Vector3( ChangeScroll.GetComponent<Scrollbar>().value * -5, MainCamera.transform.position.y, -10);
+
+
+        if (ScrollStat >= 0.5f) 
+        { 
+            AudioManager.Instance.ASCatSleep.volume = SoundStat;
+            AudioManager.Instance.MusicDefault.volume = SoundStat * -0.7f; 
+        }
+        else
+        {
+            AudioManager.Instance.ASCatSleep.volume = 0;
+            AudioManager.Instance.MusicDefault.volume = SoundStat;
         }
 
-        BlurBlack.GetComponent<Image>().color = new Color(1, 1, 1, ChangeScroll.GetComponent<Scrollbar>().value);
-        MainCamera.transform.position = new Vector3(ChangeScroll.GetComponent<Scrollbar>().value * -5, MainCamera.transform.position.y, -10);
-
-
-        AudioManager.Instance.ASCatSleep.volume = ChangeScroll.GetComponent<Scrollbar>().value;
-        AudioManager.Instance.MusicDefault.volume = ChangeScroll.GetComponent<Scrollbar>().value * -0.7f + 1f;
     }
 
-    private void OnMouseDrag()
-    {
-        isDrag = true;
-    }
 
-    private void OnMouseUp()
-    {
-        isDrag = false;
-    }
 }
