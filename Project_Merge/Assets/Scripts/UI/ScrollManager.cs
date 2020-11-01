@@ -12,7 +12,7 @@ public class ScrollManager : MonoBehaviour
     public Scrollbar ChangeScroll;
     public GameObject BlurBlack = null;
     public Slider SoundSlider;
-
+    private bool isDrag = false;
     void Start()
     {
         SoundSlider.onValueChanged.AddListener(delegate { MusicValueChangeCheck(); });
@@ -45,13 +45,30 @@ public class ScrollManager : MonoBehaviour
             AudioManager.Instance.ASCatSleep.volume = 0;
             AudioManager.Instance.MusicDefault.volume = SoundSlider.value;
         }
-        /*if (ChangeScroll.value >= 0.5)
-            ChangeScroll.value = Mathf.Lerp(ChangeScroll.value, 1, Time.deltaTime * 5);
-        else
-            ChangeScroll.value = Mathf.Lerp(ChangeScroll.value, 0, Time.deltaTime * 5);*/
+      
         BlurBlack.GetComponent<Image>().color = new Color(1, 1, 1, ChangeScroll.value);
         MainCamera.transform.position = new Vector3(ChangeScroll.value * -5, MainCamera.transform.position.y, -10);
     }
-
-
+    private void Update()
+    {
+        if (isDrag == false)
+        {
+            if (ChangeScroll.value >= 0.5)
+                ChangeScroll.value = Mathf.Lerp(ChangeScroll.value, 1, Time.deltaTime * 5);
+            else
+                ChangeScroll.value = Mathf.Lerp(ChangeScroll.value, 0, Time.deltaTime * 5);
+        }
+    }
+    private void LateUpdate()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            Debug.Log("click");
+            isDrag = true;
+        }
+        else
+        {
+            isDrag = false;
+        }
+    }
 }
