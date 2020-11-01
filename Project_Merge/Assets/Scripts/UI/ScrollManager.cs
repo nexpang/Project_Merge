@@ -9,38 +9,48 @@ public class ScrollManager : MonoBehaviour
     float ScrollStat;
     float SoundStat;
     public GameObject MainCamera = null;
-    public GameObject ChangeScroll = null;
+    public Scrollbar ChangeScroll;
     public GameObject BlurBlack = null;
+    public Slider SoundSlider;
+
     void Start()
     {
-        
+        SoundSlider.onValueChanged.AddListener(delegate { MusicValueChangeCheck(); });
+        ChangeScroll.onValueChanged.AddListener(delegate { ScrollValueChangeCheck(); }) ;
     }
-
-    void Update()
+    private void MusicValueChangeCheck()
     {
-        ScrollStat = ChangeScroll.GetComponent<Scrollbar>().value;
-        SoundStat = OptionManager.Instance.V;
-
-            if (ScrollStat >= 0.5)
-                ScrollStat = Mathf.Lerp(ScrollStat, 1, Time.deltaTime * 5);
-            else
-                ScrollStat = Mathf.Lerp(ScrollStat, 0, Time.deltaTime * 5);
-
-        BlurBlack.GetComponent<Image>().color = new Color(1, 1, 1, ScrollStat);
-        MainCamera.transform.position = new Vector3( ChangeScroll.GetComponent<Scrollbar>().value * -5, MainCamera.transform.position.y, -10);
-
-
-        if (ScrollStat >= 0.5f) 
-        { 
-            AudioManager.Instance.ASCatSleep.volume = SoundStat;
-            AudioManager.Instance.MusicDefault.volume = SoundStat * -0.7f; 
+        if (ChangeScroll.value >= 0.5f)
+        {
+            AudioManager.Instance.ASCatSleep.volume = SoundSlider.value;
+            AudioManager.Instance.MusicDefault.volume = ChangeScroll.value;
         }
         else
         {
             AudioManager.Instance.ASCatSleep.volume = 0;
-            AudioManager.Instance.MusicDefault.volume = SoundStat;
+            AudioManager.Instance.MusicDefault.volume = SoundSlider.value;
         }
-
+        BlurBlack.GetComponent<Image>().color = new Color(1, 1, 1, ChangeScroll.value);
+        MainCamera.transform.position = new Vector3(ChangeScroll.value * -5, MainCamera.transform.position.y, -10);
+    }
+     private void ScrollValueChangeCheck()
+    {
+        if (ChangeScroll.value >= 0.5f)
+        {
+            AudioManager.Instance.ASCatSleep.volume = SoundSlider.value;
+            AudioManager.Instance.MusicDefault.volume = SoundSlider.value * -0.7f;
+        }
+        else
+        {
+            AudioManager.Instance.ASCatSleep.volume = 0;
+            AudioManager.Instance.MusicDefault.volume = SoundSlider.value;
+        }
+        /*if (ChangeScroll.value >= 0.5)
+            ChangeScroll.value = Mathf.Lerp(ChangeScroll.value, 1, Time.deltaTime * 5);
+        else
+            ChangeScroll.value = Mathf.Lerp(ChangeScroll.value, 0, Time.deltaTime * 5);*/
+        BlurBlack.GetComponent<Image>().color = new Color(1, 1, 1, ChangeScroll.value);
+        MainCamera.transform.position = new Vector3(ChangeScroll.value * -5, MainCamera.transform.position.y, -10);
     }
 
 
