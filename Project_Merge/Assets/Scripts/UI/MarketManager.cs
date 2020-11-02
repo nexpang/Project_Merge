@@ -99,7 +99,10 @@ public class MarketManager : Singleton<MarketManager>
             }
 
             // 쥐 탭 목록 하나 당 개인 표시
+            if(i==0)
             MouseList[0].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("{0}초 -> {1}초", 4 - (MouseList[0].AddList[productUpgradeCount] * 0.1f) , 4 - (MouseList[0].AddList[productUpgradeCount+1] * 0.1f));
+            if(i==1)
+            MouseList[1].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("{0}마리 -> {1}마리", MouseList[1].AddList[productUpgradeCount],MouseList[1].AddList[productUpgradeCount+1]);
         }
         //======================================쥐 탭 새로고침 끝========================================
 
@@ -162,6 +165,7 @@ public class MarketManager : Singleton<MarketManager>
     {
         CatList[0].upgradeCount = SaveMouse.Instance.gameData.Upgrade_CheeseStack;
         MouseList[0].upgradeCount = SaveMouse.Instance.gameData.Upgrade_MoneyElapsedTimeStack;
+        MouseList[1].upgradeCount = SaveMouse.Instance.gameData.Upgrade_MouseLimit - 8;
         GuitarList[1].upgradeCount = SaveMouse.Instance.gameData.Upgrade_Background1;
         GuitarList[2].upgradeCount = SaveMouse.Instance.gameData.Upgrade_Background2;
         GuitarList[3].upgradeCount = SaveMouse.Instance.gameData.Upgrade_Background3;

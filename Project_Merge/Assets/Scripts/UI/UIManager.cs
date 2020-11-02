@@ -28,6 +28,8 @@ public class UIManager : Singleton<UIManager>
     private GameObject MouseBookDesc = null;
     [SerializeField]
     private GameObject Option = null;
+    [SerializeField]
+    private Text MouseLimitText = null;
 
     //public int MCheeseUpgrade = 1; 아마 지울꺼
 
@@ -64,11 +66,16 @@ public class UIManager : Singleton<UIManager>
                 MenuSet.SetActive(false);
             else MenuSet.SetActive(true);
         }
+
+        MouseLimitText.text = string.Format("{0} / {1}", pposition.childCount, SaveMouse.Instance.gameData.Upgrade_MouseLimit);
     }
 
     public void SpreadCheese()
     {
         AudioManager.Instance.ASButtonClick.Play();
+        if (!GameStat.Instance.MouseCountCheck())
+            return;
+
         if(isCatScene ? false : SaveMouse.Instance.gameData.Cheese >= NeedCheese)
         {
             SaveMouse.Instance.gameData.Cheese -= NeedCheese;

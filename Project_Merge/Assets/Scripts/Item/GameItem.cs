@@ -123,6 +123,8 @@ public class GameItem : MonoBehaviour
 
         firstTarget.transform.DOMove(new Vector2(1,-2.25f), 0.75f);
         secondTarget.transform.DOMove(new Vector2(1,-2.25f), 0.75f);
+
+        transform.GetChild(0).gameObject.SetActive(true);
     }
 
     private void MergeMachineLaunch() // 쥔공청소기 본격적인 합치기
@@ -143,5 +145,6 @@ public class GameItem : MonoBehaviour
         secondTarget.SetActive(false);
         FunctionManager.Instance.TimeDestroy(firstTarget, 1);
         FunctionManager.Instance.TimeDestroy(secondTarget, 1);
+        transform.GetChild(0).gameObject.SetActive(false);
     }
 }

@@ -23,7 +23,6 @@ public class UpgradeManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not enough Money");
             AudioManager.Instance.ASBuyFail.Play();
         }
     }
@@ -46,7 +45,27 @@ public class UpgradeManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not enough Money");
+            AudioManager.Instance.ASBuyFail.Play();
+        }
+    }
+
+    public void Mouse1Upgrade()
+    {
+        int upgradeCount = MarketManager.Instance.MouseList[1].upgradeCount;
+        if (MarketManager.Instance.MouseList[1].isMax == true)
+        {
+            AudioManager.Instance.ASBuyFail.Play();
+            return;
+        }
+        if (SaveMouse.Instance.gameData.Money >= MarketManager.Instance.MouseList[1].priceList[upgradeCount])
+        {
+            SaveMouse.Instance.gameData.Money -= MarketManager.Instance.MouseList[1].priceList[upgradeCount];
+            SaveMouse.Instance.gameData.Upgrade_MouseLimit = (int)MarketManager.Instance.MouseList[1].AddList[upgradeCount + 1];
+            MarketManager.Instance.MouseList[1].upgradeCount++;
+            UpgradeComplete();
+        }
+        else
+        {
             AudioManager.Instance.ASBuyFail.Play();
         }
     }
@@ -75,7 +94,6 @@ public class UpgradeManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not enough Money");
             AudioManager.Instance.ASBuyFail.Play();
         }
     }
@@ -104,7 +122,6 @@ public class UpgradeManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not enough Money");
             AudioManager.Instance.ASBuyFail.Play();
         }
     }
@@ -133,7 +150,6 @@ public class UpgradeManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not enough Money");
             AudioManager.Instance.ASBuyFail.Play();
         }
     }

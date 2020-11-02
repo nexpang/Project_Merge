@@ -13,6 +13,7 @@ public class GameData
     [Header("업그레이드 데이터")]
     public int Upgrade_MoneyElapsedTimeStack = 0;
     public int Upgrade_CheeseStack = 0;
+    public int Upgrade_MouseLimit = 8;
 
     public int Upgrade_Background1 = 0;
     public int Upgrade_Background2 = 0;

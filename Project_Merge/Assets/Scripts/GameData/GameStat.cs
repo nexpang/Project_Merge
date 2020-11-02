@@ -35,4 +35,12 @@ public class GameStat : Singleton<GameStat>
             MoneyDataTable[i] = MoneyDataTable[i - 1] + MoneyDataTable[i - 2];
         }
     }
+
+    public bool MouseCountCheck()
+    {
+        if(UIManager.Instance.pposition.childCount < SaveMouse.Instance.gameData.Upgrade_MouseLimit )
+            return true;
+        else
+            return false;
+    }
 }
