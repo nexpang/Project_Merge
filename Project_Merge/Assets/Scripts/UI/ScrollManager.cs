@@ -6,12 +6,11 @@ using UnityEngine.UI;
 
 public class ScrollManager : MonoBehaviour
 {
-    float ScrollStat;
-    float SoundStat;
     public GameObject MainCamera = null;
     public Scrollbar ChangeScroll;
     public GameObject BlurBlack = null;
     public Slider SoundSlider;
+
     private bool isDrag = false;
     void Start()
     {
@@ -23,22 +22,20 @@ public class ScrollManager : MonoBehaviour
         if (ChangeScroll.value >= 0.5f)
         {
             AudioManager.Instance.ASCatSleep.volume = SoundSlider.value;
-            AudioManager.Instance.MusicDefault.volume = ChangeScroll.value;
+            AudioManager.Instance.MusicDefault.volume = SoundSlider.value;
         }
         else
         {
             AudioManager.Instance.ASCatSleep.volume = 0;
-            AudioManager.Instance.MusicDefault.volume = SoundSlider.value;
+            AudioManager.Instance.MusicDefault.volume = SoundSlider.value / 2 + ChangeScroll.value / 2;
         }
-        BlurBlack.GetComponent<Image>().color = new Color(1, 1, 1, ChangeScroll.value);
-        MainCamera.transform.position = new Vector3(ChangeScroll.value * -5, MainCamera.transform.position.y, -10);
     }
      private void ScrollValueChangeCheck()
     {
         if (ChangeScroll.value >= 0.5f)
         {
-            AudioManager.Instance.ASCatSleep.volume = SoundSlider.value;
-            AudioManager.Instance.MusicDefault.volume = SoundSlider.value * -0.7f;
+            AudioManager.Instance.ASCatSleep.volume = SoundSlider.value/2 + ChangeScroll.value/2;
+            AudioManager.Instance.MusicDefault.volume = SoundSlider.value - ChangeScroll.value*0.8f;
         }
         else
         {
@@ -63,7 +60,6 @@ public class ScrollManager : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            Debug.Log("click");
             isDrag = true;
         }
         else
