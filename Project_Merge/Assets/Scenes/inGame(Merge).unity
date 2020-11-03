@@ -547,8 +547,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 143, y: 646}
-  m_SizeDelta: {x: 459.688, y: 205.95197}
+  m_AnchoredPosition: {x: 21.5, y: 706.2}
+  m_SizeDelta: {x: 216.61218, y: 85.56207}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &47851075
 MonoBehaviour:
@@ -1027,7 +1027,7 @@ MonoBehaviour:
   MouseBookPrefab: {fileID: 6160382378734117998, guid: c1e334365d439c54f8fdf999aab740b3,
     type: 3}
   MouseTapParent: {fileID: 812074160}
-  LockSprite: {fileID: 21300000, guid: 9531e322152b5bb46a11ae082484617c, type: 3}
+  LockSprite: {fileID: 21300000, guid: f3eda245edbe65c48b6d065132e69e58, type: 3}
   LastMouseID: 0
 --- !u!1 &166277809
 GameObject:
@@ -2756,8 +2756,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -81, y: 913.2}
-  m_SizeDelta: {x: 341.61353, y: 205.95197}
+  m_AnchoredPosition: {x: -86.3, y: 925.7}
+  m_SizeDelta: {x: 330.94263, y: 181.04199}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &517360115
 MonoBehaviour:
@@ -3551,7 +3551,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &590575949
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6671,7 +6671,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7640,7 +7640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32d082b4648753d43904a9bd500cca2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTestMode: 1
+  isTestMode: 0
 --- !u!1 &1198062081
 GameObject:
   m_ObjectHideFlags: 0
@@ -12224,14 +12224,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5058824, g: 0.94509804, b: 0.51259834, a: 1}
+  m_Color: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
