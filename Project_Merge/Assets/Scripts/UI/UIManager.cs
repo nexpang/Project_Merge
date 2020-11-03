@@ -17,6 +17,8 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     private Text marketMoney = null;
     [SerializeField]
+    private Text marketJewelryMoney = null;
+    [SerializeField]
     private int NeedCheese = 0;
 
     [SerializeField]
@@ -30,8 +32,8 @@ public class UIManager : Singleton<UIManager>
     private GameObject Option = null;
     [SerializeField]
     private Text MouseLimitText = null;
-    [SerializeField]
-    private bool isUIon = false;
+
+    public bool isUIon = false;
 
     //public int MCheeseUpgrade = 1; 아마 지울꺼
 
@@ -126,7 +128,7 @@ public class UIManager : Singleton<UIManager>
             jewelryMoneyText += string.Format("{0}개", jewelrymoney % 10000);
 
         jewelryMoney.text = jewelryMoneyText;
-
+        marketJewelryMoney.text = jewelryMoneyText;
 
         long cheese = SaveMouse.Instance.gameData.Cheese;
         string cheeseText = "";
@@ -220,6 +222,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void MouseBookActive()
     {
+        AudioManager.Instance.ASButtonClick.Play();
         if (MouseBook.activeSelf)
         {
             isUIon = false;
@@ -229,10 +232,12 @@ public class UIManager : Singleton<UIManager>
         {
             isUIon = true;
             MouseBook.SetActive(true);
+            MouseBookData.Instance.RefreshBook();
         }
     }
     public void MouseBookDescActive()
     {
+        AudioManager.Instance.ASButtonClick.Play();
         if (MouseBookDesc.activeSelf) 
         {
             isUIon = false;
@@ -246,6 +251,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void OptionActive()
     {
+        AudioManager.Instance.ASButtonClick.Play();
         if (Option.activeSelf)
         {
             isUIon = false;

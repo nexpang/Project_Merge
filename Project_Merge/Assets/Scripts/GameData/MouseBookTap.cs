@@ -5,4 +5,5 @@ using UnityEngine;
 public class MouseBookTap : MonoBehaviour
 {
     public int tapId = 0;
+    public bool isLock = true;
 }

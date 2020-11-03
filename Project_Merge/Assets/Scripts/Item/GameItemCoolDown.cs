@@ -13,6 +13,9 @@ public class GameItemCoolDown : Singleton<GameItemCoolDown>
     }
     void Update()
     {
+        cleanerCoolDownSec = SaveMouse.Instance.gameData.Upgrade_CleanerWaitTime;
+
+
         if(gameObject == GameObjectBox.Instance.ItemCooldown[0]) // 쥔공청소기
         {
             GameObject timeBar = GameObjectBox.Instance.ItemCooldown[0];

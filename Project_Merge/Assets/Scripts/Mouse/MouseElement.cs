@@ -32,7 +32,7 @@ public class MouseElement : Singleton<MouseElement>
 
     void Update()
     {
-        if (UIManager.Instance.Gmarket.activeSelf)
+        if (UIManager.Instance.isUIon)
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
         else
             gameObject.GetComponent<BoxCollider2D>().enabled = true;
@@ -81,6 +81,7 @@ public class MouseElement : Singleton<MouseElement>
     void Merge()
     {
         GetComponent<MouseElement>().UpdateMouseElementSprite();
+        MouseBookData.Instance.SetLastMouseID();
         Hide();
     }
 

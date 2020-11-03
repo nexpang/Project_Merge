@@ -34,7 +34,7 @@ public class MarketManager : Singleton<MarketManager>
                 CatList[i].Product.transform.GetChild(2).gameObject.GetComponent<Text>().text = string.Format("Max", CatList[i].price);
                 CatList[i].Product.transform.GetChild(3).gameObject.GetComponent<Text>().text = "";
                 CatList[i].Product.transform.GetChild(4).gameObject.SetActive(false);
-                CatList[i].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("{0}", CatList[i].AddList[productUpgradeCount]);
+                CatList[i].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("{0}개", CatList[i].AddList[productUpgradeCount]);
                 if (i != CatList.Count)
                     continue;
                 else
@@ -46,7 +46,15 @@ public class MarketManager : Singleton<MarketManager>
             CatList[i].Product.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = CatList[i].ProductSprite;
             CatList[i].Product.transform.GetChild(1).gameObject.GetComponent<Text>().text = CatList[i].productName;
             CatList[i].Product.transform.GetChild(7).gameObject.GetComponent<Text>().text = CatList[i].productLore;
-            CatList[i].Product.transform.GetChild(2).gameObject.GetComponent<Text>().text = string.Format("{0:#,###} 원", CatList[i].price);
+
+            if (CatList[i].jewelryNeed) // 돈이아니고 보석으로 사용하는가?
+            {
+                CatList[i].Product.transform.GetChild(2).gameObject.GetComponent<Text>().text = string.Format("{0:#,###} 개", CatList[i].price);
+                CatList[i].Product.transform.GetChild(8).gameObject.SetActive(true);
+            }
+            else
+                CatList[i].Product.transform.GetChild(2).gameObject.GetComponent<Text>().text = string.Format("{0:#,###} 원", CatList[i].price);
+
             if (CatList[i].isSale) // 세일인가?
             {
                 CatList[i].Product.transform.GetChild(3).gameObject.GetComponent<Text>().text = string.Format("{0:#,###} 원", CatList[i].price * 2);
@@ -59,7 +67,7 @@ public class MarketManager : Singleton<MarketManager>
             }
 
             // 고양이 탭 목록 하나 당 개인 표시
-            CatList[i].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("{0} -> {1}", CatList[i].AddList[productUpgradeCount], CatList[i].AddList[productUpgradeCount + 1]);
+            CatList[i].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("{0}개 -> {1}개", CatList[i].AddList[productUpgradeCount], CatList[i].AddList[productUpgradeCount + 1]);
         }
         //======================================고양이 탭 새로고침 끝========================================
 
@@ -74,7 +82,11 @@ public class MarketManager : Singleton<MarketManager>
                 MouseList[i].Product.transform.GetChild(2).gameObject.GetComponent<Text>().text = string.Format("Max", MouseList[i].price);
                 MouseList[i].Product.transform.GetChild(3).gameObject.GetComponent<Text>().text = "";
                 MouseList[i].Product.transform.GetChild(4).gameObject.SetActive(false);
-                MouseList[i].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("{0}", MouseList[i].AddList[productUpgradeCount]);
+
+                if(i==0) // Max일때 탭마다 단위 변경
+                    MouseList[i].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("{0}초", 4 - (int)(MouseList[0].AddList[productUpgradeCount] * 0.1f));
+                else
+                    MouseList[i].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("{0}", MouseList[i].AddList[productUpgradeCount]);
                 if (i != MouseList.Count)
                     continue;
                 else
@@ -86,7 +98,15 @@ public class MarketManager : Singleton<MarketManager>
             MouseList[i].Product.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = MouseList[i].ProductSprite;
             MouseList[i].Product.transform.GetChild(1).gameObject.GetComponent<Text>().text = MouseList[i].productName;
             MouseList[i].Product.transform.GetChild(7).gameObject.GetComponent<Text>().text = MouseList[i].productLore;
-            MouseList[i].Product.transform.GetChild(2).gameObject.GetComponent<Text>().text = string.Format("{0:#,###} 원", MouseList[i].price);
+
+            if (MouseList[i].jewelryNeed) // 돈이아니고 보석으로 사용하는가?
+            {
+                MouseList[i].Product.transform.GetChild(2).gameObject.GetComponent<Text>().text = string.Format("{0:#,###} 개", MouseList[i].price);
+                MouseList[i].Product.transform.GetChild(8).gameObject.SetActive(true);
+            }
+            else
+                MouseList[i].Product.transform.GetChild(2).gameObject.GetComponent<Text>().text = string.Format("{0:#,###} 원", MouseList[i].price);
+
             if (MouseList[i].isSale) // 세일인가?
             {
                 MouseList[i].Product.transform.GetChild(3).gameObject.GetComponent<Text>().text = string.Format("{0:#,###} 원", MouseList[i].price * 2);
@@ -100,9 +120,16 @@ public class MarketManager : Singleton<MarketManager>
 
             // 쥐 탭 목록 하나 당 개인 표시
             if(i==0)
-            MouseList[0].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("{0}초 -> {1}초", 4 - (MouseList[0].AddList[productUpgradeCount] * 0.1f) , 4 - (MouseList[0].AddList[productUpgradeCount+1] * 0.1f));
+                MouseList[0].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("{0}초 -> {1}초", 4 - (int)(MouseList[0].AddList[productUpgradeCount] * 0.1f) , 4 - (int)(MouseList[0].AddList[productUpgradeCount+1] * 0.1f));
             if(i==1)
-            MouseList[1].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("{0}마리 -> {1}마리", MouseList[1].AddList[productUpgradeCount],MouseList[1].AddList[productUpgradeCount+1]);
+                MouseList[1].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("{0}마리 -> {1}마리", MouseList[1].AddList[productUpgradeCount],MouseList[1].AddList[productUpgradeCount+1]);
+            if (i == 2)
+            {
+                if (productUpgradeCount==0)
+                    MouseList[2].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("x -> {0}초", MouseList[2].AddList[productUpgradeCount + 1]);
+                else
+                    MouseList[2].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("{0}초 -> {1}초", MouseList[2].AddList[productUpgradeCount], MouseList[2].AddList[productUpgradeCount + 1]);
+            }
         }
         //======================================쥐 탭 새로고침 끝========================================
 
@@ -119,7 +146,7 @@ public class MarketManager : Singleton<MarketManager>
                     GuitarList[i].Product.transform.GetChild(2).gameObject.GetComponent<Text>().text = string.Format("Max");
                 GuitarList[i].Product.transform.GetChild(3).gameObject.GetComponent<Text>().text = "";
                 GuitarList[i].Product.transform.GetChild(4).gameObject.SetActive(false);
-                GuitarList[i].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("{0}", GuitarList[i].AddList[productUpgradeCount]);
+                GuitarList[i].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("{0}초", GuitarList[i].AddList[productUpgradeCount]);
                 if (i != GuitarList.Count)
                     continue;
                 else
@@ -166,6 +193,7 @@ public class MarketManager : Singleton<MarketManager>
         CatList[0].upgradeCount = SaveMouse.Instance.gameData.Upgrade_CheeseStack;
         MouseList[0].upgradeCount = SaveMouse.Instance.gameData.Upgrade_MoneyElapsedTimeStack;
         MouseList[1].upgradeCount = SaveMouse.Instance.gameData.Upgrade_MouseLimit - 8;
+        MouseList[2].upgradeCount = SaveMouse.Instance.gameData.Upgrade_CleanerWaitTimeStack;
         GuitarList[1].upgradeCount = SaveMouse.Instance.gameData.Upgrade_Background1;
         GuitarList[2].upgradeCount = SaveMouse.Instance.gameData.Upgrade_Background2;
         GuitarList[3].upgradeCount = SaveMouse.Instance.gameData.Upgrade_Background3;

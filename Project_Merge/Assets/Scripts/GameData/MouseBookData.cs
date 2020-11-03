@@ -12,6 +12,12 @@ public class MouseBookData : Singleton<MouseBookData>
     private GameObject MouseBookPrefab = null;
     [SerializeField]
     private GameObject MouseTapParent = null;
+    [SerializeField]
+    private Sprite LockSprite = null;
+
+    [SerializeField]
+    private int LastMouseID = 0;
+
     public void MouseBookDatatable()
     {
 
@@ -110,6 +116,7 @@ public class MouseBookData : Singleton<MouseBookData>
     {
         int j = 0;
         MouseBookDatatable();
+        SetLastMouseID();
         for (int i = 0; i < mouseBookList.Count; i++)
         {
             GameObject booktap = Instantiate(MouseBookPrefab, MouseTapParent.transform);
@@ -127,11 +134,49 @@ public class MouseBookData : Singleton<MouseBookData>
                 booktap.GetComponent<RectTransform>().anchoredPosition = new Vector2(450, 3930 - j * 560);
                 j++;
             }
+            if(LastMouseID < i)
+            {
+                booktap.transform.GetChild(0).GetComponent<Image>().sprite = LockSprite;
+                booktap.transform.GetChild(1).GetComponent<Text>().text = "잠김";
+                booktap.GetComponent<MouseBookTap>().tapId = i + 1;
+                booktap.GetComponent<MouseBookTap>().isLock = true;
+                continue;
+            }
             booktap.transform.GetChild(0).GetComponent<Image>().sprite = mouseBookList[i].sprite;
             booktap.transform.GetChild(1).GetComponent<Text>().text = mouseBookList[i].name;
             booktap.GetComponent<MouseBookTap>().tapId = i + 1;
         }
-        
-        Debug.Log(mouseBookList[0].id);
+    }
+
+    public void RefreshBook()
+    {
+        for (int i = 0; i < MouseTapParent.transform.childCount; i++)
+        {
+            GameObject booktap = MouseTapParent.transform.GetChild(i).gameObject;
+            if (LastMouseID < i + 1)
+            {
+                booktap.transform.GetChild(0).GetComponent<Image>().sprite = LockSprite;
+                booktap.transform.GetChild(1).GetComponent<Text>().text = "잠김";
+                booktap.GetComponent<MouseBookTap>().tapId = i + 1;
+                booktap.GetComponent<MouseBookTap>().isLock = true;
+                continue;
+            }
+            booktap.transform.GetChild(0).GetComponent<Image>().sprite = mouseBookList[i].sprite;
+            booktap.transform.GetChild(1).GetComponent<Text>().text = mouseBookList[i].name;
+            booktap.GetComponent<MouseBookTap>().tapId = i + 1;
+        }
+    }
+
+    public void SetLastMouseID() // 현재 최고 쥐 단계를 표시하게 하는 함수 -> LastMouseID에 저장/ 현재는 쥐들을 합칠때만 호출
+    {
+        for(int i = 0; i < UIManager.Instance.pposition.childCount; i++)
+        {
+            GameObject[] mice = GameObject.FindGameObjectsWithTag("Mouse");
+            if (mice[i].GetComponent<MouseElement>().mouseID > LastMouseID)
+            {
+                LastMouseID = mice[i].GetComponent<MouseElement>().mouseID;
+                SaveMouse.Instance.SaveGameData();
+            }
+        }
     }
 }

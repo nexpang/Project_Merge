@@ -70,6 +70,30 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
+    public void Mouse2Upgrade()
+    {
+        int upgradeCount = MarketManager.Instance.MouseList[2].upgradeCount;
+        if (MarketManager.Instance.MouseList[2].isMax == true)
+        {
+            AudioManager.Instance.ASBuyFail.Play();
+            return;
+        }
+        if (SaveMouse.Instance.gameData.JewelryMoney >= MarketManager.Instance.MouseList[2].priceList[upgradeCount])
+        {
+            SaveMouse.Instance.gameData.JewelryMoney -= MarketManager.Instance.MouseList[2].priceList[upgradeCount];
+            SaveMouse.Instance.gameData.Upgrade_CleanerWaitTime = (int)MarketManager.Instance.MouseList[2].AddList[upgradeCount + 1];
+            MarketManager.Instance.MouseList[2].upgradeCount++;
+            SaveMouse.Instance.gameData.Upgrade_CleanerWaitTimeStack = MarketManager.Instance.MouseList[2].upgradeCount;
+            if (SaveMouse.Instance.gameData.ItemCleaner == 0)
+                SaveMouse.Instance.gameData.ItemCleaner = 2;
+            UpgradeComplete();
+        }
+        else
+        {
+            AudioManager.Instance.ASBuyFail.Play();
+        }
+    }
+
     public void Guitar1Upgrade()
     {
         int upgradeCount = MarketManager.Instance.GuitarList[1].upgradeCount;

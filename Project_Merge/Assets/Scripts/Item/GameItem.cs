@@ -42,11 +42,6 @@ public class GameItem : MonoBehaviour
                 {
                     MergeMachineReady();
                 }
-                else if (GameItemCoolDown.Instance.cleanerCoolDownCurrentSec == GameItemCoolDown.Instance.cleanerCoolDownSec + 1)
-                {
-                    MergeMachineLaunch();
-                    GameItemCoolDown.Instance.cleanerCoolDownCurrentSec = 0;
-                }
             }
             else
                 GameItemCoolDown.Instance.cleanerCoolDownCurrentSec = 0;
@@ -123,7 +118,8 @@ public class GameItem : MonoBehaviour
 
         firstTarget.transform.DOMove(new Vector2(1,-2.25f), 0.75f);
         secondTarget.transform.DOMove(new Vector2(1,-2.25f), 0.75f);
-
+        Invoke("MergeMachineLaunch", 1);
+        GameItemCoolDown.Instance.cleanerCoolDownCurrentSec = 0;
         transform.GetChild(0).gameObject.SetActive(true);
     }
 
@@ -131,12 +127,11 @@ public class GameItem : MonoBehaviour
     {
         if (firstTarget == null || secondTarget == null) // 예외 처리 : 타겟이 없어졌다면 리턴
             return;
-
         Vector3 spawnPoint = new Vector3(1, -2.25f, 0.1f);
         GameObject newMouse = Instantiate(MouseSpriteManager.Instance.TileSprites[firstTarget.GetComponent<MouseElement>().mouseID], spawnPoint, Quaternion.identity);
         newMouse.transform.SetParent(UIManager.Instance.pposition.transform);
         float randomMouseX = Random.Range(-1.8f, 1.8f);
-        float randomMouseY = Random.Range(-2.2f, 3f);
+        float randomMouseY = Random.Range(-2.2f, 1.8f);
         newMouse.transform.DOMove(new Vector2(randomMouseX, randomMouseY),1);
 
         firstTarget.transform.DOMove(new Vector2(firstTarget.transform.position.x, firstTarget.transform.position.y), 0);       
