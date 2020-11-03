@@ -21,13 +21,15 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     private int NeedCheese = 0;
 
+    public GameObject MouseBookDesc = null;
+    public GameObject MouseBookDescChild = null;
+
     [SerializeField]
     private GameObject mouse = null;
 
     [SerializeField]
     private GameObject MouseBook = null;
-    [SerializeField]
-    private GameObject MouseBookDesc = null;
+
     [SerializeField]
     private GameObject Option = null;
     [SerializeField]
@@ -237,17 +239,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void MouseBookDescActive()
     {
-        AudioManager.Instance.ASButtonClick.Play();
-        if (MouseBookDesc.activeSelf) 
-        {
-            isUIon = false;
-            MouseBookDesc.SetActive(false);
-        }
-        else
-        {
-            isUIon = true;
-            MouseBookDesc.SetActive(true);
-        }
+
     }
     public void OptionActive()
     {

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 [Serializable]
 public class MouseBookData : Singleton<MouseBookData>
 {
-    List<MouseVo> mouseBookList = new List<MouseVo>();
+    public List<MouseVo> mouseBookList = new List<MouseVo>();
     [SerializeField]
     private GameObject MouseBookPrefab = null;
     [SerializeField]
@@ -22,7 +22,7 @@ public class MouseBookData : Singleton<MouseBookData>
     {
 
         MouseVo mouse01 = new MouseVo(1, "들쥐", "이게 머쥐?", MouseSpriteManager.Instance.TileSprites[0].GetComponent<SpriteRenderer>().sprite);
-        MouseVo mouse02 = new MouseVo(2, "햄스터", "", MouseSpriteManager.Instance.TileSprites[1].GetComponent<SpriteRenderer>().sprite);
+        MouseVo mouse02 = new MouseVo(2, "햄스터", "아 설명 왜 안넣냐고 ㅋㅋ", MouseSpriteManager.Instance.TileSprites[1].GetComponent<SpriteRenderer>().sprite);
         MouseVo mouse03 = new MouseVo(3, "다람쥐", "", MouseSpriteManager.Instance.TileSprites[2].GetComponent<SpriteRenderer>().sprite);
         MouseVo mouse04 = new MouseVo(4, "박쥐", "", MouseSpriteManager.Instance.TileSprites[3].GetComponent<SpriteRenderer>().sprite);
         MouseVo mouse05 = new MouseVo(5, "더럽쥐", "", MouseSpriteManager.Instance.TileSprites[4].GetComponent<SpriteRenderer>().sprite);
@@ -164,6 +164,7 @@ public class MouseBookData : Singleton<MouseBookData>
             booktap.transform.GetChild(0).GetComponent<Image>().sprite = mouseBookList[i].sprite;
             booktap.transform.GetChild(1).GetComponent<Text>().text = mouseBookList[i].name;
             booktap.GetComponent<MouseBookTap>().tapId = i + 1;
+            booktap.GetComponent<MouseBookTap>().isLock = false;
         }
     }
 

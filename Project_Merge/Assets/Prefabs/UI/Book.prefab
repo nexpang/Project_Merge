@@ -273,8 +273,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: cf5d9153a20b65e42aff63e5f49ad128, type: 3}
-        m_MethodName: 
+      - m_Target: {fileID: 359957370111187781}
+        m_MethodName: TabClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -297,3 +297,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tapId: 0
+  isLock: 1
+  MouseBookDesc: {fileID: 0}
