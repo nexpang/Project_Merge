@@ -30,6 +30,8 @@ public class UIManager : Singleton<UIManager>
     private GameObject Option = null;
     [SerializeField]
     private Text MouseLimitText = null;
+    [SerializeField]
+    private bool isUIon = false;
 
     //public int MCheeseUpgrade = 1; 아마 지울꺼
 
@@ -60,13 +62,19 @@ public class UIManager : Singleton<UIManager>
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && isUIon == false)
         {
             if (MenuSet.activeSelf)
                 MenuSet.SetActive(false);
             else MenuSet.SetActive(true);
         }
-
+        else if (Input.GetKeyDown(KeyCode.Escape) && isUIon == true) 
+        {
+            Gmarket.SetActive(false);
+            MouseBook.SetActive(false);
+            MouseBookDesc.SetActive(false);
+            Option.SetActive(false);
+        }
         MouseLimitText.text = string.Format("{0} / {1}", pposition.childCount, SaveMouse.Instance.gameData.Upgrade_MouseLimit);
     }
 
@@ -134,10 +142,12 @@ public class UIManager : Singleton<UIManager>
         AudioManager.Instance.ASButtonClick.Play();
         if (Gmarket.activeSelf)
         {
+            isUIon = false;
             Gmarket.SetActive(false);
         }
         else
         {
+            isUIon = true;
             Gmarket.SetActive(true);
         }
         UpdateMoneyCheese();
@@ -191,8 +201,13 @@ public class UIManager : Singleton<UIManager>
     public void MenuSetOn()
     {
         if (MenuSet.activeSelf)
+        {
             MenuSet.SetActive(false);
-        else MenuSet.SetActive(true);
+        }
+        else
+        {
+            MenuSet.SetActive(true);
+        } 
     }
     public void Exit()
     {
@@ -206,19 +221,40 @@ public class UIManager : Singleton<UIManager>
     public void MouseBookActive()
     {
         if (MouseBook.activeSelf)
+        {
+            isUIon = false;
             MouseBook.SetActive(false);
-        else MouseBook.SetActive(true);
+        }
+        else 
+        {
+            isUIon = true;
+            MouseBook.SetActive(true);
+        }
     }
     public void MouseBookDescActive()
     {
-        if (MouseBookDesc.activeSelf)
+        if (MouseBookDesc.activeSelf) 
+        {
+            isUIon = false;
             MouseBookDesc.SetActive(false);
-        else MouseBookDesc.SetActive(true);
+        }
+        else
+        {
+            isUIon = true;
+            MouseBookDesc.SetActive(true);
+        }
     }
     public void OptionActive()
     {
         if (Option.activeSelf)
+        {
+            isUIon = false;
             Option.SetActive(false);
-        else Option.SetActive(true);
+        }
+        else
+        {
+            isUIon = true;
+            Option.SetActive(true);
+        }
     }
 }

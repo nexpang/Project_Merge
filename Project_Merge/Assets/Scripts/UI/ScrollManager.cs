@@ -21,8 +21,8 @@ public class ScrollManager : MonoBehaviour
     {
         if (ChangeScroll.value >= 0.5f)
         {
-            AudioManager.Instance.ASCatSleep.volume = SoundSlider.value;
-            AudioManager.Instance.MusicDefault.volume = SoundSlider.value;
+            AudioManager.Instance.ASCatSleep.volume = SoundSlider.value / 2 + ChangeScroll.value / 2;
+            AudioManager.Instance.MusicDefault.volume = SoundSlider.value - ChangeScroll.value * 0.8f;
         }
         else
         {
@@ -40,7 +40,7 @@ public class ScrollManager : MonoBehaviour
         else
         {
             AudioManager.Instance.ASCatSleep.volume = 0;
-            AudioManager.Instance.MusicDefault.volume = SoundSlider.value;
+            AudioManager.Instance.MusicDefault.volume = SoundSlider.value / 2 + ChangeScroll.value / 2;
         }
       
         BlurBlack.GetComponent<Image>().color = new Color(1, 1, 1, ChangeScroll.value);
