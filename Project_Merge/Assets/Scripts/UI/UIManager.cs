@@ -19,6 +19,8 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     private Text marketJewelryMoney = null;
     [SerializeField]
+    private Text shopJewelryMoney = null;
+    [SerializeField]
     private int NeedCheese = 0;
 
     public GameObject MouseBookDesc = null;
@@ -32,6 +34,10 @@ public class UIManager : Singleton<UIManager>
 
     [SerializeField]
     private GameObject Option = null;
+
+    [SerializeField]
+    private GameObject Shop = null;
+
     [SerializeField]
     private Text MouseLimitText = null;
 
@@ -78,6 +84,7 @@ public class UIManager : Singleton<UIManager>
             MouseBook.SetActive(false);
             MouseBookDesc.SetActive(false);
             Option.SetActive(false);
+            Shop.SetActive(false);
         }
         MouseLimitText.text = string.Format("{0} / {1}", pposition.childCount, SaveMouse.Instance.gameData.Upgrade_MouseLimit);
     }
@@ -131,6 +138,7 @@ public class UIManager : Singleton<UIManager>
 
         jewelryMoney.text = jewelryMoneyText;
         marketJewelryMoney.text = jewelryMoneyText;
+        shopJewelryMoney.text = jewelryMoneyText;
 
         long cheese = SaveMouse.Instance.gameData.Cheese;
         string cheeseText = "";
@@ -254,5 +262,21 @@ public class UIManager : Singleton<UIManager>
             isUIon = true;
             Option.SetActive(true);
         }
+    }
+
+    public void ShopActive()
+    {
+        AudioManager.Instance.ASButtonClick.Play();
+        if (Shop.activeSelf)
+        {
+            isUIon = false;
+            Shop.SetActive(false);
+        }
+        else
+        {
+            isUIon = true;
+            Shop.SetActive(true);
+        }
+        UpdateMoneyCheese();
     }
 }
