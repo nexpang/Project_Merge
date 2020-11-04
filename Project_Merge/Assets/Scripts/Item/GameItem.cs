@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class GameItem : MonoBehaviour
+public class GameItem : Singleton<GameItem>
 {
     public List<int> miceCount = new List<int>();
 
-    GameObject firstTarget = null;
-    GameObject secondTarget = null; // 쥔공청소기에 쓰일것들
+    [HideInInspector]
+    public GameObject firstTarget = null;
+    [HideInInspector]
+    public GameObject secondTarget = null; // 쥔공청소기에 쓰일것들
 
 
     void Update()
@@ -106,13 +108,14 @@ public class GameItem : MonoBehaviour
             }
         }
 
+        if (firstTarget == null || secondTarget == null) // 예외 처리 : 타겟이 없어졌다면 리턴
+            return;
+
         firstTarget.GetComponent<Rigidbody2D>().simulated = false;
         firstTarget.GetComponent<MouseElement>().MoveWithComputerMouse = false;
         secondTarget.GetComponent<Rigidbody2D>().simulated = false;
         secondTarget.GetComponent<MouseElement>().MoveWithComputerMouse = false;
 
-        if (firstTarget == null || secondTarget == null) // 예외 처리 : 타겟이 없어졌다면 리턴
-            return;
 
         //==============================본격적인 합치기 시작==============================
 

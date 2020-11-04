@@ -170,9 +170,12 @@ public class MouseBookData : Singleton<MouseBookData>
 
     public void SetLastMouseID() // 현재 최고 쥐 단계를 표시하게 하는 함수 -> LastMouseID에 저장/ 현재는 쥐들을 합칠때만 호출
     {
-        for(int i = 0; i < UIManager.Instance.pposition.childCount; i++)
+        GameObject[] miceCountDetect = GameObject.FindGameObjectsWithTag("Mouse");
+        for (int i = 0; i < miceCountDetect.Length; i++)
         {
             GameObject[] mice = GameObject.FindGameObjectsWithTag("Mouse");
+            if(mice[i] == null)
+                continue;
             if (mice[i].GetComponent<MouseElement>().mouseID > LastMouseID)
             {
                 LastMouseID = mice[i].GetComponent<MouseElement>().mouseID;
