@@ -178,6 +178,7 @@ public class MouseBookData : Singleton<MouseBookData>
             if (miceCountDetect[i].GetComponent<MouseElement>().mouseID > LastMouseID)
             {
                 LastMouseID = miceCountDetect[i].GetComponent<MouseElement>().mouseID;
+                SaveMouse.Instance.SaveGameData();
             }
         }
     }

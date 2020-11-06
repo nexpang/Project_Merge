@@ -86,7 +86,6 @@ public class MouseElement : Singleton<MouseElement>
             Destroy(triggered);
 
         UpdateMouseElementSprite();
-        SaveMouse.Instance.SaveGameData();
     }
 
     void Hide()
