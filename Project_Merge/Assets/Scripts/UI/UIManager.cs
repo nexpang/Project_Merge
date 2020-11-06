@@ -85,6 +85,7 @@ public class UIManager : Singleton<UIManager>
             MouseBookDesc.SetActive(false);
             Option.SetActive(false);
             Shop.SetActive(false);
+            isUIon = false;
         }
         MouseLimitText.text = string.Format("{0} / {1}", pposition.childCount, SaveMouse.Instance.gameData.Upgrade_MouseLimit);
     }
@@ -276,6 +277,7 @@ public class UIManager : Singleton<UIManager>
         {
             isUIon = true;
             Shop.SetActive(true);
+            Gmarket.SetActive(false);
         }
         UpdateMoneyCheese();
     }

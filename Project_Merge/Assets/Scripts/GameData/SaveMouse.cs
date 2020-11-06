@@ -83,7 +83,6 @@ public class SaveMouse : MonoBehaviour
         File.WriteAllText(filePath, code);
 
         MiceSave();
-        MiceXYSave();
     }
 
     private void OnApplicationQuit()
@@ -109,17 +108,6 @@ public class SaveMouse : MonoBehaviour
         for (int i = 0; i < pposition.transform.childCount; i++)
         {
             gameData.MiceList.Add(pposition.transform.GetChild(i).gameObject.GetComponent<MouseElement>().mouseID);
-            gameData.MiceXY.Add(pposition.transform.GetChild(i).gameObject.transform.localPosition);
-        }
-    }
-
-    public void MiceXYSave() // 쥐를 클릭하고 마우스를 올렸을 때 저장됨
-    {
-        gameData.MiceXY.Clear();
-        GameObject pposition = GameObject.Find("pposition");
-
-        for (int i = 0; i < pposition.transform.childCount; i++)
-        {
             gameData.MiceXY.Add(pposition.transform.GetChild(i).gameObject.transform.localPosition);
         }
     }

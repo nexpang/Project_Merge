@@ -173,13 +173,11 @@ public class MouseBookData : Singleton<MouseBookData>
         GameObject[] miceCountDetect = GameObject.FindGameObjectsWithTag("Mouse");
         for (int i = 0; i < miceCountDetect.Length; i++)
         {
-            GameObject[] mice = GameObject.FindGameObjectsWithTag("Mouse");
-            if(mice[i] == null)
+            if(miceCountDetect[i] == null)
                 continue;
-            if (mice[i].GetComponent<MouseElement>().mouseID > LastMouseID)
+            if (miceCountDetect[i].GetComponent<MouseElement>().mouseID > LastMouseID)
             {
-                LastMouseID = mice[i].GetComponent<MouseElement>().mouseID;
-                SaveMouse.Instance.SaveGameData();
+                LastMouseID = miceCountDetect[i].GetComponent<MouseElement>().mouseID;
             }
         }
     }
