@@ -70,6 +70,8 @@ public class MouseElement : Singleton<MouseElement>
                     triggered = mouse.gameObject;
                     if (triggered.GetComponent<MouseElement>().mouseID == gameObject.GetComponent<MouseElement>().mouseID)
                     {
+                        triggered.transform.parent = UIManager.Instance.pposition.parent;
+                        transform.parent = UIManager.Instance.pposition.parent;
                         Merge();
                         break;
                     }
@@ -80,15 +82,15 @@ public class MouseElement : Singleton<MouseElement>
 
     void Merge()
     {
-        GetComponent<MouseElement>().UpdateMouseElementSprite();
-        MouseBookData.Instance.SetLastMouseID();
-        Hide();
+        if (mouseID != 40)
+            Destroy(triggered);
+
+        UpdateMouseElementSprite();
     }
 
     void Hide()
     {
-        if(GetComponent<MouseElement>().mouseID != 40)
-        Destroy(triggered.gameObject);
+
     }
 
     void UpdateMouseElementSprite()
@@ -97,15 +99,17 @@ public class MouseElement : Singleton<MouseElement>
         {
             if (i == 39)
                 break;
-            if(gameObject.GetComponent<MouseElement>().mouseID == MSM.TileSprites[i].GetComponent<MouseElement>().mouseID)
+            if(mouseID == MSM.TileSprites[i].GetComponent<MouseElement>().mouseID)
             {
                 GameObject mergedmouse = Instantiate(MSM.TileSprites[i + 1], transform.localPosition + new Vector3(0,0,0.1f), transform.localRotation);
                 mergedmouse.transform.SetParent(uiManager.pposition.transform);
                 mergedmouse.GetComponent<MouseElement>().Invoke("MergeOrCreate", 0.05f);
             }
         }
-        if (gameObject.GetComponent<MouseElement>().mouseID != 40)
+        if (mouseID != 40)
             Destroy(gameObject);
+
+        MouseBookData.Instance.SetLastMouseID();
     }
 
 

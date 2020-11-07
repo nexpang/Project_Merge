@@ -129,7 +129,13 @@ public class GameItem : Singleton<GameItem>
     private void MergeMachineLaunch() // 쥔공청소기 본격적인 합치기
     {
         if (firstTarget == null || secondTarget == null) // 예외 처리 : 타겟이 없어졌다면 리턴
+        {
+            if (firstTarget == null && secondTarget != null)
+                secondTarget.GetComponent<Rigidbody2D>().simulated = true;
+            if (firstTarget != null && secondTarget == null)
+                firstTarget.GetComponent<Rigidbody2D>().simulated = true;
             return;
+        }
         Vector3 spawnPoint = new Vector3(1, -2.25f, 0.1f);
         GameObject newMouse = Instantiate(MouseSpriteManager.Instance.TileSprites[firstTarget.GetComponent<MouseElement>().mouseID], spawnPoint, Quaternion.identity);
         newMouse.transform.SetParent(UIManager.Instance.pposition.transform);

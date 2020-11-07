@@ -10,10 +10,12 @@ public class MarketManager : Singleton<MarketManager>
     public List<MarketProduct> CatList = new List<MarketProduct>();
     public List<MarketProduct> MouseList = new List<MarketProduct>();
     public List<MarketProduct> GuitarList = new List<MarketProduct>();
+    public List<MarketProduct> PremiumList = new List<MarketProduct>();
 
     private void Awake()
     {
         Refresh();
+        RefreshPremium();
         LoadUpgradeData();
     }
 
@@ -198,9 +200,22 @@ public class MarketManager : Singleton<MarketManager>
         GuitarList[2].upgradeCount = SaveMouse.Instance.gameData.Upgrade_Background2;
         GuitarList[3].upgradeCount = SaveMouse.Instance.gameData.Upgrade_Background3;
     }
+
+    public void RefreshPremium()
+    {
+        for (int i = 0; i < PremiumList.Count; i++)
+        {
+            PremiumList[i].Product.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = PremiumList[i].ProductSprite;
+            PremiumList[i].Product.transform.GetChild(1).gameObject.GetComponent<Text>().text = PremiumList[i].productName;
+            PremiumList[i].Product.transform.GetChild(2).gameObject.GetComponent<Text>().text = string.Format("{0:#,###}  ₩", PremiumList[i].priceList[0]);
+            PremiumList[i].Product.transform.GetChild(3).gameObject.GetComponent<Text>().text = "";
+            PremiumList[i].Product.transform.GetChild(4).gameObject.SetActive(false);
+            PremiumList[i].Product.transform.GetChild(7).gameObject.GetComponent<Text>().text = PremiumList[i].productLore;
+        }
+    }
 }
 
-[Serializable]
+    [Serializable]
 public class MarketProduct
 {
     public GameObject Product = null;
