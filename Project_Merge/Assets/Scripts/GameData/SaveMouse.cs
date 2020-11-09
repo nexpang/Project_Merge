@@ -90,6 +90,11 @@ public class SaveMouse : MonoBehaviour
         SaveGameData();
     }
 
+    private void OnApplicationPause()
+    {
+        SaveGameData();
+    }
+
     public void MiceLoad()
     {
         for (int i = 0; i < gameData.MiceList.Count; i++)
