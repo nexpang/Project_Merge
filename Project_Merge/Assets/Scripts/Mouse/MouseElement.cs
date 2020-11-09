@@ -109,7 +109,7 @@ public class MouseElement : Singleton<MouseElement>
         if (mouseID != 40)
             Destroy(gameObject);
 
-        MouseBookData.Instance.SetLastMouseID();
+        MouseBookData.Instance.SetLastMouseID(true);
     }
 
 

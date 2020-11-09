@@ -18,6 +18,9 @@ public class MouseBookData : Singleton<MouseBookData>
     [SerializeField]
     private int LastMouseID = 0;
 
+    [SerializeField]
+    private bool FirstBookOn = false;
+
     public void MouseBookDatatable()
     {
 
@@ -116,7 +119,7 @@ public class MouseBookData : Singleton<MouseBookData>
     {
         int j = 0;
         MouseBookDatatable();
-        SetLastMouseID();
+        SetLastMouseID(false);
         for (int i = 0; i < mouseBookList.Count; i++)
         {
             GameObject booktap = Instantiate(MouseBookPrefab, MouseTapParent.transform);
@@ -168,7 +171,7 @@ public class MouseBookData : Singleton<MouseBookData>
         }
     }
 
-    public void SetLastMouseID() // 현재 최고 쥐 단계를 표시하게 하는 함수 -> LastMouseID에 저장/ 현재는 쥐들을 합칠때만 호출
+    public void SetLastMouseID(bool isMerging) // 현재 최고 쥐 단계를 표시하게 하는 함수 -> LastMouseID에 저장/ 현재는 쥐들을 합칠때만 호출
     {
         GameObject[] miceCountDetect = GameObject.FindGameObjectsWithTag("Mouse");
         for (int i = 0; i < miceCountDetect.Length; i++)
@@ -179,7 +182,33 @@ public class MouseBookData : Singleton<MouseBookData>
             {
                 LastMouseID = miceCountDetect[i].GetComponent<MouseElement>().mouseID;
                 SaveMouse.Instance.SaveGameData();
+                if(isMerging)
+                    FirstBookOn = true;
             }
         }
+    }
+
+    private void Update()
+    {
+        if (FirstBookOn)
+        {
+            DescDisplayFirst();
+            FirstBookOn = false;
+        }
+    }
+
+
+    private void DescDisplayFirst()  // 새로 본 쥐를 봤을 때 뜨는 설명
+    {
+        UIManager.Instance.isUIon = true;
+        UIManager.Instance.MouseBookDesc.SetActive(true);
+
+        GameObject sprite = UIManager.Instance.MouseBookDescChild.transform.GetChild(0).gameObject;
+        GameObject name = UIManager.Instance.MouseBookDescChild.transform.GetChild(1).gameObject;
+        GameObject desc = UIManager.Instance.MouseBookDescChild.transform.GetChild(2).gameObject;
+
+        sprite.GetComponent<Image>().sprite = mouseBookList[LastMouseID - 1].sprite;
+        name.GetComponent<Text>().text = mouseBookList[LastMouseID - 1].name;
+        desc.GetComponent<Text>().text = mouseBookList[LastMouseID - 1].desc;
     }
 }
