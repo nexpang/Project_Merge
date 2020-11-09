@@ -10,10 +10,12 @@ public class IAPManager : MonoBehaviour , IStoreListener
     public const string productFewCash = "FewCash";
     public const string productMiddleCash = "MiddleCash";
     public const string productExpensiveCash= "ExpensiveCash";
+    public const string productVeryExpensiveCash= "VeryExpensiveCash";
 
     private const string _android_FewCashId = "mergecash_1";
     private const string _android_MiddleCashId = "mergecash_2";
     private const string _android_ExpensiveCashId = "mergecash_3";
+    private const string _android_VeryExpensiveCashId = "mergecash_4";
 
 
     //싱글톤====================
@@ -79,6 +81,11 @@ public class IAPManager : MonoBehaviour , IStoreListener
             {
                 {_android_ExpensiveCashId,GooglePlay.Name}}
             );
+        builder.AddProduct(
+            id: productVeryExpensiveCash, ProductType.Consumable, new IDs()
+            {
+                {_android_VeryExpensiveCashId,GooglePlay.Name}}
+            );
 
         UnityPurchasing.Initialize(listener:this,builder);
     }
@@ -113,6 +120,11 @@ public class IAPManager : MonoBehaviour , IStoreListener
             //캐쉬 상승처리
             Debug.Log("큰돈");
             SaveMouse.Instance.gameData.JewelryMoney += 3000;
+        }
+        else if(args.purchasedProduct.definition.id == productVeryExpensiveCash)
+        {
+            Debug.Log("매우 큰돈");
+            SaveMouse.Instance.gameData.JewelryMoney += 10000;
         }
         return PurchaseProcessingResult.Complete;
     }

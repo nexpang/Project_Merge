@@ -55,7 +55,7 @@ public class MouseBookData : Singleton<MouseBookData>
         MouseVo mouse26 = new MouseVo(26, "딱쥐", "잠..잠깐 던지지 말쥐!!", MouseSpriteManager.Instance.TileSprites[25].GetComponent<SpriteRenderer>().sprite);
         MouseVo mouse27 = new MouseVo(27, "보석반쥐", "사탕 같기도?", MouseSpriteManager.Instance.TileSprites[26].GetComponent<SpriteRenderer>().sprite);
         MouseVo mouse28 = new MouseVo(28, "미세먼쥐", "내가 등장하면 마스크를 착용 하쥐!", MouseSpriteManager.Instance.TileSprites[27].GetComponent<SpriteRenderer>().sprite);
-        MouseVo mouse29 = new MouseVo(29, "게딱쥐", "난 도둑이 아니쥐...!", MouseSpriteManager.Instance.TileSprites[28].GetComponent<SpriteRenderer>().sprite);
+        MouseVo mouse29 = new MouseVo(29, "휴쥐", "이삿날 선물 뚝딱", MouseSpriteManager.Instance.TileSprites[28].GetComponent<SpriteRenderer>().sprite);
         MouseVo mouse30 = new MouseVo(30, "널빤쥐", "밟지 말쥐! 찍!", MouseSpriteManager.Instance.TileSprites[29].GetComponent<SpriteRenderer>().sprite);
 
         MouseVo mouse31 = new MouseVo(31, "구쮜", "플렉스- 하쥐!", MouseSpriteManager.Instance.TileSprites[30].GetComponent<SpriteRenderer>().sprite);
