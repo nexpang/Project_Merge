@@ -40,7 +40,7 @@ public class GameItem : Singleton<GameItem>
         {
             if (SaveMouse.Instance.gameData.ItemCleaner == 2)
             {
-                if (GameItemCoolDown.Instance.cleanerCoolDownCurrentSec == GameItemCoolDown.Instance.cleanerCoolDownSec) // 여기서 0을 하지않고 합치면서 0으로 변경
+                if (GameItemCoolDown.Instance.cleanerCoolDownCurrentSec >= GameItemCoolDown.Instance.cleanerCoolDownSec) // 여기서 0을 하지않고 합치면서 0으로 변경
                 {
                     MergeMachineReady();
                 }
