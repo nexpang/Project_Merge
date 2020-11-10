@@ -106,7 +106,8 @@ public class UIManager : Singleton<UIManager>
             GameObject newmouse = Instantiate(mouse,randomSpawn,Quaternion.identity);
             newmouse.transform.SetParent(pposition.transform);
             newmouse.GetComponent<MouseElement>().MergeOrCreate();
-            UpdateMoneyCheese();    
+            UpdateMoneyCheese();
+            MouseBookData.Instance.SetLastMouseID(true);
         }
         else
         {
