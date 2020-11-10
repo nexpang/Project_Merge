@@ -70,7 +70,7 @@ public class UIManager : Singleton<UIManager>
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && isUIon == false)
         {
