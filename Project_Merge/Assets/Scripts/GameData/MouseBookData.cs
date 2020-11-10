@@ -34,7 +34,7 @@ public class MouseBookData : Singleton<MouseBookData>
         MouseVo mouse07 = new MouseVo(7, "두더쥐", $"여기가 어디쥐? \n\n = 돈을 한번에 벌어오는 양 =\n{GameStat.Instance.MoneyDataTable[6]:#,###}원", MouseSpriteManager.Instance.TileSprites[6].GetComponent<SpriteRenderer>().sprite);
         MouseVo mouse08 = new MouseVo(8, "마우스", $"컴퓨터는 어디있쥐? \n\n = 돈을 한번에 벌어오는 양 =\n{GameStat.Instance.MoneyDataTable[7]:#,###}원", MouseSpriteManager.Instance.TileSprites[7].GetComponent<SpriteRenderer>().sprite);
         MouseVo mouse09 = new MouseVo(9, "간쥐", $"저 쥐... 멋.있.다! \n\n = 돈을 한번에 벌어오는 양 =\n{GameStat.Instance.MoneyDataTable[8]:#,###}원", MouseSpriteManager.Instance.TileSprites[8].GetComponent<SpriteRenderer>().sprite);
-        MouseVo mouse10 = new MouseVo(10, "쥐갈공명", $"총은 왜찾는거야!? \n\n = 돈을 한번에 벌어오는 양 =\n{GameStat.Instance.MoneyDataTable[9]:#,###}원", MouseSpriteManager.Instance.TileSprites[9].GetComponent<SpriteRenderer>().sprite);
+        MouseVo mouse10 = new MouseVo(10, "쥐갈공명", $"당신의 무기는 제껍니다. \n -쥐갈- \n\n = 돈을 한번에 벌어오는 양 =\n{GameStat.Instance.MoneyDataTable[9]:#,###}원", MouseSpriteManager.Instance.TileSprites[9].GetComponent<SpriteRenderer>().sprite);
 
         MouseVo mouse11 = new MouseVo(11, "엑스라쥐", $"정말 크-쥐! \n\n = 돈을 한번에 벌어오는 양 =\n{GameStat.Instance.MoneyDataTable[10]:#,###}원", MouseSpriteManager.Instance.TileSprites[10].GetComponent<SpriteRenderer>().sprite);
         MouseVo mouse12 = new MouseVo(12, "콩쥐&팥쥐", $"콩쥐 심은데 콩쥐난다? \n\n = 돈을 한번에 벌어오는 양 =\n{GameStat.Instance.MoneyDataTable[11]:#,###}원", MouseSpriteManager.Instance.TileSprites[11].GetComponent<SpriteRenderer>().sprite);
