@@ -25,6 +25,8 @@ public class MouseBookTap : Singleton<MouseBookTap>
 
             UIManager.Instance.isUIon = true;
             UIManager.Instance.MouseBookDesc.SetActive(true);
+            MouseBookData.Instance.NewMouseEffect.SetActive(false);
+            MouseBookData.Instance.MouseBookDescImage.GetComponent<Image>().color = new Color(1, 0.9865527f, 0.9103774f, 1);
             DescDisplay();
         }
     }
