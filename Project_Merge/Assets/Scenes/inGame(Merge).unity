@@ -5343,6 +5343,7 @@ MonoBehaviour:
   miceCount: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   firstTarget: {fileID: 0}
   secondTarget: {fileID: 0}
+  feverRainbow: {fileID: 0}
 --- !u!1 &703169049
 GameObject:
   m_ObjectHideFlags: 0
@@ -8831,6 +8832,7 @@ MonoBehaviour:
   miceCount: 
   firstTarget: {fileID: 0}
   secondTarget: {fileID: 0}
+  feverRainbow: {fileID: 0}
 --- !u!1 &1035303608
 GameObject:
   m_ObjectHideFlags: 0
@@ -18238,6 +18240,7 @@ MonoBehaviour:
   miceCount: 
   firstTarget: {fileID: 0}
   secondTarget: {fileID: 0}
+  feverRainbow: {fileID: 1911065187}
 --- !u!1 &2114577273
 GameObject:
   m_ObjectHideFlags: 0
