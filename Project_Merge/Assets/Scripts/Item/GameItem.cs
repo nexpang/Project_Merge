@@ -14,6 +14,9 @@ public class GameItem : Singleton<GameItem>
     public GameObject secondTarget = null; // 쥔공청소기에 쓰일것들
 
 
+    public GameObject feverRainbow = null; // 피버 타임에 쓰일것
+
+
     void Update()
     {
         // ============================아이템 공통 업데이트======================
@@ -64,17 +67,19 @@ public class GameItem : Singleton<GameItem>
             else
                 GameItemCoolDown.Instance.cleanerCoolDownCurrentSec = 0;
         }
-        // ==============================피버 타임===============================
+        // ============================== 피버 타임 ===============================
         if (gameObject == GameObjectBox.Instance.Items[1])
         {
             if (SaveMouse.Instance.gameData.ItemFever == 2)
             {
-                if (feverActive)
+                if (GameItemCoolDown.Instance.feverCoolDownCurrentSec >= GameItemCoolDown.Instance.feverCoolDownSec)
                 {
-                    StartFevertime(5f,180f); // 지속시간, 쿨시간인데 이거 어캄
+                    ReadyFevertime();
                 }
             }
-        }// 이거 잘 이해안됨
+        }
+        else
+            GameItemCoolDown.Instance.feverCoolDownCurrentSec = 0;
     }
 
     void OnMouseUp()
@@ -94,10 +99,12 @@ public class GameItem : Singleton<GameItem>
         {
             if (SaveMouse.Instance.gameData.ItemFever == 0)
                 GameObjectBox.Instance.Items[1].SetActive(false);
-            else if (SaveMouse.Instance.gameData.ItemFever == 1)
-                SaveMouse.Instance.gameData.ItemFever = 2;
-            else
+            else if (SaveMouse.Instance.gameData.ItemFever == 2)
+            {
                 SaveMouse.Instance.gameData.ItemFever = 1;
+            }
+            else
+                SaveMouse.Instance.gameData.ItemFever = 2;
         }
     }
 
@@ -189,22 +196,26 @@ public class GameItem : Singleton<GameItem>
     //==============================피버 타임==============================
     bool feverActive = true;
 
-    private void StartFevertime(float feverTimeDuration, float feverTimeCooltime)// 지속시간
+    private void ReadyFevertime()
     {
-        if (feverActive == false)
-            return;
-        feverActive = false;
-        Invoke("StopFevertime", feverTimeDuration);
-        Invoke("ActiveFevertime", feverTimeCooltime);
+        Invoke("StartFevertime", 1f);
+        //Invoke("StopFevertime", 10f);// 지속시간
+
+        //Invoke("ActiveFevertime", feverTimeCooltime); //쿨타임 스크립트로 해야됨
+
+        GameItemCoolDown.Instance.cleanerCoolDownCurrentSec = 0;
+        transform.GetChild(0).gameObject.SetActive(true);
+    }
+    private void StartFevertime()
+    {
         Debug.Log("피버타임 시작");
+        feverRainbow.SetActive(true);
+        Invoke("StopFevertime", 10f);// 지속시간
+
     }
     private void StopFevertime()
     {
+        feverRainbow.SetActive(false);
         Debug.Log("피버타임 종료");
-    }
-    private void ActiveFevertime()
-    {
-        feverActive = true;
-        Debug.Log("피버타임 활성화");
     }
 }
