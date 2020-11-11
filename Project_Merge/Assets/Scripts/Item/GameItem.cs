@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Rendering;
 
 public class GameItem : Singleton<GameItem>
 {
@@ -32,6 +33,21 @@ public class GameItem : Singleton<GameItem>
                 GameObjectBox.Instance.Items[0].SetActive(true);
                 GameObjectBox.Instance.Items[0].GetComponent<SpriteRenderer>().sprite = GameSpriteBox.Instance.ItemCleaner[1];
             }
+
+            if (SaveMouse.Instance.gameData.ItemFever == 0)
+            {
+                GameObjectBox.Instance.Items[1].SetActive(false);
+            }
+            else if (SaveMouse.Instance.gameData.ItemFever == 1)
+            {
+                GameObjectBox.Instance.Items[1].SetActive(true);
+                //GameObjectBox.Instance.Items[1].GetComponent<SpriteRenderer>().sprite = GameSpriteBox.Instance.ItemCleaner[0];
+            }
+            else if (SaveMouse.Instance.gameData.ItemFever == 2)
+            {
+                GameObjectBox.Instance.Items[1].SetActive(true);
+                //GameObjectBox.Instance.Items[1].GetComponent<SpriteRenderer>().sprite = GameSpriteBox.Instance.ItemCleaner[1];
+            }
         }
         // =====================================================================
 
@@ -48,7 +64,17 @@ public class GameItem : Singleton<GameItem>
             else
                 GameItemCoolDown.Instance.cleanerCoolDownCurrentSec = 0;
         }
-        // =====================================================================
+        // ==============================피버 타임===============================
+        if (gameObject == GameObjectBox.Instance.Items[1])
+        {
+            if (SaveMouse.Instance.gameData.ItemFever == 2)
+            {
+                if (feverActive)
+                {
+                    StartFevertime(5f,180f); // 지속시간, 쿨시간인데 이거 어캄
+                }
+            }
+        }// 이거 잘 이해안됨
     }
 
     void OnMouseUp()
@@ -63,7 +89,16 @@ public class GameItem : Singleton<GameItem>
             else
                 SaveMouse.Instance.gameData.ItemCleaner = 1;
         }
-        //======================================================================
+        //==============================피버 타임===============================
+        if(gameObject == GameObjectBox.Instance.Items[1])
+        {
+            if (SaveMouse.Instance.gameData.ItemFever == 0)
+                GameObjectBox.Instance.Items[1].SetActive(false);
+            else if (SaveMouse.Instance.gameData.ItemFever == 1)
+                SaveMouse.Instance.gameData.ItemFever = 2;
+            else
+                SaveMouse.Instance.gameData.ItemFever = 1;
+        }
     }
 
     private void MergeMachineReady()
@@ -150,5 +185,26 @@ public class GameItem : Singleton<GameItem>
         FunctionManager.Instance.TimeDestroy(firstTarget, 1);
         FunctionManager.Instance.TimeDestroy(secondTarget, 1);
         transform.GetChild(0).gameObject.SetActive(false);
+    }
+    //==============================피버 타임==============================
+    bool feverActive = true;
+
+    private void StartFevertime(float feverTimeDuration, float feverTimeCooltime)// 지속시간
+    {
+        if (feverActive == false)
+            return;
+        feverActive = false;
+        Invoke("StopFevertime", feverTimeDuration);
+        Invoke("ActiveFevertime", feverTimeCooltime);
+        Debug.Log("피버타임 시작");
+    }
+    private void StopFevertime()
+    {
+        Debug.Log("피버타임 종료");
+    }
+    private void ActiveFevertime()
+    {
+        feverActive = true;
+        Debug.Log("피버타임 활성화");
     }
 }

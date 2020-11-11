@@ -18,6 +18,8 @@ public class GameData
     public int Upgrade_CleanerWaitTime = 200;
     public int Upgrade_CleanerWaitTimeStack = 0;
     public int ItemCleaner = 0; // 0이면 없음, 1이면 off, 2이면 on
+
+    public int ItemFever = 0; // 0이면 없음, 1이면 쿨타임, 2면 on
     
 
     public int Upgrade_Background1 = 0;

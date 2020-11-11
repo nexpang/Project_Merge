@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -3160679835315345083}
   - component: {fileID: -7487746533329028342}
   - component: {fileID: -5389218777571265113}
+  - component: {fileID: 5589296461447580743}
   m_Layer: 0
   m_Name: 24
   m_TagString: Mouse
@@ -144,4 +145,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseID: 24
+  MoveWithComputerMouse: 0
   collideDistance: 0.5
+--- !u!95 &5589296461447580743
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8495953918963561885}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f98aa9b942f81f043a2f6f5149f49648, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
