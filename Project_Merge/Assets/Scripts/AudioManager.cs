@@ -14,8 +14,7 @@ public class AudioManager : Singleton<AudioManager>
     public float MusicDefault = 1;
     public float MusicDefaultSetting = 1;
 
-    [SerializeField]
-    private AudioSource MusicDefaultTotal = null;
+    public AudioSource MusicDefaultTotal = null;
 
     private void Start()
     {

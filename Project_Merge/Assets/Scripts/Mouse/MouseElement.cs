@@ -42,6 +42,16 @@ public class MouseElement : Singleton<MouseElement>
             float targetPositionY = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -2.2f, 1.8f);
             transform.position = new Vector3(targetPositionX, targetPositionY, 0);
         }
+
+
+        if (mouseID != 4 && mouseID != 15)
+        {
+            if (GameStat.Instance.isFever)
+                transform.GetChild(0).gameObject.GetComponent<Animator>().Play("Mouse_Fever");
+            else
+                transform.GetChild(0).gameObject.GetComponent<Animator>().Play("Mouse_Idle");
+        }
+
     }
 
     void OnMouseDown()
@@ -117,7 +127,10 @@ public class MouseElement : Singleton<MouseElement>
     {
         while (true)
         {
-            yield return new WaitForSeconds(GameStat.Instance.Upgrade_MoneyElapsedTime);
+            for (int i = 0; i < 10; i++)
+            {
+                yield return new WaitForSeconds(GameStat.Instance.Upgrade_MoneyElapsedTime / 10);
+            }
             UIManager.Instance.AddMoney(GameStat.Instance.MoneyDataTable[mouseID]);
             GameObject coinAnimation = Instantiate(GameObjectBox.Instance.CoinAnimation, new Vector3(transform.localPosition.x, transform.localPosition.y + 2, -0.15f), transform.rotation);
             coinAnimation.transform.SetParent(gameObject.transform);

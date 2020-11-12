@@ -122,7 +122,7 @@ public class MarketManager : Singleton<MarketManager>
 
             // 쥐 탭 목록 하나 당 개인 표시
             if(i==0)
-                MouseList[0].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("{0}초 -> {1}초", 4 - (int)(MouseList[0].AddList[productUpgradeCount] * 0.1f) , 4 - (int)(MouseList[0].AddList[productUpgradeCount+1] * 0.1f));
+                MouseList[0].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("{0}초 -> {1}초", 4 - (MouseList[0].AddList[productUpgradeCount] * 0.1f) , 4 - (MouseList[0].AddList[productUpgradeCount+1] * 0.1f));
             if(i==1)
                 MouseList[1].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("{0}마리 -> {1}마리", MouseList[1].AddList[productUpgradeCount],MouseList[1].AddList[productUpgradeCount+1]);
             if (i == 2)
@@ -185,6 +185,7 @@ public class MarketManager : Singleton<MarketManager>
             }
 
             // 기타 탭 목록 하나 당 개인 표시
+            if(i==0)
             GuitarList[0].Product.transform.GetChild(6).gameObject.GetComponent<Text>().text = string.Format("{0}초 -> {1}초", GuitarList[0].AddList[productUpgradeCount], GuitarList[0].AddList[productUpgradeCount + 1]);
         }
         //======================================기타 탭 새로고침 끝========================================
@@ -196,6 +197,7 @@ public class MarketManager : Singleton<MarketManager>
         MouseList[0].upgradeCount = SaveMouse.Instance.gameData.Upgrade_MoneyElapsedTimeStack;
         MouseList[1].upgradeCount = SaveMouse.Instance.gameData.Upgrade_MouseLimit - 8;
         MouseList[2].upgradeCount = SaveMouse.Instance.gameData.Upgrade_CleanerWaitTimeStack;
+        GuitarList[0].upgradeCount = SaveMouse.Instance.gameData.Upgrade_FeverWaitTimeStack;
         GuitarList[1].upgradeCount = SaveMouse.Instance.gameData.Upgrade_Background1;
         GuitarList[2].upgradeCount = SaveMouse.Instance.gameData.Upgrade_Background2;
         GuitarList[3].upgradeCount = SaveMouse.Instance.gameData.Upgrade_Background3;
@@ -207,7 +209,7 @@ public class MarketManager : Singleton<MarketManager>
         {
             PremiumList[i].Product.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = PremiumList[i].ProductSprite;
             PremiumList[i].Product.transform.GetChild(1).gameObject.GetComponent<Text>().text = PremiumList[i].productName;
-            PremiumList[i].Product.transform.GetChild(2).gameObject.GetComponent<Text>().text = string.Format("{0:#,###}  ₩", PremiumList[i].priceList[0]);
+            PremiumList[i].Product.transform.GetChild(2).gameObject.GetComponent<Text>().text = string.Format("₩ {0:#,###}", PremiumList[i].priceList[0]);
             PremiumList[i].Product.transform.GetChild(3).gameObject.GetComponent<Text>().text = "";
             PremiumList[i].Product.transform.GetChild(4).gameObject.SetActive(false);
             PremiumList[i].Product.transform.GetChild(7).gameObject.GetComponent<Text>().text = PremiumList[i].productLore;

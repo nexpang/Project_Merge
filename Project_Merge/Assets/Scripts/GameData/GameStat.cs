@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameStat : Singleton<GameStat>
 {
     public List<int> MoneyDataTable = new List<int>();
 
     public float Upgrade_MoneyElapsedTime { get; private set; } = 4;
+    public float feverValue { get; private set; } = 1;
+    public bool isFever = false;
 
     private void Start()
     {
@@ -23,7 +26,15 @@ public class GameStat : Singleton<GameStat>
     }
     public void FUpgrade_MoneyElapsedTime(int upgradeStack)
     {
-        Upgrade_MoneyElapsedTime = 4 - (upgradeStack * 0.1f);
+        if (GameObject.Find("ChangeScroll").GetComponent<Scrollbar>().value < 0.5)
+            Upgrade_MoneyElapsedTime = (4 - (upgradeStack * 0.1f)) * feverValue;
+        else
+            Upgrade_MoneyElapsedTime = 4 - (upgradeStack * 0.1f);
+    }
+
+    public void FeverValueSet(float Value)
+    {
+        feverValue = Value;
     }
 
     private void MoneyDataTableCalculate()

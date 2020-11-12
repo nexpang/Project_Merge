@@ -81,11 +81,18 @@ public class UIManager : Singleton<UIManager>
         else if (Input.GetKeyDown(KeyCode.Escape) && isUIon == true) 
         {
             Gmarket.SetActive(false);
-            MouseBook.SetActive(false);
-            MouseBookDesc.SetActive(false);
             Option.SetActive(false);
             Shop.SetActive(false);
-            isUIon = false;
+
+            if (MouseBookDesc.activeSelf)
+            {
+                MouseBookDesc.SetActive(false);
+            }
+            else
+            {
+                MouseBook.SetActive(false);
+                isUIon = false;
+            }
         }
         MouseLimitText.text = string.Format("{0} / {1}", pposition.childCount, SaveMouse.Instance.gameData.Upgrade_MouseLimit);
     }
@@ -200,11 +207,12 @@ public class UIManager : Singleton<UIManager>
     {
         AudioManager.Instance.FCatClick();
         SaveMouse.Instance.gameData.Cheese += MarketManager.Instance.CatList[0].AddList[SaveMouse.Instance.gameData.Upgrade_CheeseStack];
+        if(GameStat.Instance.isFever && GameObject.Find("ChangeScroll").GetComponent<Scrollbar>().value >= 0.5)
+            SaveMouse.Instance.gameData.Cheese += MarketManager.Instance.CatList[0].AddList[SaveMouse.Instance.gameData.Upgrade_CheeseStack];
         float hitPx = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, -2f, 2f);
         float hitPy = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -2.5f, 3.5f);
         CatClickAnimation();
         UpdateMoneyCheese();
-
     }
     private void CatClickAnimation()
     {

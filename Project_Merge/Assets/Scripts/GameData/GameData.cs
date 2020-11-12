@@ -19,7 +19,7 @@ public class GameData
     public int Upgrade_CleanerWaitTimeStack = 0;
     public int ItemCleaner = 0; // 0이면 없음, 1이면 off, 2이면 on
 
-    public int Upgrade_FeverWaitTime = 200;
+    public int Upgrade_FeverWaitTime = 300;
     public int Upgrade_FeverWaitTimeStack = 0;
     public int ItemFever = 0; // 0이면 없음, 1이면 쿨타임, 2면 on, 3이면 피버 가동중
     
@@ -30,6 +30,8 @@ public class GameData
 
     public int currentBackground = 0; // 0 - 기본배경, 1 - 쥐평선, 2 - 노을, 3 - 쥐리산
 
+    [Header("튜토리얼 세이브")]
+    public int TutorialStage = 0;
 
     [Header("쥐 리스트/좌표")]
     public List<int> MiceList = new List<int>();

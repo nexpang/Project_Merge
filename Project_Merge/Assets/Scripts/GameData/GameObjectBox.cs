@@ -10,7 +10,9 @@ public class GameObjectBox : Singleton<GameObjectBox>
 
     [Header("아이템")]
     public GameObject[] Items = null;
-    public GameObject[] ItemCooldown = null;
+
+    [Header("아이템 버튼")]
+    public GameObject[] ItemButtons = null;
 
     [Header("아이템 이펙트")]
     public GameObject CleanerWind = null;

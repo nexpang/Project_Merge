@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.Rendering;
 
@@ -15,7 +16,6 @@ public class GameItem : Singleton<GameItem>
 
 
     public GameObject feverRainbow = null; // 피버 타임에 쓰일것
-
 
     void Update()
     {
@@ -37,19 +37,26 @@ public class GameItem : Singleton<GameItem>
                 GameObjectBox.Instance.Items[0].GetComponent<SpriteRenderer>().sprite = GameSpriteBox.Instance.ItemCleaner[1];
             }
 
+            if (GameItemCoolDown.Instance.feverCoolDownCurrentSec >= GameItemCoolDown.Instance.feverCoolDownSec)
+                SaveMouse.Instance.gameData.ItemFever = 2;
+            else
+                SaveMouse.Instance.gameData.ItemFever = 1;
+
             if (SaveMouse.Instance.gameData.ItemFever == 0)
             {
                 GameObjectBox.Instance.Items[1].SetActive(false);
             }
             else if (SaveMouse.Instance.gameData.ItemFever == 1)
             {
+                GameObjectBox.Instance.ItemButtons[0].GetComponent<Animator>().Play("FeverLever_Idle");
                 GameObjectBox.Instance.Items[1].SetActive(true);
-                //GameObjectBox.Instance.Items[1].GetComponent<SpriteRenderer>().sprite = GameSpriteBox.Instance.ItemCleaner[0];
+                GameObjectBox.Instance.Items[1].GetComponent<SpriteRenderer>().sprite = GameSpriteBox.Instance.ItemFever[0];
             }
             else if (SaveMouse.Instance.gameData.ItemFever == 2)
             {
+                GameObjectBox.Instance.ItemButtons[0].GetComponent<Animator>().Play("FeverLever_Ready");
                 GameObjectBox.Instance.Items[1].SetActive(true);
-                //GameObjectBox.Instance.Items[1].GetComponent<SpriteRenderer>().sprite = GameSpriteBox.Instance.ItemCleaner[1];
+                GameObjectBox.Instance.Items[1].GetComponent<SpriteRenderer>().sprite = GameSpriteBox.Instance.ItemFever[1];
             }
         }
         // =====================================================================
@@ -67,24 +74,52 @@ public class GameItem : Singleton<GameItem>
             else
                 GameItemCoolDown.Instance.cleanerCoolDownCurrentSec = 0;
         }
-        // ============================== 피버 타임 ===============================
-        if (gameObject == GameObjectBox.Instance.Items[1])
+        if (GameStat.Instance.isFever)
+        {
+            if (GameObject.Find("ChangeScroll").GetComponent<Scrollbar>().value >= 0.5)
+            {
+                GameObject.Find("FeverTextSprite").GetComponent<SpriteRenderer>().sprite = GameSpriteBox.Instance.FeverHead[1];
+                GameObject.Find("FeverTextSprite2").GetComponent<SpriteRenderer>().sprite = GameSpriteBox.Instance.FeverHead[1];
+            }
+            else
+            {
+                GameObject.Find("FeverTextSprite").GetComponent<SpriteRenderer>().sprite = GameSpriteBox.Instance.FeverHead[0];
+                GameObject.Find("FeverTextSprite2").GetComponent<SpriteRenderer>().sprite = GameSpriteBox.Instance.FeverHead[0];
+            }
+        }
+    }
+
+    public void ClickCleanerButton()
+    {
+        // ============================쥔공 청소기===============================
+        if (gameObject == GameObjectBox.Instance.Items[0])
+        {
+            if (SaveMouse.Instance.gameData.ItemCleaner == 0)
+                GameObjectBox.Instance.Items[0].SetActive(false);
+            else if (SaveMouse.Instance.gameData.ItemCleaner == 1)
+                SaveMouse.Instance.gameData.ItemCleaner = 2;
+            else
+                SaveMouse.Instance.gameData.ItemCleaner = 1;
+        }
+    }
+
+    public void ClickFeverButton()
+    {
+        if (SaveMouse.Instance.gameData.ItemFever == 0)
+            GameObjectBox.Instance.Items[1].SetActive(false);
+        if (GameItemCoolDown.Instance.feverCoolDownCurrentSec >= GameItemCoolDown.Instance.feverCoolDownSec)
         {
             if (SaveMouse.Instance.gameData.ItemFever == 2)
             {
-                if (GameItemCoolDown.Instance.feverCoolDownCurrentSec >= GameItemCoolDown.Instance.feverCoolDownSec)
-                {
-                    ReadyFevertime();
-                }
+                SaveMouse.Instance.gameData.ItemFever = 1;
+                ReadyFevertime();
             }
         }
-        else
-            GameItemCoolDown.Instance.feverCoolDownCurrentSec = 0;
     }
 
     void OnMouseUp()
     {
-        // ============================쥔공 청소기===============================
+/*        // ============================쥔공 청소기===============================
         if (gameObject == GameObjectBox.Instance.Items[0])
         {
             if (SaveMouse.Instance.gameData.ItemCleaner == 0)
@@ -105,7 +140,7 @@ public class GameItem : Singleton<GameItem>
             }
             else
                 SaveMouse.Instance.gameData.ItemFever = 2;
-        }
+        }*/
     }
 
     private void MergeMachineReady()
@@ -194,7 +229,6 @@ public class GameItem : Singleton<GameItem>
         transform.GetChild(0).gameObject.SetActive(false);
     }
     //==============================피버 타임==============================
-    bool feverActive = true;
 
     private void ReadyFevertime()
     {
@@ -202,20 +236,24 @@ public class GameItem : Singleton<GameItem>
         //Invoke("StopFevertime", 10f);// 지속시간
 
         //Invoke("ActiveFevertime", feverTimeCooltime); //쿨타임 스크립트로 해야됨
-
+        AudioManager.Instance.MusicDefaultTotal.Stop();
         GameItemCoolDown.Instance.cleanerCoolDownCurrentSec = 0;
         transform.GetChild(0).gameObject.SetActive(true);
     }
     private void StartFevertime()
     {
-        Debug.Log("피버타임 시작");
         feverRainbow.SetActive(true);
-        Invoke("StopFevertime", 10f);// 지속시간
+        GameItemCoolDown.Instance.feverCoolDownCurrentSec = 0;
+        GameStat.Instance.FeverValueSet(0.2f);
+        GameStat.Instance.isFever = true;
 
+        Invoke("StopFevertime", 10f);// 지속시간
     }
     private void StopFevertime()
     {
+        GameStat.Instance.FeverValueSet(1f);
+        GameStat.Instance.isFever = false;
+        AudioManager.Instance.MusicDefaultTotal.Play();
         feverRainbow.SetActive(false);
-        Debug.Log("피버타임 종료");
     }
 }
