@@ -97,6 +97,13 @@ public class SaveMouse : MonoBehaviour
 
     public void MiceLoad()
     {
+        if(gameData.TutorialStage != -1)
+        {
+            gameData.MiceList.Clear();
+            gameData.MiceXY.Clear();
+            return;
+        }
+
         for (int i = 0; i < gameData.MiceList.Count; i++)
         {
             GameObject newmouse = Instantiate(MouseSpriteManager.Instance.TileSprites[gameData.MiceList[i]-1], gameData.MiceXY[i], Quaternion.identity);

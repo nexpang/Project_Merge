@@ -71,6 +71,7 @@ public class UIManager : Singleton<UIManager>
     // Update is called once per frame
     void LateUpdate()
     {
+        MouseLimitText.text = string.Format("{0} / {1}", pposition.childCount, SaveMouse.Instance.gameData.Upgrade_MouseLimit);
         if (Input.GetKeyDown(KeyCode.Escape) && isUIon == false)
         {
             if (MenuSet.activeSelf)
@@ -79,6 +80,8 @@ public class UIManager : Singleton<UIManager>
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && isUIon == true) 
         {
+            if (SaveMouse.Instance.gameData.TutorialStage == 7 || SaveMouse.Instance.gameData.TutorialStage == 8 || SaveMouse.Instance.gameData.TutorialStage == 9)
+                return;
             Gmarket.SetActive(false);
             Option.SetActive(false);
             Shop.SetActive(false);
@@ -86,6 +89,10 @@ public class UIManager : Singleton<UIManager>
             if (MouseBookDesc.activeSelf)
             {
                 MouseBookDesc.SetActive(false);
+                if (!MouseBookDesc.activeSelf)
+                {
+                    isUIon = false;
+                }
             }
             else
             {
@@ -93,7 +100,6 @@ public class UIManager : Singleton<UIManager>
                 isUIon = false;
             }
         }
-        MouseLimitText.text = string.Format("{0} / {1}", pposition.childCount, SaveMouse.Instance.gameData.Upgrade_MouseLimit);
     }
 
     public void SpreadCheese()
