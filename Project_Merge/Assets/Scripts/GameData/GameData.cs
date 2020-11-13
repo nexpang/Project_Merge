@@ -21,7 +21,7 @@ public class GameData
 
     public int Upgrade_FeverWaitTime = 300;
     public int Upgrade_FeverWaitTimeStack = 0;
-    public int ItemFever = 0; // 0이면 없음, 1이면 쿨타임, 2면 on, 3이면 피버 가동중
+    public int ItemFever = 0; // 0이면 없음, 1이면 준비중, 2면 준비완료
     
 
     public int Upgrade_Background1 = 0;

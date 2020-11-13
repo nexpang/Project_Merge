@@ -16,6 +16,8 @@ public class MouseBookTap : Singleton<MouseBookTap>
         if (UIManager.Instance.MouseBookDesc.activeSelf)
         {
             UIManager.Instance.MouseBookDesc.SetActive(false);
+            if (!UIManager.Instance.MouseBook.activeSelf)
+                UIManager.Instance.isUIon = false;
         }
         else
         {

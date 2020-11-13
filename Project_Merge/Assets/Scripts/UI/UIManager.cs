@@ -29,8 +29,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     private GameObject mouse = null;
 
-    [SerializeField]
-    private GameObject MouseBook = null;
+    public GameObject MouseBook = null;
 
     [SerializeField]
     private GameObject Option = null;

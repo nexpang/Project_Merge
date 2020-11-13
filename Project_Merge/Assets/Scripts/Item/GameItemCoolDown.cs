@@ -78,7 +78,9 @@ public class GameItemCoolDown : Singleton<GameItemCoolDown>
 
     private void OneSecond()
     {
-        cleanerCoolDownCurrentSec++;
-        feverCoolDownCurrentSec++;
+        if(SaveMouse.Instance.gameData.ItemCleaner == 2)
+            cleanerCoolDownCurrentSec++;
+        if(SaveMouse.Instance.gameData.ItemFever == 1)
+            feverCoolDownCurrentSec++;
     }
 }

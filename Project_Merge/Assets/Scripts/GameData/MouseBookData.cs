@@ -193,6 +193,11 @@ public class MouseBookData : Singleton<MouseBookData>
         }
     }
 
+    public int GetLastMouseID() // private용
+    {
+        return LastMouseID;
+    }
+
     private void Update()
     {
         if (FirstBookOn)

@@ -37,10 +37,10 @@ public class GameItem : Singleton<GameItem>
                 GameObjectBox.Instance.Items[0].GetComponent<SpriteRenderer>().sprite = GameSpriteBox.Instance.ItemCleaner[1];
             }
 
+
+           //=======================피버
             if (GameItemCoolDown.Instance.feverCoolDownCurrentSec >= GameItemCoolDown.Instance.feverCoolDownSec)
                 SaveMouse.Instance.gameData.ItemFever = 2;
-            else
-                SaveMouse.Instance.gameData.ItemFever = 1;
 
             if (SaveMouse.Instance.gameData.ItemFever == 0)
             {
@@ -115,32 +115,6 @@ public class GameItem : Singleton<GameItem>
                 ReadyFevertime();
             }
         }
-    }
-
-    void OnMouseUp()
-    {
-/*        // ============================쥔공 청소기===============================
-        if (gameObject == GameObjectBox.Instance.Items[0])
-        {
-            if (SaveMouse.Instance.gameData.ItemCleaner == 0)
-                GameObjectBox.Instance.Items[0].SetActive(false);
-            else if (SaveMouse.Instance.gameData.ItemCleaner == 1)
-                SaveMouse.Instance.gameData.ItemCleaner = 2;
-            else
-                SaveMouse.Instance.gameData.ItemCleaner = 1;
-        }
-        //==============================피버 타임===============================
-        if(gameObject == GameObjectBox.Instance.Items[1])
-        {
-            if (SaveMouse.Instance.gameData.ItemFever == 0)
-                GameObjectBox.Instance.Items[1].SetActive(false);
-            else if (SaveMouse.Instance.gameData.ItemFever == 2)
-            {
-                SaveMouse.Instance.gameData.ItemFever = 1;
-            }
-            else
-                SaveMouse.Instance.gameData.ItemFever = 2;
-        }*/
     }
 
     private void MergeMachineReady()
@@ -245,6 +219,7 @@ public class GameItem : Singleton<GameItem>
         feverRainbow.SetActive(true);
         GameItemCoolDown.Instance.feverCoolDownCurrentSec = 0;
         GameStat.Instance.FeverValueSet(0.2f);
+        SaveMouse.Instance.gameData.ItemFever = 1;
         GameStat.Instance.isFever = true;
 
         Invoke("StopFevertime", 10f);// 지속시간
