@@ -13,9 +13,13 @@ public class AudioManager : Singleton<AudioManager>
 
     public float MusicDefault = 1;
     public float MusicDefaultSetting = 1;
+    public float SFXDefault = 1;
+    public float SFXDefaultSetting = 1;
 
     public AudioSource MusicDefaultTotal = null;
 
+    [SerializeField]
+    private AudioSource[] Sfx = null;
     private void Start()
     {
         ASCatSleep.Play();
@@ -24,6 +28,11 @@ public class AudioManager : Singleton<AudioManager>
     private void Update()
     {
         MusicDefaultTotal.volume = MusicDefault * MusicDefaultSetting;
+
+        for (int i = 0; i < Sfx.Length; i++)
+        {
+            Sfx[i].volume = SFXDefault * SFXDefaultSetting;
+        }
     }
     public void FMouseSqueaky()
     {

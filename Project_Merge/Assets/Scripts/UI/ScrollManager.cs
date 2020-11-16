@@ -12,6 +12,10 @@ public class ScrollManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public Scrollbar ChangeScroll;
     public GameObject BlurBlack = null;
     public Slider SoundSlider;
+    public Slider SFXSlider;
+
+    [SerializeField]
+    private AudioSource AudioCatSleep = null;
 
     private bool mouseCheck = false;
 
@@ -19,16 +23,24 @@ public class ScrollManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     void Start()
     {
         SoundSlider.onValueChanged.AddListener(delegate { MusicValueChangeCheck(); });
+        SFXSlider.onValueChanged.AddListener(delegate { SFXValueChangeCheck(); });
         ChangeScroll.onValueChanged.AddListener(delegate { ScrollValueChangeCheck(); }) ;
     }
     private void MusicValueChangeCheck()
     {
         AudioManager.Instance.MusicDefaultSetting = SoundSlider.value;
     }
-     private void ScrollValueChangeCheck()
+
+    private void SFXValueChangeCheck()
     {
-        AudioManager.Instance.MusicDefault = -ChangeScroll.value*0.8f + 1;
-      
+        AudioManager.Instance.SFXDefaultSetting = SFXSlider.value;
+    }
+
+    private void ScrollValueChangeCheck()
+    {
+        AudioManager.Instance.MusicDefault = -ChangeScroll.value * 0.8f + 1;
+        AudioCatSleep.volume = (1 - AudioManager.Instance.MusicDefault) * AudioManager.Instance.SFXDefaultSetting;
+
         BlurBlack.GetComponent<Image>().color = new Color(1, 1, 1, ChangeScroll.value);
         MainCamera.transform.position = new Vector3(ChangeScroll.value * -5, MainCamera.transform.position.y, -10);
     }

@@ -148,6 +148,12 @@ public class GameItem : Singleton<GameItem>
             if (i == 38) return; // 모든 쥐가 2마리 이상 없으면 리턴
         }
 
+        if (targetMouseID >= MouseBookData.Instance.GetLastMouseID()) // 만약 도감 마지막보다 크다면 리턴
+            return;
+
+        if (UIManager.Instance.MouseBookDesc.activeSelf && !UIManager.Instance.MouseBook.activeSelf) // 도감 설명만 켜있으면 리턴
+            return;
+
         for (int i = 0; i < mice.Length; i++) // 최종적으로 오브젝트 선택
         {
             if (mice[i].GetComponent<MouseElement>().mouseID == targetMouseID)

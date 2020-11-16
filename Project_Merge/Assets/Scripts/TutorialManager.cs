@@ -16,7 +16,25 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     private GameObject[] TutorialBlocks = null;
 
+
+    [SerializeField]
+    private GameObject PrevButton = null;
+    [SerializeField]
+    private GameObject NextButton = null;
+
+    [SerializeField]
+    private GameObject TutorialImage = null;
+    [SerializeField]
+    private GameObject TutorialPictures = null;
+    [SerializeField]
+    private GameObject TutorialQuestion = null;
+
+    [SerializeField]
+    private Sprite[] TutorialSprites = null;
+
+
     private float pointSpeed = 2f;
+    private int tutorialImagePage = 1;
 
     private void Awake()
     {
@@ -39,6 +57,11 @@ public class TutorialManager : MonoBehaviour
             SaveMouse.Instance.gameData.Upgrade_MouseLimit = 8;
             MarketManager.Instance.MouseList[1].upgradeCount = 0;
             // 쥐도 로드 안되게 해놨음
+        }
+        else if(SaveMouse.Instance.gameData.TutorialStage == 0) // 만약 튜토 0인데 치즈나 돈은 있을때
+        {
+            SaveMouse.Instance.gameData.TutorialStage = -1;
+            TutorialImageShowQuestion();
         }
         else // 만약 튜토리얼 조건 충족 안되면
         {
@@ -308,6 +331,69 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
+    void TutorialImageShowQuestion()
+    {
+        TutorialFinger.SetActive(false);
+        TutorialQuestion.SetActive(true);
+    }
+
+    public void QuestionYes()
+    {
+        TutorialImageShow();
+        TutorialQuestion.SetActive(false);
+    }
+
+    public void QuestionNo()
+    {
+        TutorialQuestion.SetActive(false);
+    }
+
+    void TutorialImageShow()
+    {
+        TutorialImage.SetActive(true);
+        tutorialImagePage = 1;
+        PrevButton.SetActive(false);
+        TutorialPictures.GetComponent<Image>().sprite = TutorialSprites[0];
+    }
+
+    public void NextButtonClick()
+    {
+        tutorialImagePage++;
+        if (tutorialImagePage == 1)
+            PrevButton.SetActive(false);
+        else
+            PrevButton.SetActive(true);
+
+        if (tutorialImagePage == 1)
+            TutorialPictures.GetComponent<Image>().sprite = TutorialSprites[0];
+        else if (tutorialImagePage == 2)
+            TutorialPictures.GetComponent<Image>().sprite = TutorialSprites[1];
+        else if (tutorialImagePage == 3)
+            TutorialPictures.GetComponent<Image>().sprite = TutorialSprites[2];
+        else if (tutorialImagePage == 4)
+        {
+            TutorialImage.SetActive(false);
+            tutorialImagePage = 1;
+            TutorialPictures.GetComponent<Image>().sprite = TutorialSprites[0];
+        }
+    }
+
+    public void PrevButtonClick()
+    {
+        tutorialImagePage--;
+        if (tutorialImagePage == 1)
+            PrevButton.SetActive(false);
+        else
+            PrevButton.SetActive(true);
+
+        if (tutorialImagePage == 1)
+            TutorialPictures.GetComponent<Image>().sprite = TutorialSprites[0];
+        else if (tutorialImagePage == 2)
+            TutorialPictures.GetComponent<Image>().sprite = TutorialSprites[1];
+        else if (tutorialImagePage == 3)
+            TutorialPictures.GetComponent<Image>().sprite = TutorialSprites[2];
+
+    }
 
     void TutorialComplete()
     {
