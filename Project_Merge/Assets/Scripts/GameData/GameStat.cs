@@ -49,7 +49,8 @@ public class GameStat : Singleton<GameStat>
 
     public bool MouseCountCheck()
     {
-        if(UIManager.Instance.pposition.childCount < SaveMouse.Instance.gameData.Upgrade_MouseLimit )
+        GameObject[] mice = GameObject.FindGameObjectsWithTag("Mouse");
+        if(mice.Length < SaveMouse.Instance.gameData.Upgrade_MouseLimit )
             return true;
         else
             return false;

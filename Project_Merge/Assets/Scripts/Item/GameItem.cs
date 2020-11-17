@@ -17,6 +17,12 @@ public class GameItem : Singleton<GameItem>
 
     public GameObject feverRainbow = null; // 피버 타임에 쓰일것
 
+    private void Start()
+    {
+        if (SaveMouse.Instance.gameData.ItemFever == 2)
+            SaveMouse.Instance.gameData.ItemFever = 1;
+    }
+
     void Update()
     {
         // ============================아이템 공통 업데이트======================
@@ -164,6 +170,9 @@ public class GameItem : Singleton<GameItem>
                     secondTarget = mice[i];
             }
         }
+
+        firstTarget.transform.SetParent(UIManager.Instance.pposition.transform.parent);
+        secondTarget.transform.SetParent(UIManager.Instance.pposition.transform.parent);
 
         if (firstTarget == null || secondTarget == null) // 예외 처리 : 타겟이 없어졌다면 리턴
             return;
