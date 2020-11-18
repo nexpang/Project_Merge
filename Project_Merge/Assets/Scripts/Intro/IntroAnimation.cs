@@ -24,7 +24,7 @@ public class IntroAnimation : MonoBehaviour
     {
         IntroLogo.SetActive(false);
         IntroBackground.SetActive(false);
-        IntroTitle.GetComponent<Animator>().Play("Intro_Title_Appear");
+        IntroTitle.GetComponent<Animator>().Play("Intro_Title_Appear2");
     }
 
     private void Update()
