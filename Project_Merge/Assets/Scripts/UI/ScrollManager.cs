@@ -39,7 +39,7 @@ public class ScrollManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     private void ScrollValueChangeCheck()
     {
         AudioManager.Instance.MusicDefault = -ChangeScroll.value * 0.8f + 1;
-        AudioCatSleep.volume = (1 - AudioManager.Instance.MusicDefault) * AudioManager.Instance.SFXDefaultSetting;
+        AudioManager.Instance.ASCatSleep.volume = (1 - AudioManager.Instance.MusicDefault) * AudioManager.Instance.SFXDefaultSetting;
 
         BlurBlack.GetComponent<Image>().color = new Color(1, 1, 1, ChangeScroll.value);
         MainCamera.transform.position = new Vector3(ChangeScroll.value * -5, MainCamera.transform.position.y, -10);

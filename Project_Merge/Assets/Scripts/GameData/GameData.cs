@@ -8,7 +8,7 @@ public class GameData
     [Header("화폐")]
     public long Cheese = 0;
     public long Money = 0;
-    public long JewelryMoney = 0;
+    public long JewelryMoney { get; private set; } = 0;
 
     [Header("업그레이드 데이터")]
     public int Upgrade_MoneyElapsedTimeStack = 0;
@@ -36,4 +36,21 @@ public class GameData
     [Header("쥐 리스트/좌표")]
     public List<int> MiceList = new List<int>();
     public List<Vector2> MiceXY = new List<Vector2>();
+
+    public enum SETTYPE
+    {
+        SET,
+        ADD,
+        REMOVE,
+    };
+
+    public void AccessSetJewelry(SETTYPE settype,long value)
+    {
+        switch(settype)
+        {
+            case SETTYPE.SET: JewelryMoney = value; break;
+            case SETTYPE.ADD: JewelryMoney += value; break;
+            case SETTYPE.REMOVE: JewelryMoney -= value; break;
+        }
+    }
 }

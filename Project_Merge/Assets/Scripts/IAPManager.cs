@@ -107,24 +107,24 @@ public class IAPManager : MonoBehaviour , IStoreListener
         {
             //캐쉬 상승처리
             Debug.Log("작은돈");
-            SaveMouse.Instance.gameData.JewelryMoney += 500;
+            SaveMouse.Instance.gameData.AccessSetJewelry(GameData.SETTYPE.ADD, 500);
         }
         else if (args.purchasedProduct.definition.id == productMiddleCash)
         {
             //캐쉬 상승처리
             Debug.Log("중간돈");
-            SaveMouse.Instance.gameData.JewelryMoney += 3000;
+            SaveMouse.Instance.gameData.AccessSetJewelry(GameData.SETTYPE.ADD, 3000);
         }
         else if (args.purchasedProduct.definition.id == productExpensiveCash)
         {
             //캐쉬 상승처리
             Debug.Log("큰돈");
-            SaveMouse.Instance.gameData.JewelryMoney += 10000;
+            SaveMouse.Instance.gameData.AccessSetJewelry(GameData.SETTYPE.ADD, 10000);
         }
         else if(args.purchasedProduct.definition.id == productVeryExpensiveCash)
         {
             Debug.Log("매우 큰돈");
-            SaveMouse.Instance.gameData.JewelryMoney += 100000;
+            SaveMouse.Instance.gameData.AccessSetJewelry(GameData.SETTYPE.ADD, 100000);
         }
         return PurchaseProcessingResult.Complete;
     }

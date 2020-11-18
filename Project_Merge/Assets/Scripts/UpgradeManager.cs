@@ -80,7 +80,7 @@ public class UpgradeManager : MonoBehaviour
         }
         if (SaveMouse.Instance.gameData.JewelryMoney >= MarketManager.Instance.MouseList[2].priceList[upgradeCount])
         {
-            SaveMouse.Instance.gameData.JewelryMoney -= MarketManager.Instance.MouseList[2].priceList[upgradeCount];
+            SaveMouse.Instance.gameData.AccessSetJewelry(GameData.SETTYPE.REMOVE, MarketManager.Instance.MouseList[2].priceList[upgradeCount]);
             SaveMouse.Instance.gameData.Upgrade_CleanerWaitTime = (int)MarketManager.Instance.MouseList[2].AddList[upgradeCount + 1];
             MarketManager.Instance.MouseList[2].upgradeCount++;
             SaveMouse.Instance.gameData.Upgrade_CleanerWaitTimeStack = MarketManager.Instance.MouseList[2].upgradeCount;
@@ -104,7 +104,7 @@ public class UpgradeManager : MonoBehaviour
         }
         if (SaveMouse.Instance.gameData.JewelryMoney >= MarketManager.Instance.GuitarList[0].priceList[upgradeCount])
         {
-            SaveMouse.Instance.gameData.JewelryMoney -= MarketManager.Instance.GuitarList[0].priceList[upgradeCount];
+            SaveMouse.Instance.gameData.AccessSetJewelry(GameData.SETTYPE.REMOVE, MarketManager.Instance.GuitarList[0].priceList[upgradeCount]);
             SaveMouse.Instance.gameData.Upgrade_FeverWaitTime = (int)MarketManager.Instance.GuitarList[0].AddList[upgradeCount + 1];
             MarketManager.Instance.GuitarList[0].upgradeCount++;
             SaveMouse.Instance.gameData.Upgrade_FeverWaitTimeStack = MarketManager.Instance.GuitarList[0].upgradeCount;
