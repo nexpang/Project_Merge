@@ -22,7 +22,6 @@ public class GameData
     public int Upgrade_FeverWaitTime = 300;
     public int Upgrade_FeverWaitTimeStack = 0;
     public int ItemFever = 0; // 0이면 없음, 1이면 준비중, 2면 준비완료
-    
 
     public int Upgrade_Background1 = 0;
     public int Upgrade_Background2 = 0;

@@ -10,7 +10,6 @@ public class AdmobRewardManager : MonoBehaviour
     public bool isTestMode;
 
     private RewardedAd videoAd;
-    public static bool ShowAd = false;
 
     const string testID = "ca-app-pub-3940256099942544/5224354917";
         //광고 ID
@@ -92,5 +91,8 @@ public class AdmobRewardManager : MonoBehaviour
     public void HandleOnUserEarnedReward(object sender, EventArgs args)
     {
         //보상이 들어갈 곳입니다.
+        SaveMouse.Instance.gameData.AccessSetJewelry(GameData.SETTYPE.ADD, 5);
+        AdmobCooldown.Instance.give5_CoolDownCurrentSec = 0;
+
     }
 }
