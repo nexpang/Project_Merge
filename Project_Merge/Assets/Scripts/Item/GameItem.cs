@@ -221,13 +221,14 @@ public class GameItem : Singleton<GameItem>
 
     private void ReadyFevertime()
     {
-        Invoke("StartFevertime", 1f);
+        Invoke("StartFevertime", 1.6f);
         //Invoke("StopFevertime", 10f);// 지속시간
 
         //Invoke("ActiveFevertime", feverTimeCooltime); //쿨타임 스크립트로 해야됨
         AudioManager.Instance.MusicDefaultTotal.Stop();
         GameItemCoolDown.Instance.cleanerCoolDownCurrentSec = 0;
         transform.GetChild(0).gameObject.SetActive(true);
+        AudioManager.Instance.MusicFever.Play();
     }
     private void StartFevertime()
     {
@@ -236,7 +237,6 @@ public class GameItem : Singleton<GameItem>
         GameStat.Instance.FeverValueSet(0.2f);
         SaveMouse.Instance.gameData.ItemFever = 1;
         GameStat.Instance.isFever = true;
-
         Invoke("StopFevertime", 10f);// 지속시간
     }
     private void StopFevertime()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TutorialManager : MonoBehaviour
+public class TutorialManager : Singleton<TutorialManager>
 {
     [SerializeField]
     private GameObject TutorialFinger = null;
@@ -22,8 +22,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     private GameObject NextButton = null;
 
-    [SerializeField]
-    private GameObject TutorialImage = null;
+    public GameObject TutorialImage = null;
     [SerializeField]
     private GameObject TutorialPictures = null;
     [SerializeField]
@@ -348,12 +347,13 @@ public class TutorialManager : MonoBehaviour
         TutorialQuestion.SetActive(false);
     }
 
-    void TutorialImageShow()
+    public void  TutorialImageShow()
     {
         TutorialImage.SetActive(true);
         tutorialImagePage = 1;
         PrevButton.SetActive(false);
         TutorialPictures.GetComponent<Image>().sprite = TutorialSprites[0];
+        UIManager.Instance.isUIon = true;
     }
 
     public void NextButtonClick()

@@ -82,6 +82,11 @@ public class UIManager : Singleton<UIManager>
         {
             if (SaveMouse.Instance.gameData.TutorialStage == 7 || SaveMouse.Instance.gameData.TutorialStage == 8 || SaveMouse.Instance.gameData.TutorialStage == 9)
                 return;
+            if (TutorialManager.Instance.TutorialImage.activeSelf)
+            {
+                TutorialManager.Instance.TutorialImage.SetActive(false);
+                return;
+            }
             Gmarket.SetActive(false);
             Option.SetActive(false);
             Shop.SetActive(false);
