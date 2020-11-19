@@ -162,6 +162,8 @@ public class UIManager : Singleton<UIManager>
         long cheese = SaveMouse.Instance.gameData.Cheese;
         string cheeseText = "";
 
+        if (cheese >= 100000000)
+            cheeseText += string.Format("{0}억", (cheese % 1000000000000) / 100000000);
         if (cheese >= 10000)
             cheeseText += string.Format("{0}만", (cheese % 100000000) / 10000);
         if (cheese >= 0)
@@ -182,6 +184,7 @@ public class UIManager : Singleton<UIManager>
             Gmarket.SetActive(true);
         }
         UpdateMoneyCheese();
+        FunctionManager.Instance.RefreshScroll();
     }
     public void Cheese_Shop()
     {
@@ -192,6 +195,7 @@ public class UIManager : Singleton<UIManager>
         CheeseShop.SetActive(true);
 
         MarketTab.GetComponent<Image>().sprite = MarketTabImage[0];
+        FunctionManager.Instance.RefreshScroll();
     }
     public void Money_Shop()
     {
@@ -202,6 +206,7 @@ public class UIManager : Singleton<UIManager>
         CheeseShop.SetActive(false);
 
         MarketTab.GetComponent<Image>().sprite = MarketTabImage[2];
+        FunctionManager.Instance.RefreshScroll();
     }
     public void Mouse_Shop()
     {
@@ -212,6 +217,7 @@ public class UIManager : Singleton<UIManager>
         CheeseShop.SetActive(false);
  
         MarketTab.GetComponent<Image>().sprite = MarketTabImage[1];
+        FunctionManager.Instance.RefreshScroll();
     }
     public void CheeseCat()
     {
@@ -299,5 +305,6 @@ public class UIManager : Singleton<UIManager>
             Gmarket.SetActive(false);
         }
         UpdateMoneyCheese();
+        FunctionManager.Instance.RefreshScroll();
     }
 }

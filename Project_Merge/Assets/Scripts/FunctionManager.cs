@@ -16,6 +16,11 @@ public class FunctionManager : Singleton<FunctionManager>
         Destroy(go);
     }
 
-
-
+    public void RefreshScroll()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            GameObjectBox.Instance.shopContents[i].GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+        }
+    }
 }

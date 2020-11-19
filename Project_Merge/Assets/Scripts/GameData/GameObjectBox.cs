@@ -16,4 +16,7 @@ public class GameObjectBox : Singleton<GameObjectBox>
 
     [Header("아이템 이펙트")]
     public GameObject CleanerWind = null;
+
+    [Header("상점 스크롤 초기화 오브젝트")]
+    public GameObject[] shopContents = null;
 }
