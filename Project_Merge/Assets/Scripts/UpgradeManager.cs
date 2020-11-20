@@ -13,9 +13,9 @@ public class UpgradeManager : MonoBehaviour
             AudioManager.Instance.ASBuyFail.Play();
             return;
         }
-        if (SaveMouse.Instance.gameData.Money >= MarketManager.Instance.CatList[0].priceList[upgradeCount])
+        if (SaveMouse.Instance.gameData.AccessGetMoney() >= MarketManager.Instance.CatList[0].priceList[upgradeCount])
         {
-            SaveMouse.Instance.gameData.Money -= MarketManager.Instance.CatList[0].priceList[upgradeCount];
+            SaveMouse.Instance.gameData.AccessSetMoney(GameData.SETTYPE.REMOVE, MarketManager.Instance.CatList[0].priceList[upgradeCount]);
             SaveMouse.Instance.gameData.Upgrade_CheeseStack++;
             MarketManager.Instance.CatList[0].upgradeCount++;
 
@@ -35,9 +35,9 @@ public class UpgradeManager : MonoBehaviour
             AudioManager.Instance.ASBuyFail.Play();
             return;
         }
-        if (SaveMouse.Instance.gameData.Money >= MarketManager.Instance.MouseList[0].priceList[upgradeCount])
+        if (SaveMouse.Instance.gameData.AccessGetMoney() >= MarketManager.Instance.MouseList[0].priceList[upgradeCount])
         {
-            SaveMouse.Instance.gameData.Money -= MarketManager.Instance.MouseList[0].priceList[upgradeCount];
+            SaveMouse.Instance.gameData.AccessSetMoney(GameData.SETTYPE.REMOVE, MarketManager.Instance.MouseList[0].priceList[upgradeCount]);
             SaveMouse.Instance.gameData.Upgrade_MoneyElapsedTimeStack++;
             MarketManager.Instance.MouseList[0].upgradeCount++;
             UpgradeComplete();
@@ -57,9 +57,9 @@ public class UpgradeManager : MonoBehaviour
             AudioManager.Instance.ASBuyFail.Play();
             return;
         }
-        if (SaveMouse.Instance.gameData.Money >= MarketManager.Instance.MouseList[1].priceList[upgradeCount])
+        if (SaveMouse.Instance.gameData.AccessGetMoney() >= MarketManager.Instance.MouseList[1].priceList[upgradeCount])
         {
-            SaveMouse.Instance.gameData.Money -= MarketManager.Instance.MouseList[1].priceList[upgradeCount];
+            SaveMouse.Instance.gameData.AccessSetMoney(GameData.SETTYPE.REMOVE, MarketManager.Instance.MouseList[1].priceList[upgradeCount]);
             SaveMouse.Instance.gameData.Upgrade_MouseLimit = (int)MarketManager.Instance.MouseList[1].AddList[upgradeCount + 1];
             MarketManager.Instance.MouseList[1].upgradeCount++;
             UpgradeComplete();
@@ -78,7 +78,7 @@ public class UpgradeManager : MonoBehaviour
             AudioManager.Instance.ASBuyFail.Play();
             return;
         }
-        if (SaveMouse.Instance.gameData.JewelryMoney >= MarketManager.Instance.MouseList[2].priceList[upgradeCount])
+        if (SaveMouse.Instance.gameData.AccessGetJewelry() >= MarketManager.Instance.MouseList[2].priceList[upgradeCount])
         {
             SaveMouse.Instance.gameData.AccessSetJewelry(GameData.SETTYPE.REMOVE, MarketManager.Instance.MouseList[2].priceList[upgradeCount]);
             SaveMouse.Instance.gameData.Upgrade_CleanerWaitTime = (int)MarketManager.Instance.MouseList[2].AddList[upgradeCount + 1];
@@ -102,7 +102,7 @@ public class UpgradeManager : MonoBehaviour
             AudioManager.Instance.ASBuyFail.Play();
             return;
         }
-        if (SaveMouse.Instance.gameData.JewelryMoney >= MarketManager.Instance.GuitarList[0].priceList[upgradeCount])
+        if (SaveMouse.Instance.gameData.AccessGetJewelry() >= MarketManager.Instance.GuitarList[0].priceList[upgradeCount])
         {
             SaveMouse.Instance.gameData.AccessSetJewelry(GameData.SETTYPE.REMOVE, MarketManager.Instance.GuitarList[0].priceList[upgradeCount]);
             SaveMouse.Instance.gameData.Upgrade_FeverWaitTime = (int)MarketManager.Instance.GuitarList[0].AddList[upgradeCount + 1];
@@ -132,9 +132,9 @@ public class UpgradeManager : MonoBehaviour
             SaveMouse.Instance.gameData.currentBackground = 1;
             return;
         }
-        if (SaveMouse.Instance.gameData.Money >= MarketManager.Instance.GuitarList[1].priceList[upgradeCount])
+        if (SaveMouse.Instance.gameData.AccessGetMoney() >= MarketManager.Instance.GuitarList[1].priceList[upgradeCount])
         {
-            SaveMouse.Instance.gameData.Money -= MarketManager.Instance.GuitarList[1].priceList[upgradeCount];
+            SaveMouse.Instance.gameData.AccessSetMoney(GameData.SETTYPE.REMOVE, MarketManager.Instance.GuitarList[1].priceList[upgradeCount]);
             SaveMouse.Instance.gameData.Upgrade_Background1 = 1;
             MarketManager.Instance.GuitarList[1].upgradeCount++;
             UpgradeComplete();
@@ -160,9 +160,9 @@ public class UpgradeManager : MonoBehaviour
             SaveMouse.Instance.gameData.currentBackground = 2;
             return;
         }
-        if (SaveMouse.Instance.gameData.Money >= MarketManager.Instance.GuitarList[2].priceList[upgradeCount])
+        if (SaveMouse.Instance.gameData.AccessGetMoney() >= MarketManager.Instance.GuitarList[2].priceList[upgradeCount])
         {
-            SaveMouse.Instance.gameData.Money -= MarketManager.Instance.GuitarList[2].priceList[upgradeCount];
+            SaveMouse.Instance.gameData.AccessSetMoney(GameData.SETTYPE.REMOVE, MarketManager.Instance.GuitarList[2].priceList[upgradeCount]);
             SaveMouse.Instance.gameData.Upgrade_Background2 = 1;
             MarketManager.Instance.GuitarList[2].upgradeCount++;
             UpgradeComplete();
@@ -188,9 +188,9 @@ public class UpgradeManager : MonoBehaviour
             SaveMouse.Instance.gameData.currentBackground = 3;
             return;
         }
-        if (SaveMouse.Instance.gameData.Money >= MarketManager.Instance.GuitarList[3].priceList[upgradeCount])
+        if (SaveMouse.Instance.gameData.AccessGetMoney() >= MarketManager.Instance.GuitarList[3].priceList[upgradeCount])
         {
-            SaveMouse.Instance.gameData.Money -= MarketManager.Instance.GuitarList[3].priceList[upgradeCount];
+            SaveMouse.Instance.gameData.AccessSetMoney(GameData.SETTYPE.REMOVE, MarketManager.Instance.GuitarList[3].priceList[upgradeCount]);
             SaveMouse.Instance.gameData.Upgrade_Background3 = 1;
             MarketManager.Instance.GuitarList[3].upgradeCount++;
             UpgradeComplete();

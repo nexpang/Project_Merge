@@ -43,16 +43,22 @@ public class TutorialManager : Singleton<TutorialManager>
 
     private void NewbieDetect()
     {
-        if(SaveMouse.Instance.gameData.Cheese == 0 && SaveMouse.Instance.gameData.Money == 0 && UIManager.Instance.pposition.childCount == 0)
+        if(SaveMouse.Instance.gameData.AccessGetCheese() == 0 && SaveMouse.Instance.gameData.AccessGetMoney() == 0 && UIManager.Instance.pposition.childCount == 0)
         {
-            SaveMouse.Instance.gameData.TutorialStage = 1;
+            if(SaveMouse.Instance.gameData.Cheese == 0 && SaveMouse.Instance.gameData.Money == 0)
+                SaveMouse.Instance.gameData.TutorialStage = 1;
+            else
+            {
+                SaveMouse.Instance.gameData.TutorialStage = -1;
+                TutorialImageShowQuestion();
+            }
         }
         else if(SaveMouse.Instance.gameData.TutorialStage > 0)
         {
             // 튜토리얼을 진행하시겠습니까? 띄우고 안하면 -1로 바꿈, 하면 1로 바꿔
             SaveMouse.Instance.gameData.TutorialStage = 1; // 근데 일단 1로 바꿔놔 지금은 귀찮거든
-            SaveMouse.Instance.gameData.Cheese = 0;
-            SaveMouse.Instance.gameData.Money = 0;
+            SaveMouse.Instance.gameData.AccessSetCheese(GameData.SETTYPE.SET, 0);
+            SaveMouse.Instance.gameData.AccessSetMoney(GameData.SETTYPE.SET, 0);
             SaveMouse.Instance.gameData.Upgrade_MouseLimit = 8;
             MarketManager.Instance.MouseList[1].upgradeCount = 0;
             // 쥐도 로드 안되게 해놨음
@@ -101,7 +107,7 @@ public class TutorialManager : Singleton<TutorialManager>
                 TutorialLore.transform.GetChild(1).gameObject.GetComponent<Text>().text = "잘했쥐! 이제 고양이를 클릭해서 \n 치즈를 20개 벌어보라쥐!";
             }
 
-            if (SaveMouse.Instance.gameData.Cheese >= 20)
+            if (SaveMouse.Instance.gameData.AccessGetCheese() >= 20)
             {
                 SaveMouse.Instance.gameData.TutorialStage = 3;
                 TutorialFinger.transform.GetChild(0).gameObject.GetComponent<Animator>().Play("TutorialFinger_Good");
@@ -266,14 +272,14 @@ public class TutorialManager : Singleton<TutorialManager>
                 TutorialFinger.transform.localPosition = new Vector3(1.17f, 1.44f, -0.5f);
                 TutorialFinger.transform.GetChild(0).gameObject.GetComponent<Animator>().Play("TutorialFinger_Stage2_0");
                 TutorialLore.transform.GetChild(1).gameObject.GetComponent<Text>().text = "이곳에서 한번 두번째 탭의 상품을 사보라쥐! \n 돈은 내가 넣어줬쥐. 잘 쓰라쥐!";
-                SaveMouse.Instance.gameData.Money = 100;
+                SaveMouse.Instance.gameData.AccessSetMoney(GameData.SETTYPE.SET, 100);
                 UIManager.Instance.UpdateMoneyCheese();
             }
 
             if (MarketManager.Instance.MouseList[1].upgradeCount ==1)
             {
                 SaveMouse.Instance.gameData.TutorialStage = 9;
-                SaveMouse.Instance.gameData.Money -= 100;
+                SaveMouse.Instance.gameData.AccessSetMoney(GameData.SETTYPE.REMOVE, 100);
                 UIManager.Instance.UpdateMoneyCheese();
                 TutorialFinger.transform.GetChild(0).gameObject.GetComponent<Animator>().Play("TutorialFinger_Good");
                 TutorialBlocks[8].SetActive(false);

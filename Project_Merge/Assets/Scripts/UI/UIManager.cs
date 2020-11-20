@@ -113,9 +113,9 @@ public class UIManager : Singleton<UIManager>
         if (!GameStat.Instance.MouseCountCheck())
             return;
 
-        if(isCatScene ? false : SaveMouse.Instance.gameData.Cheese >= NeedCheese)
+        if(isCatScene ? false : SaveMouse.Instance.gameData.AccessGetCheese() >= NeedCheese)
         {
-            SaveMouse.Instance.gameData.Cheese -= NeedCheese;
+            SaveMouse.Instance.gameData.AccessSetCheese(GameData.SETTYPE.REMOVE, NeedCheese);
             float randomMouseX = Random.Range(-1.8f, 1.8f);
             float randomMouseY = Random.Range(-2.2f, 1.8f);
 
@@ -133,7 +133,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void UpdateMoneyCheese()
     {
-        long money = SaveMouse.Instance.gameData.Money;
+        long money = SaveMouse.Instance.gameData.AccessGetMoney();
         string moneyText = "";
 
         if (money >= 100000000)
@@ -145,7 +145,7 @@ public class UIManager : Singleton<UIManager>
         Money.text = moneyText;
         marketMoney.text = moneyText;
 
-        long jewelrymoney = SaveMouse.Instance.gameData.JewelryMoney;
+        long jewelrymoney = SaveMouse.Instance.gameData.AccessGetJewelry();
         string jewelryMoneyText = "";
 
         if (jewelrymoney >= 100000000)
@@ -159,7 +159,7 @@ public class UIManager : Singleton<UIManager>
         marketJewelryMoney.text = jewelryMoneyText;
         shopJewelryMoney.text = jewelryMoneyText;
 
-        long cheese = SaveMouse.Instance.gameData.Cheese;
+        long cheese = SaveMouse.Instance.gameData.AccessGetCheese();
         string cheeseText = "";
 
         if (cheese >= 100000000)
@@ -222,9 +222,9 @@ public class UIManager : Singleton<UIManager>
     public void CheeseCat()
     {
         AudioManager.Instance.FCatClick();
-        SaveMouse.Instance.gameData.Cheese += MarketManager.Instance.CatList[0].AddList[SaveMouse.Instance.gameData.Upgrade_CheeseStack];
-        if(GameStat.Instance.isFever && GameObject.Find("ChangeScroll").GetComponent<Scrollbar>().value >= 0.5)
-            SaveMouse.Instance.gameData.Cheese += MarketManager.Instance.CatList[0].AddList[SaveMouse.Instance.gameData.Upgrade_CheeseStack];
+        SaveMouse.Instance.gameData.AccessSetCheese(GameData.SETTYPE.ADD, MarketManager.Instance.CatList[0].AddList[SaveMouse.Instance.gameData.Upgrade_CheeseStack]);
+        if (GameStat.Instance.isFever && GameObject.Find("ChangeScroll").GetComponent<Scrollbar>().value >= 0.5)
+            SaveMouse.Instance.gameData.AccessSetCheese(GameData.SETTYPE.ADD, MarketManager.Instance.CatList[0].AddList[SaveMouse.Instance.gameData.Upgrade_CheeseStack]);
         float hitPx = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, -2f, 2f);
         float hitPy = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -2.5f, 3.5f);
         CatClickAnimation();
@@ -251,11 +251,7 @@ public class UIManager : Singleton<UIManager>
     {
         Application.Quit();
     }
-    public void AddMoney(int money)
-    {
-        SaveMouse.Instance.gameData.Money += money;
-        UpdateMoneyCheese();
-    }
+
     public void MouseBookActive()
     {
         AudioManager.Instance.ASButtonClick.Play();
@@ -306,5 +302,32 @@ public class UIManager : Singleton<UIManager>
         }
         UpdateMoneyCheese();
         FunctionManager.Instance.RefreshScroll();
+    }
+
+    public Text CompleteText = null;
+
+    public void Repair()
+    {
+        AudioManager.Instance.ASButtonClick.Play();
+        if (SaveMouse.Instance.gameData.AccessRepairBoolJMGet() == false)
+        {
+            SaveMouse.Instance.gameData.AccessRepairBoolJM(true);
+            SaveMouse.Instance.gameData.AccessSetJewelry(GameData.SETTYPE.SET,SaveMouse.Instance.gameData.JewelryMoney);
+            SaveMouse.Instance.gameData.AccessSetMoney(GameData.SETTYPE.SET,SaveMouse.Instance.gameData.Money);
+            SaveMouse.Instance.gameData.AccessSetCheese(GameData.SETTYPE.SET,SaveMouse.Instance.gameData.Cheese);
+            UpdateMoneyCheese();
+            CompleteText.text = "복구가 끝났다쥐!";
+        }
+        else
+        {
+            CompleteText.text = "한번만 할 수 있쥐..";
+        }
+        SaveMouse.Instance.SaveGameData();
+        Invoke("CompleteTextDisappear", 3);
+    }
+
+    private void CompleteTextDisappear()
+    {
+        CompleteText.text = "";
     }
 }

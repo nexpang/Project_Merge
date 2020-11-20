@@ -131,7 +131,8 @@ public class MouseElement : Singleton<MouseElement>
             {
                 yield return new WaitForSeconds(GameStat.Instance.Upgrade_MoneyElapsedTime / 10);
             }
-            UIManager.Instance.AddMoney(GameStat.Instance.MoneyDataTable[mouseID]);
+            SaveMouse.Instance.gameData.AccessSetMoney(GameData.SETTYPE.ADD, GameStat.Instance.MoneyDataTable[mouseID]);
+            UIManager.Instance.UpdateMoneyCheese();
             GameObject coinAnimation = Instantiate(GameObjectBox.Instance.CoinAnimation, new Vector3(transform.localPosition.x, transform.localPosition.y + 2, -0.15f), transform.rotation);
             coinAnimation.transform.SetParent(gameObject.transform);
         }
