@@ -76,13 +76,12 @@ public class SaveMouse : MonoBehaviour
 
     public void SaveGameData()
     {
+        MiceSave();
         string ToJsonData = JsonUtility.ToJson(gameData, true);
         byte[] bytes = System.Text.Encoding.UTF8.GetBytes(ToJsonData);
         string code = System.Convert.ToBase64String(bytes);
 
         File.WriteAllText(filePath, code);
-
-        MiceSave();
     }
 
     private void OnApplicationQuit()
