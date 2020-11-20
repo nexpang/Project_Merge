@@ -96,7 +96,7 @@ public class SaveMouse : MonoBehaviour
 
     public void MiceLoad()
     {
-        if(gameData.TutorialStage != -1)
+        if (gameData.TutorialStage != -1 && gameData.TutorialStage != 0)
         {
             gameData.MiceList.Clear();
             gameData.MiceXY.Clear();
