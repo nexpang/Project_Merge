@@ -52,6 +52,7 @@ public class SaveMouse : MonoBehaviour
     private void Awake()
     {
         filePath = string.Concat(Application.persistentDataPath, GameDataFileName);
+        Debug.Log(filePath);
     }
 
     public void LoadGameData()
